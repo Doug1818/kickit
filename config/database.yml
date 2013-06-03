@@ -1,0 +1,11 @@
+development: &development
+  adapter: postgresql
+  database: kickit_development
+
+production:
+  <<: *development
+
+test: &test
+  adapter: postgresql
+  database: kickit_test
+  min_messages: warning
