@@ -1,5 +1,7 @@
 Kickit::Application.routes.draw do
   
+  devise_for :users
+
   root to: 'static_pages#home'
 
   # The priority is based upon order of creation:

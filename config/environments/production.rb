@@ -64,4 +64,22 @@ Kickit::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+
+  # Mailgun smtp settings
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.smtp_settings = {
+    :port           => ENV['MAILGUN_SMTP_PORT'], 
+    :address        => ENV['MAILGUN_SMTP_SERVER'],
+    :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
+    :password       => ENV['MAILGUN_SMTP_PASSWORD'],
+    :domain         => 'kick-it-now.com',
+    :authentication => :plain,
+  }
+
+  # Google Analytics tracker code
+  #GA.tracker = "UA-39300896-1"
+
+  # Specify what domain to use for mailer URLs (also required for Devise)
+  config.action_mailer.default_url_options = { host: 'kick-it-now.com' }
 end
