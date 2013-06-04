@@ -3,7 +3,7 @@
 	<head>
 	    <title>My Page</title>
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
-	    <%= stylesheet_link_tag "http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css", "mobile_alerts.css" %>
+	    <%= stylesheet_link_tag "http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" %>
 	    <%= javascript_include_tag "http://code.jquery.com/jquery-1.8.2.min.js", "http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js", "application" %>
 	</head>
 	<body>
@@ -35,3 +35,43 @@
 	    </div>
 	</body>
 </html>
+
+<style type="text/css">
+.test {
+padding: 8px 35px 8px 14px;
+margin-bottom: 18px;
+color: #c09853;
+text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+background-color: #fcf8e3;
+border: 1px solid #fbeed5;
+border-radius: 4px;
+}
+.test-heading {
+color: inherit;
+}
+.test .close {
+position: relative;
+top: -2px;
+right: -21px;
+line-height: 18px;
+}
+
+.test-success {
+color: #468847;
+background-color: #dff0d8;
+border-color: #d6e9c6;
+}
+
+.test-danger,
+.test-error {
+color: #b94a48;
+background-color: #f2dede;
+border-color: #eed3d7;
+}
+
+.test-info {
+color: #3a87ad;
+background-color: #d9edf7;
+border-color: #bce8f1;
+}
+</style>
