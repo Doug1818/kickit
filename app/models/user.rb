@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
-  attr_accessible :name, :phone, :habit, :start_date, :supporter_name, :supporter_email
+  attr_accessible :name, :phone, :habit, :start_date, :supporter_name, :supporter_email, :supporter_relationship
   has_many :days, dependent: :destroy
 
   after_create :create_30_days
@@ -16,4 +16,7 @@ class User < ActiveRecord::Base
   def create_30_days
   	30.times { |i| self.days.create(day: i + 1, date: Date.today + (i+1)) }
   end
+
+  RELATIONSHIPS = ["Friend", "Boyfriend", "Girlfriend", "Husband", "Wife", "Father", "Mother", "Son", "Daughter",
+    "Brother", "Sister", "Uncle", "Aunt", "Nephew", "Niece", "Cousin", "Other", "Don't share my progress"]
 end
