@@ -1,0 +1,100 @@
+// Grays
+@black:             #000;
+@grayDark:          lighten(@black, 25%);
+@gray:              lighten(@black, 50%);
+@grayLight:         lighten(@black, 70%);
+@grayLighter:       lighten(@black, 90%);
+@white:             #fff;
+ 
+// Accent Colors
+@blue:              #08b5fb;
+@green:             #46a546;
+@red:               #9d261d;
+@yellow:            #ffc40d;
+@orange:            #f89406;
+@pink:              #c3325f;
+@purple:            #7a43b6;
+
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+	line-height: 1;
+}
+
+h1 {
+	color: @white;
+	text-align: center;
+}
+
+h2 {
+	font-size: 2em;
+	text-align: left;
+	color: @black;
+}
+
+h3 {
+	font-size: 1.4em;
+	text-align: left;
+	font-weight: normal;
+	color: @black;
+}
+
+
+/* calendar */
+
+#calendar table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#calendar td,
+#calendar th {
+  font-family: "Lucida Grande",arial,helvetica,sans-serif;
+  font-size: 10px;
+  padding: 6px;
+  border: 1px solid #999;
+}
+
+#calendar th {
+  background: #DDD;
+  color: #666;
+  text-align: center;
+  width: 14.2857142857143%;
+}
+
+#calendar td {
+  background: #FFF;
+  color: #777;
+  height: 30px;
+  vertical-align: top;
+  font-size: 16px;
+}
+
+#calendar .notmonth {
+  color: #CCC;
+}
+
+#calendar #month {
+  margin: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+#calendar #month a, #calendar #month a:hover {
+  text-decoration: none;
+  padding: 0 10px;
+  color: #999;
+}
+
+#calendar .today {
+  background-color: #D7F2FF;
+}
+
+#calendar .day {
+  margin: 0;
+  padding: 0;
+  font-size: 10px;
+  text-align: center;
+  color: @black
+}

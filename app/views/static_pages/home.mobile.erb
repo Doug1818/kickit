@@ -1,11 +1,12 @@
 <% content_for :title do %><title>Home</title><% end %>
 <% content_for :h1 do %><h1>Home</h1><% end %>
 
-<h1>Kick it</h1>
+<h2>Kick it</h2>
 
 <% if user_signed_in? %>
-	<p><%= link_to 'Sign out', destroy_user_session_path, method: "delete", "data-role" => "button" %></p>
+	<%= link_to 'Tracking', days_path, "data-role" => "button" %>
+	<%= link_to 'Sign out', destroy_user_session_path, method: "delete", "data-role" => "button" %>
 <% else %>
-	<p><%= link_to 'Sign up', new_user_registration_path, "data-role" => "button" %></p>
-	<p><%= link_to 'Sign in', new_user_session_path, "data-role" => "button" %></p>
+	<%= link_to 'Sign up', new_user_registration_path, "data-role" => "button" %>
+	<%= link_to 'Sign in', new_user_session_path, "data-role" => "button" %>
 <% end %>

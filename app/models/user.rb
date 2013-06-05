@@ -14,6 +14,6 @@ class User < ActiveRecord::Base
   after_create :create_30_days
 
   def create_30_days
-  	30.times { |i| self.days.create(day: i + 1) }
+  	30.times { |i| self.days.create(day: i + 1, date: Date.today + (i+1)) }
   end
 end

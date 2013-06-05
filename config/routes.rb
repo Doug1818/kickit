@@ -1,6 +1,7 @@
 Kickit::Application.routes.draw do
   
   devise_for :users
+  resources :days
 
   root to: 'static_pages#home'
 
