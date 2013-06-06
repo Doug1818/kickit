@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  skip_before_filter :verify_authenticity_token
+
   def send_text_message
 	number_to_send_to = "9175879211"
  
@@ -14,7 +16,14 @@ class UsersController < ApplicationController
   def receive_text_message
 	message_body = params["Body"]
 	from_number = params["From"]
-	#binding.pry
+	
 	#SMSLogger.log_text_message from_number, message_body
+
+	response = Twilio::TwiML::Response.new do |r|
+		r.Sms 'Daily check in complete!'
+	end
+	response.text
+	render :nothing => true
+	#binding.pry
   end
 end

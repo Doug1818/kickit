@@ -2,14 +2,14 @@ Kickit::Application.routes.draw do
   
   devise_for :users
   resources :users do
-    member do
-      post :send_text_message
-      get :receive_text_message
+    collection do
+      post :send_text_message, :receive_text_message
     end
   end
   resources :days
 
   root to: 'static_pages#home'
+  #match '/sms',  to: 'text_messages#create'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
