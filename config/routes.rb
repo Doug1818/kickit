@@ -4,6 +4,7 @@ Kickit::Application.routes.draw do
   resources :users do
     member do
       post :send_text_message
+      get :receive_text_message
     end
   end
   resources :days

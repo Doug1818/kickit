@@ -13,6 +13,7 @@ gem 'mail'
 gem 'figaro'
 gem "watu_table_builder", :require => "table_builder"
 gem "twilio-ruby"
+gem "localtunnel"
 
 group :production do
   gem 'google-analytics-rails'
