@@ -1,6 +1,11 @@
 Kickit::Application.routes.draw do
   
   devise_for :users
+  resources :users do
+    member do
+      post :send_text_message
+    end
+  end
   resources :days
 
   root to: 'static_pages#home'
