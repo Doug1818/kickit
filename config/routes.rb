@@ -8,7 +8,11 @@ Kickit::Application.routes.draw do
   end
   resources :days
 
-  root to: 'static_pages#home'
+  
+  devise_scope :user do
+    root to: "devise/registrations#new"
+  end
+  #root to: 'static_pages#home'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
