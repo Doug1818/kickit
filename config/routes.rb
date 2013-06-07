@@ -9,7 +9,6 @@ Kickit::Application.routes.draw do
   resources :days
 
   root to: 'static_pages#home'
-  #match '/sms',  to: 'text_messages#create'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

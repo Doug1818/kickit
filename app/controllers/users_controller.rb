@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 	#SMSLogger.log_text_message from_number, message_body
 
 	response = Twilio::TwiML::Response.new do |r|
-		r.Sms 'Daily check in complete!'
+		r.Sms "Daily check in complete!"
 	end
 	response.text
 	render :nothing => true

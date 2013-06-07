@@ -15,4 +15,5 @@
 //= require twitter/bootstrap
 //= require jquery-ui
 //= require bootstrap
+//= require formToWizard
 //= require_tree .
