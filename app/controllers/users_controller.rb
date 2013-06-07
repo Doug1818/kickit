@@ -22,8 +22,6 @@ class UsersController < ApplicationController
 	response = Twilio::TwiML::Response.new do |r|
 		r.Sms "Daily check in complete!"
 	end
-	response.text
-	render :nothing => true
-	#binding.pry
+	render :xml => response.text
   end
 end
