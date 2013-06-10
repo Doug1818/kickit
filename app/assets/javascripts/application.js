@@ -18,4 +18,3 @@
 //= require formToWizard
 //= require_tree .
 
-
