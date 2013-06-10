@@ -4,9 +4,9 @@ Kickit::Application.routes.draw do
   #devise_scope :user do
   #  root to: "devise/registrations#new"
   #end
-  resources :users do
+  resources :text_messages do
     collection do
-      post :send_text_message, :receive_text_message
+      post :send, :receive
     end
   end
   resources :days

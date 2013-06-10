@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class TextMessagesController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def send_text_message
