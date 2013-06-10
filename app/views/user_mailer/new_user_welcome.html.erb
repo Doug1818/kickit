@@ -1,0 +1,14 @@
+<p>
+	<% if @user.name? %>
+		<%= @user.name %>,
+	<% else %>
+		<%= @user.username %>,
+	<% end %>
+</p>
+
+<p>Thank you for signing up for Kick it!</p>
+
+<p>On <%= @user.start_date %> you will start your 30 day program.  Good luck!</p>
+
+<p>Best,<br>
+The Kick it Team</p>

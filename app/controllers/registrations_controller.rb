@@ -13,7 +13,7 @@ skip_before_filter :require_no_authentication, :only => [:new, :create]
     if @user.save
       sign_in @user
       redirect_to root_path
-      #UserMailer.resrequest_confirmation(@user).deliver
+      UserMailer.new_user_welcome(@user).deliver
     else
       render 'new'
     end
