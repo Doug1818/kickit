@@ -1,8 +1,8 @@
 Kickit::Application.routes.draw do
   
-  devise_for :users, controllers: { registrations: "user_registrations" }
+  devise_for :users, controllers: { registrations: "registrations" }
   devise_scope :user do
-    root to: "devise/user_registrations#new"
+    root to: "devise/registrations#new"
   end
   resources :users do
     collection do
