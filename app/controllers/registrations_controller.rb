@@ -12,6 +12,7 @@ skip_before_filter :require_no_authentication, :only => [:new, :create]
     end
     if @user.save
       sign_in @user
+      flash[:success] = "Welcome! You have signed up successfully."
       redirect_to root_path
       UserMailer.new_user_welcome(@user).deliver
     else
