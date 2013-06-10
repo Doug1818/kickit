@@ -7,8 +7,10 @@
 	<%= link_to 'Tracking', days_path, "data-role" => "button" %>
 	<%= link_to 'Sign out', destroy_user_session_path, method: "delete", "data-role" => "button" %>
 <% else %>
+	<%= link_to 'Sign in', new_user_session_path %>
 	
 	<%= form_for @user do |f| %>
+		<%= render 'shared/error_messages', object: f.object %>
 		<fieldset>
 			<p>What do you want to kick?</p>	
 			<%= f.select :habit, User::HABITS %>

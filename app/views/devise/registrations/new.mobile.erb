@@ -9,6 +9,7 @@
 <% else %>
 	
 	<%= form_for @user do |f| %>
+		<%= render 'shared/error_messages', object: f.object %>
 		<fieldset>
 			<p>What do you want to kick?</p>	
 			<%= f.select :habit, User::HABITS %>

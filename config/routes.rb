@@ -1,17 +1,17 @@
 Kickit::Application.routes.draw do
   
-  devise_for :users
+  devise_for :users, controllers: { registrations: "user_registrations" }
+  devise_scope :user do
+    root to: "devise/user_registrations#new"
+  end
   resources :users do
     collection do
       post :send_text_message, :receive_text_message
     end
   end
   resources :days
-
   
-  devise_scope :user do
-    root to: "devise/registrations#new"
-  end
+  
   #root to: 'static_pages#home'
 
   # The priority is based upon order of creation:
