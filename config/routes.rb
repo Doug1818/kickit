@@ -11,7 +11,6 @@ Kickit::Application.routes.draw do
   end
   resources :days
   
-  
   #root to: 'static_pages#home'
 
   # The priority is based upon order of creation:

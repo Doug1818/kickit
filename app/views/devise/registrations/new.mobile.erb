@@ -7,7 +7,6 @@
 	<%= link_to 'Tracking', days_path, "data-role" => "button" %>
 	<%= link_to 'Sign out', destroy_user_session_path, method: "delete", "data-role" => "button" %>
 <% else %>
-	
 	<%= form_for @user do |f| %>
 		<%= render 'shared/error_messages', object: f.object %>
 		<fieldset>
@@ -39,6 +38,8 @@
 			<%= f.select :supporter_relationship, User::RELATIONSHIPS %>
 			<%= f.text_field :supporter_name, placeholder: "Supporter name" %>
 			<%= f.text_field :supporter_email, placeholder: "Supporter email" %>
+		</fieldset>
+		<fieldset>
 			<%= f.submit "Start" %>
 		</fieldset>
 	<% end %>

@@ -4,7 +4,9 @@
  alert('Alert!');
 });*/
 
-$("#new_user").formToWizard();
+$(document).ready(function() {
+ $("#new_user").formToWizard();
+});
 
 (function($) {
     $.fn.formToWizard = function(options) {
@@ -28,7 +30,7 @@ $("#new_user").formToWizard();
 
             // 2
             var name = $(this).find("legend").html();
-            $("#steps").append("<li id='stepDesc" + i + "'>Step " + (i + 1) + "<span>" + name + "</span></li>");
+            /*$("#steps").append("<li id='stepDesc" + i + "'>Step " + (i + 1) + "<span>" + name + "</span></li>");*/
 
             if (i == 0) {
                 createNextButton(i);
