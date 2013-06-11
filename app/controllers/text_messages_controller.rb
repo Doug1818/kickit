@@ -11,17 +11,20 @@ class TextMessagesController < ApplicationController
 		if @user.start_date <= Date.today && @user.end_date >= Date.today
 			if @sent_text.message.upcase == "Y" || @sent_text.message.upcase == "N"
 				if @day.result?
-					response = Twilio::TwiML::Response.new { |r| r.Sms "You have already checked in" }
+					response = Twilio::TwiML::Response.new { |r| r.Sms "You have already checked in." }
 					render :xml => response.text
 				else
+					@day.update_attributes(result: 1)
 					response = Twilio::TwiML::Response.new { |r| r.Sms "Thanks for checking in today!" }
 					render :xml => response.text
-					@day.update_attributes(result: 1)
 				end
 			else
 				response = Twilio::TwiML::Response.new { |r| r.Sms "Invalid reply. Please enter either 'Y' or 'N'. Thank you!" }
 				render :xml => response.text
 			end
+		else
+			response = Twilio::TwiML::Response.new { |r| r.Sms "You are not signed up for a Kick it program.  To start a new program go to http://www.kick-it-now.com" }
+			render :xml => response.text
 		end
 	end
 end
