@@ -19,6 +19,7 @@
     			</div>
     			<%= link_to 'Sign out', destroy_user_session_path, method: "delete", "data-role" => "button" %>
 			</div>
+
 	        <div data-role="header">
 	            <%= link_to 'Home', root_path, "data-icon" => "home", "data-iconpos" => "notext", class: "ui-icon-alt",
 	            	"data-role" => "button", "data-theme" => "c", "data-inline" => "true", "data-ajax" => "false" %>
@@ -27,8 +28,7 @@
 		          <a href="#mypanel" data-icon="bars" data-iconpos="notext" data-theme="c" class="ui-icon-alt">Options</a>
 	            <% else %>
             		<%= link_to 'Sign in', new_user_session_path, "data-role" => "button", "data-theme" => "c", "data-inline" => "true" %>
-            	<% end %>
-	            
+            	<% end %>  
 	        </div>
 	 
 	        <div data-role="content">

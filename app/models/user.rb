@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
   attr_accessible :username, :name, :phone, :habit, :start_date, :end_date, :supporter_name, :supporter_email, :supporter_relationship
   has_many :days, dependent: :destroy
+  has_many :sent_texts, dependent: :destroy
   after_create :create_30_days
   scope :active_program, where("start_date <= ? AND end_date >= ?", Date.today, Date.today)
 

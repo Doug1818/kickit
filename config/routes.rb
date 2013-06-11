@@ -11,6 +11,7 @@ Kickit::Application.routes.draw do
     end
   end
   resources :days
+  resources :sent_texts
   
   root to: 'static_pages#home'
 
