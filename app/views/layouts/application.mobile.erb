@@ -26,7 +26,7 @@
 	            <% if user_signed_in? %>
 		          <a href="#mypanel" data-icon="bars" data-iconpos="notext" data-theme="c" class="ui-icon-alt">Options</a>
 	            <% else %>
-            		<%= link_to 'Sign in', new_user_session_path %>
+            		<%= link_to 'Sign in', new_user_session_path, "data-role" => "button", "data-theme" => "c", "data-inline" => "true" %>
             	<% end %>
 	            
 	        </div>
