@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130607143437) do
+ActiveRecord::Schema.define(:version => 20130611143255) do
 
   create_table "days", :force => true do |t|
     t.date     "date"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20130607143437) do
     t.string   "supporter_email"
     t.string   "supporter_relationship"
     t.string   "username"
+    t.date     "end_date"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

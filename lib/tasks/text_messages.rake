@@ -1,7 +1,7 @@
 namespace :text do
 	desc "Send text message"
 	task :send => :environment do
-		User.all.each do |user|
+		User.active_program.all.each do |user|
 			number_to_send_to = user.phone
 			@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
 		 
