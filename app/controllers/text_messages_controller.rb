@@ -5,7 +5,6 @@ class TextMessagesController < ApplicationController
 		message = params["Body"]
 		from_number = params["From"][2..-1]
 		@user = User.find_by_phone(from_number)
-		binding.pry
 		@day = @user.days.find_by_date(Date.today)
 		@sent_text = User.sent_texts.create(message: message)
 		if @user.start_date <= Date.today && @user.end_date >= Date.today
