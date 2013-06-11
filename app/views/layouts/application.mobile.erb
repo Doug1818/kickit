@@ -3,25 +3,32 @@
 	<head>
 		<%= yield :title %>
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
-	    <%= stylesheet_link_tag "http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css", "mobile" %>
-	    <%= javascript_include_tag "http://code.jquery.com/jquery-1.8.2.min.js", "http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js", "application" %>
+	    <%= stylesheet_link_tag "http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css", "mobile" %>
+	    <%= javascript_include_tag "http://code.jquery.com/jquery-1.9.1.min.js", "http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js", "application" %>
 	    <%= csrf_meta_tags %>
 	  	<%= render 'layouts/shim' %>
 	</head>
 	<body>
 	    <div data-role="page">
-	 
+
+	    	<div data-role="panel" id="mypanel" data-position="right" data-theme="a">
+	    		<div data-role="controlgroup">
+	    		<%= link_to 'Home', root_path, "data-role" => "button" %>
+	    		<%= link_to 'Profile', edit_user_registration_path, "data-role" => "button" %>
+	    		<%= link_to 'Tracking', days_path, "data-role" => "button" %>
+    			</div>
+    			<%= link_to 'Sign out', destroy_user_session_path, method: "delete", "data-role" => "button" %>
+			</div>
 	        <div data-role="header">
-	            <%= link_to 'Home', root_path, 
+	            <%= link_to 'Home', root_path, "data-icon" => "home", "data-iconpos" => "notext", class: "ui-icon-alt",
 	            	"data-role" => "button", "data-theme" => "c", "data-inline" => "true", "data-ajax" => "false" %>
 	            <%= yield :h1 %>
 	            <% if user_signed_in? %>
-	            	<%= link_to 'Sign out', destroy_user_session_path, method: "delete", 
-	            	"data-role" => "button", "data-theme" => "c", "data-inline" => "true", "data-ajax" => "false" %>
+		          <a href="#mypanel" data-icon="bars" data-iconpos="notext" data-theme="c" class="ui-icon-alt">Options</a>
 	            <% else %>
-	            	<%= link_to 'Sign in', new_user_session_path, 
-	            	"data-role" => "button", "data-theme" => "c", "data-inline" => "true", "data-ajax" => "false" %>
+            		<%= link_to 'Sign in', new_user_session_path %>
             	<% end %>
+	            
 	        </div>
 	 
 	        <div data-role="content">
