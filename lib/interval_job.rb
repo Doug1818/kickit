@@ -1,3 +1,5 @@
+module IntervalModule
+
 class IntervalJob
 	def perform
 		User.active_program.all.each do |user|
@@ -11,4 +13,6 @@ class IntervalJob
 			)
 		end
 	end
+end
+
 end
