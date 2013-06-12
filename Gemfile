@@ -14,6 +14,8 @@ gem 'figaro'
 gem "watu_table_builder", :require => "table_builder"
 gem "twilio-ruby"
 gem "localtunnel"
+gem "clockwork"
+gem 'delayed_job_active_record'
 
 group :production do
   gem 'google-analytics-rails'

@@ -5,7 +5,6 @@
 
 <% if user_signed_in? %>
 	<%= link_to 'Tracking', days_path, "data-role" => "button" %>
-	<%= link_to 'Sign out', destroy_user_session_path, method: "delete", "data-role" => "button" %>
 <% else %>
 	<%= form_for @user do |f| %>
 		<%= render 'shared/error_messages', object: f.object %>
