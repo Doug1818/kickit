@@ -11,7 +11,7 @@ class TextMessagesController < ApplicationController
 		else
 			@day = @user.days.find_by_date(Date.today - 2)
 		end
-		if !@day.nil? && Time.now >= @day + 1 + 9.hours && Time.now <= @day + 2 + 9.hours #User is in an active program (@day is not nil) and in the 24hr check-in window
+		if !@day.nil? && Time.now >= @day.date + 1 + 9.hours && Time.now <= @day.date + 2 + 9.hours #User is in an active program (@day is not nil) and in the 24hr check-in window
 			if message.upcase == "Y" || message.upcase == "N"
 				if @day.result?
 					response = Twilio::TwiML::Response.new { |r| r.Sms "You have already checked in today." }
