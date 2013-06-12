@@ -7,7 +7,7 @@ class TextMessagesController < ApplicationController
 		@user = User.find_by_phone(from_number)
 		@day = @user.days.find_by_date(Date.today)
 		@sent_text = @user.sent_texts.create(message: message)
-		if @day? #@user.start_date <= Date.today && @user.end_date >= Date.today
+		if !@day.nil? #User is in an active program (@day is not nil)
 			if message.upcase == "Y" || message.upcase == "N"
 				if @day.result?
 					response = Twilio::TwiML::Response.new { |r| r.Sms "You have already checked in." }
