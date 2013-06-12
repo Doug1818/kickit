@@ -6,15 +6,18 @@ class TextMessagesController < ApplicationController
 		from_number = params["From"][2..-1]
 		@user = User.find_by_phone(from_number)
 		@day = @user.days.find_by_date(Date.today)
-		#binding.pry
 		@sent_text = @user.sent_texts.create(message: message)
-		if @user.start_date <= Date.today && @user.end_date >= Date.today
-			if @sent_text.message.upcase == "Y" || @sent_text.message.upcase == "N"
+		if @day? #@user.start_date <= Date.today && @user.end_date >= Date.today
+			if message.upcase == "Y" || message.upcase == "N"
 				if @day.result?
 					response = Twilio::TwiML::Response.new { |r| r.Sms "You have already checked in." }
 					render :xml => response.text
 				else
-					@day.update_attributes(result: 1)
+					if message.upcase == "Y"
+						@day.update_attributes(result: 1)
+					elsif message.upcase == "N"
+						@day.update_attributes(result: 2)
+					end
 					response = Twilio::TwiML::Response.new { |r| r.Sms "Thanks for checking in today!" }
 					render :xml => response.text
 				end
