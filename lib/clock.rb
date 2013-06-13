@@ -8,5 +8,5 @@ include Clockwork
 include IntervalModule
 include OpenWindowModule
 
-every(5.minutes, 'Queueing interval job') { Delayed::Job.enqueue IntervalModule::IntervalJob.new("9175879211", Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN'], "+1#{ENV['TWILIO_PHONE_NUMBER']}") }
+every(5.minutes, 'Queueing interval job') { Delayed::Job.enqueue IntervalModule::IntervalJob.new("9175879211", Twilio::REST::Client.new(ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']), "+1#{ENV['TWILIO_PHONE_NUMBER']}") }
 every(2.minutes, 'Queueing open window job') { Delayed::Job.enqueue OpenWindowModule::OpenWindowJob.new }
