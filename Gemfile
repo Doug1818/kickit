@@ -16,6 +16,7 @@ gem "twilio-ruby"
 gem "localtunnel"
 gem "clockwork"
 gem 'delayed_job_active_record'
+gem 'daemons'
 
 group :production do
   gem 'google-analytics-rails'
