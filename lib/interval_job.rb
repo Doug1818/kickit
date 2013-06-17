@@ -5,7 +5,7 @@ module IntervalModule
 
 class IntervalJob
 	def perform
-		number_to_send_to = user.phone
+		number_to_send_to = "9175879211"
 		@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
 		 
 		@twilio_client.account.sms.messages.create(
