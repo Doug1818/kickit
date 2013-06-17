@@ -40,4 +40,7 @@ Kickit::Application.configure do
 
    # Specify what domain to use for mailer URLs (also required for Devise)
   config.action_mailer.default_url_options = { host: "localhost:3000" }
+
+  # Doug per SO tip to get foreman working with thin
+  $stdout.sync = true
 end
