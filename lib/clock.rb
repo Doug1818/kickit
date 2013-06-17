@@ -8,5 +8,5 @@ include Clockwork
 include IntervalModule
 include OpenWindowModule
 
-every(3.minutes, 'Queueing interval job') { Delayed::Job.enqueue IntervalModule::IntervalJob.new }
-every(2.minutes, 'Queueing open window job') { Delayed::Job.enqueue OpenWindowModule::OpenWindowJob.new }
+#every(3.minutes, 'Queueing interval job') { Delayed::Job.enqueue IntervalModule::IntervalJob.new }
+#every(2.minutes, 'Queueing open window job') { Delayed::Job.enqueue OpenWindowModule::OpenWindowJob.new }
