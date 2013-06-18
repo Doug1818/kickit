@@ -12,4 +12,20 @@ namespace :text do
 			)
 		end
 	end
+
+	desc "Open check-in window"
+	task :open_window => :environment do
+		User.active_program.all.each do |user|
+			@day = user.days.find_by_date(Date.today)
+			@day.update_attributes(result: 3)
+		end
+	end
+
+	desc "Close check-in window"
+	task :close_window => :environment do
+		User.active_program.all.each do |user|
+			@day = user.days.find_by_date(Date.today) # To be changed to Date.today - 1
+			@day.update_attributes(result: 4) if @day.result == 3
+		end
+	end
 end
