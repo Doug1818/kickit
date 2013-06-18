@@ -24,8 +24,11 @@ namespace :text do
 	desc "Close check-in window"
 	task :close_window => :environment do
 		User.active_program.all.each do |user|
-			@day = user.days.find_by_date(Date.today) # To be changed to Date.today - 1
-			@day.update_attributes(result: 4) if @day.result == 3
+			@day = user.days.find_by_date(Date.today - 1)
+			if @day.result == 3
+				@day.update_attributes(result: 4)
+				# And charge user $1
+			end
 		end
 	end
 end
