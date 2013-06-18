@@ -1,8 +1,3 @@
-require File.expand_path('../../config/boot',        __FILE__)
-require File.expand_path('../../config/environment', __FILE__)
-
-module IntervalModule
-
 class IntervalJob
 	def perform
 		number_to_send_to = "9175879211"
@@ -14,6 +9,4 @@ class IntervalJob
 				:body => "Reminder test"
 			)
 	end
-end
-
 end

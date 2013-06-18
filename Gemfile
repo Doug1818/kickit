@@ -18,6 +18,7 @@ gem "clockwork"
 gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'thin'
+gem 'newrelic_rpm'
 
 group :production do
   gem 'google-analytics-rails'
