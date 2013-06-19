@@ -14,8 +14,13 @@ class TextMessagesController < ApplicationController
 		if !@day.nil? && Time.now >= @day.date + 1 + 13.hours && Time.now <= @day.date + 2 + 13.hours # User is in an active program (@day is not nil) and in the 24hr check-in window
 			if message.upcase == "Y" || message.upcase == "N"
 				if @day.result == 1 || @day.result == 2
-					response = Twilio::TwiML::Response.new { |r| r.Sms "You have already checked in today." }
-					render :xml => response.text
+					if Time.now.hour >= 4 && Time.now.hour < 13 # If it's between midnight and 9am
+						response = Twilio::TwiML::Response.new { |r| r.Sms "You have already checked in for #{(Date.today - 1).strftime("%A, %B %d")}. If you want to check in for #{Date.today.strftime("%A, %B %d")}, got to #{root_path} or you can check in by text after 9am." }
+						render :xml => response.text
+					else
+						response = Twilio::TwiML::Response.new { |r| r.Sms "You have already checked in today." }
+						render :xml => response.text
+					end
 				elsif @day.result == 3
 					if message.upcase == "Y"
 						@day.update_attributes(result: 1)
