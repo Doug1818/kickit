@@ -1,10 +1,8 @@
 <% content_for :title do %><title>Home</title><% end %>
 <% content_for :h1 do %><h1>Home</h1><% end %>
 
-<h2>Kick it</h2>
-
-<% if user_signed_in? %>
-	<%= link_to 'Tracking', days_path, "data-role" => "button" %>
+<% if user_signed_in? && current_user.start_date? && current_user.start_date <= Date.current && Date.current <= current_user.start_date + 30 %>
+	<%= render 'shared/calendar' %>
 <% else %>
 	<%= form_for @user do |f| %>
 		<%= render 'shared/error_messages', object: f.object %>
