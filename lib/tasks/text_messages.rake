@@ -16,7 +16,7 @@ namespace :text do
 	desc "Open check-in window"
 	task :open_window => :environment do
 		User.active_program.all.each do |user|
-			@day = user.days.find_by_date(Date.today)
+			@day = user.days.find_by_date(Date.current - 1)
 			@day.update_attributes(result: 3)
 		end
 	end
@@ -24,7 +24,7 @@ namespace :text do
 	desc "Close check-in window"
 	task :close_window => :environment do
 		User.active_program.all.each do |user|
-			@day = user.days.find_by_date(Date.today - 1)
+			@day = user.days.find_by_date(Date.current - 2)
 			if @day.result == 3
 				@day.update_attributes(result: 4)
 				# And charge user $1
