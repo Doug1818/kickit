@@ -1,6 +1,6 @@
 namespace :text do
 	desc "Send text message"
-	task :send => :environment do
+	task :tracking => :environment do
 		User.active_program.all.each do |user|
 			number_to_send_to = user.phone
 			@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
@@ -13,14 +13,14 @@ namespace :text do
 		end
 	end
 
-	desc "Send reminders"
-	task :reminders => :environment do
+	desc "Send reminders with on-the-hour times"
+	task :reminders_full => :environment do
 		User.active_program.all.each do |user|
 			number_to_send_to = user.phone
 			@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
 
 			user.reminders.each do |reminder|
-				if Time.current.hour == reminder.time.hour
+				if Time.current.hour == reminder.time.hour && reminder.time.min == 0
 					@twilio_client.account.sms.messages.create(
 						:from => "+1#{ENV['TWILIO_PHONE_NUMBER']}",
 						:to => number_to_send_to,
@@ -31,6 +31,26 @@ namespace :text do
 		end
 	end
 
+	desc "Send reminders with half hour times"
+	task :reminders_half => :environment do
+		User.active_program.all.each do |user|
+			number_to_send_to = user.phone
+			@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
+
+			user.reminders.each do |reminder|
+				if Time.current.hour == reminder.time.hour && reminder.time.min == 30
+					@twilio_client.account.sms.messages.create(
+						:from => "+1#{ENV['TWILIO_PHONE_NUMBER']}",
+						:to => number_to_send_to,
+						:body => "Test reminder."
+					)
+				end
+			end
+		end
+	end
+end
+
+namespace :checkin do
 	desc "Open check-in window"
 	task :open_window => :environment do
 		User.active_program.all.each do |user|
