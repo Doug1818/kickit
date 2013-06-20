@@ -4,7 +4,7 @@
 <% if user_signed_in? && current_user.start_date? && current_user.start_date <= Date.current && Date.current <= current_user.start_date + 30 %>
 	<%= render 'shared/calendar' %>
 <% else %>
-	<%= form_for @user do |f| %>
+	<%= form_for @user, html: { multipart: true } do |f| %>
 		<%= render 'shared/error_messages', object: f.object %>
 		<fieldset>
 			<p>What do you want to kick?</p>	
@@ -25,6 +25,12 @@
 			<p>We'll want to send you some reminders</p>
 			<%= f.text_field :phone, placeholder: "Cell number (to receive texts)" %>
 			<%= f.email_field :email, placeholder: "Email" %>
+		</fieldset>
+		<fieldset>
+			<p>Pick reminder times</p>
+			<%= f.fields_for :reminders do |builder| %>
+				<%= builder.time_select :time, :minute_step => 15, :ampm => true %>
+			<% end %>
 		</fieldset>
 		<fieldset>
 			<p>Pick a start date</p>

@@ -13,6 +13,24 @@ namespace :text do
 		end
 	end
 
+	desc "Send reminders"
+	task :reminders => :environment do
+		User.active_program.all.each do |user|
+			number_to_send_to = user.phone
+			@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
+
+			user.reminders.each do |reminder|
+				if Time.current.hour == reminder.hour
+					@twilio_client.account.sms.messages.create(
+						:from => "+1#{ENV['TWILIO_PHONE_NUMBER']}",
+						:to => number_to_send_to,
+						:body => "Test reminder."
+					)
+				end
+			end
+		end
+	end
+
 	desc "Open check-in window"
 	task :open_window => :environment do
 		User.active_program.all.each do |user|
