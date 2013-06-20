@@ -10,7 +10,11 @@ Kickit::Application.routes.draw do
       post :send, :receive
     end
   end
-  resources :days
+  resources :days do
+    member do
+      put :success, :failure
+    end
+  end
   resources :sent_texts
   
   root to: 'static_pages#home'
