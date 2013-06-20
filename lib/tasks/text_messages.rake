@@ -20,7 +20,7 @@ namespace :text do
 			@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
 
 			user.reminders.each do |reminder|
-				if Time.current.hour == reminder.hour
+				if Time.current.hour == reminder.time.hour
 					@twilio_client.account.sms.messages.create(
 						:from => "+1#{ENV['TWILIO_PHONE_NUMBER']}",
 						:to => number_to_send_to,
