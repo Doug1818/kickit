@@ -2,7 +2,8 @@
 <% content_for :h1 do %><h1><%= @day.date.strftime("%a, %b %d") %></h1><% end %>
 
 <div style="margin-bottom:10px;">
-	<%= link_to "Back", :back, "data-role" => "button", "data-inline" => true, "data-mini" => true %>
+	<%= link_to "Back", :back, "data-role" => "button", "data-icon" => "arrow-l", 
+		"data-iconpos" => "left", "data-inline" => true, "data-mini" => true %>
 </div>
 
 <% if @day.result == 1 %>

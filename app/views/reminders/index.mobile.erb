@@ -1,0 +1,12 @@
+<% content_for :title do %><title>Home</title><% end %>
+<% content_for :h1 do %><h1>Home</h1><% end %>
+
+<% @reminders.each_with_index do |reminder, i| %>
+	<div style="margin-bottom:25px;">
+		<div><%= "Reminder #{i + 1}: #{reminder.time.strftime('%l:%M %p')}" %></div>
+		<%= link_to "Edit", edit_reminder_path(reminder) %> | 
+		<%= link_to "Delete", reminder, method: :delete, confirm: "You sure?" %>
+	</div>
+<% end %>
+
+<%= link_to "Add a new reminder", new_reminder_path, "data-role" => "button" %>

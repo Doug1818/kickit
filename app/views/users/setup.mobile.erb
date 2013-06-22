@@ -1,0 +1,34 @@
+<% content_for :title do %><title>Set up</title><% end %>
+<% content_for :h1 do %><h1>Set up</h1><% end %>
+
+<%= form_for @user, url: do_setup_user_path(@user), html: { multipart: true, method: :put } do |f| %>
+	<%= render 'shared/error_messages', object: f.object %>
+	<fieldset>
+		<p>Pick a username<br> (as anonymous as you want)</p>
+		<%= f.text_field :username %>
+	</fieldset>
+	<fieldset>
+		<p>We'll want to send you some reminders</p>
+		<%= f.text_field :phone, placeholder: "Cell number (to receive texts)" %>
+	</fieldset>
+	<fieldset id="reminders">
+		<p>Pick reminder times</p>
+		<%= f.fields_for :reminders do |builder| %>
+			<%= render 'reminder_fields', f: builder %>
+		<% end %>
+	</fieldset>
+	<fieldset>
+		<p>Pick a start date</p>
+		<%= f.text_field :start_date, type: "date" %>
+	</fieldset>
+	<fieldset>
+		<p>Pick a supporter</p>
+		<p>Who in your life is closest to you and someone with whom you are comfortable sharing your progress?  We will send them a welcome email.</p>
+		<%= f.select :supporter_relationship, User::RELATIONSHIPS %>
+		<%= f.text_field :supporter_name, placeholder: "Supporter name" %>
+		<%= f.text_field :supporter_email, placeholder: "Supporter email" %>
+	</fieldset>
+	<fieldset>
+		<%= f.submit "Start" %>
+	</fieldset>
+<% end %>

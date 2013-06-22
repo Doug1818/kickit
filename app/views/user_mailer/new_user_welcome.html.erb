@@ -1,14 +1,6 @@
-<p>
-	<% if @user.name? %>
-		<%= @user.name %>,
-	<% else %>
-		<%= @user.username %>,
-	<% end %>
-</p>
-
 <p>Thank you for signing up for Kick it!</p>
 
-<p>On <%= @user.start_date %> you will start your 30 day program.  Good luck!</p>
+<p>Get started by setting up a 30-day plan at <%= link_to 'kick-it-now.com', root_url %>.</p>
 
 <p>Best,<br>
 The Kick it Team</p>

@@ -8,6 +8,10 @@ $(document).ready(function() {
  $("#new_user").formToWizard();
 });
 
+$(document).ready(function() {
+ $(".edit_user").formToWizard();
+});
+
 (function($) {
     $.fn.formToWizard = function(options) {
         options = $.extend({  

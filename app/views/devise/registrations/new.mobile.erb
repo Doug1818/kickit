@@ -2,48 +2,15 @@
 <% content_for :h1 do %><h1>Home</h1><% end %>
 
 <% if user_signed_in? && current_user.start_date? && current_user.start_date <= Date.current && Date.current <= current_user.start_date + 30 %>
+	<!-- If in an active program -->
 	<%= render 'shared/calendar' %>
+<% elsif user_signed_in? && !current_user.start_date? %>
+	<!-- If signed up only -->
+	<%= render 'setup' %>
+<% elsif user_signed_in? && current_user.start_date? && current_user.start_date > Date.current %>
+	<!-- If signed up / setup but not started -->
+	<!-- Check list -->
 <% else %>
-	<%= form_for @user, html: { multipart: true } do |f| %>
-		<%= render 'shared/error_messages', object: f.object %>
-		<fieldset>
-			<p>What do you want to kick?</p>	
-			<%= f.select :habit, User::HABITS %>
-		</fieldset>
-		<fieldset>
-			<p>Alright, let's kick X! Looks like you're new...</p>
-			<p>Pick a username<br> (as anonymous as you want)</p>
-			<%= f.text_field :username %>
-			
-			<p>Pick a password (a good one)</p>
-			<%= f.password_field :password %>
-
-			<p>Confirm your password</p>
-			<%= f.password_field :password_confirmation %>
-		</fieldset>
-		<fieldset>
-			<p>We'll want to send you some reminders</p>
-			<%= f.text_field :phone, placeholder: "Cell number (to receive texts)" %>
-			<%= f.email_field :email, placeholder: "Email" %>
-		</fieldset>
-		<fieldset>
-			<p>Pick reminder times</p>
-			<%= f.fields_for :reminders do |builder| %>
-				<%= builder.time_select :time, :minute_step => 15, :ampm => true %>
-			<% end %>
-		</fieldset>
-		<fieldset>
-			<p>Pick a start date</p>
-			<%= f.text_field :start_date, type: "date" %>
-		</fieldset>
-		<fieldset>
-			<p>Who in your life is closest to you and someone with whom you are comfortable sharing your progress?  We will send them a welcome email.</p>
-			<%= f.select :supporter_relationship, User::RELATIONSHIPS %>
-			<%= f.text_field :supporter_name, placeholder: "Supporter name" %>
-			<%= f.text_field :supporter_email, placeholder: "Supporter email" %>
-		</fieldset>
-		<fieldset>
-			<%= f.submit "Start" %>
-		</fieldset>
-	<% end %>
+	<!-- If not signed up -->
+	<%= render 'signup' %>
 <% end %>

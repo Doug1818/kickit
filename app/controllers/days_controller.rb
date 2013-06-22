@@ -11,7 +11,6 @@ class DaysController < ApplicationController
   end
 
   def success
-  	#binding.pry
   	@day = Day.find(params[:id])
   	@day.update_attributes(result: 1)
   	redirect_to root_path

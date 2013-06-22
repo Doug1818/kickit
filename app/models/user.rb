@@ -14,13 +14,13 @@ class User < ActiveRecord::Base
   has_many :sent_texts, dependent: :destroy
   has_many :reminders, dependent: :destroy
   accepts_nested_attributes_for :reminders
-  after_create :create_30_days
+  #after_create :create_30_days
   scope :active_program, where("start_date <= ? AND end_date >= ?", Date.today, Date.today)
 
-  def create_30_days
-  	30.times { |i| self.days.create(day: i + 1, date: self.start_date + i) } if self.start_date?
-    self.update_attributes(end_date: start_date + 30)
-  end
+  #def create_30_days
+  #	30.times { |i| self.days.create(day: i + 1, date: self.start_date + i) } if self.start_date?
+  #  self.update_attributes(end_date: start_date + 30)
+  #end
 
   RELATIONSHIPS = ["Friend", "Boyfriend", "Girlfriend", "Husband", "Wife", "Father", "Mother", "Son", "Daughter",
     "Brother", "Sister", "Uncle", "Aunt", "Nephew", "Niece", "Cousin", "Other", "Don't share my progress"]

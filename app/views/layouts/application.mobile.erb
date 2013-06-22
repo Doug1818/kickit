@@ -15,7 +15,8 @@
 	    		<div data-role="controlgroup">
 	    		<%= link_to 'Home', root_path, "data-role" => "button" %>
 	    		<%= link_to 'Profile', edit_user_registration_path, "data-role" => "button" %>
-	    		<%= link_to 'Tracking', days_path, "data-role" => "button" %>
+	    		<%= link_to 'Reminders', reminders_path, "data-role" => "button" %>
+	    		<%= link_to 'Tracking', root_path, "data-role" => "button" %>
     			</div>
     			<%= link_to 'Sign out', destroy_user_session_path, method: "delete", "data-role" => "button" %>
 			</div>

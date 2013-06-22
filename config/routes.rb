@@ -4,7 +4,12 @@ Kickit::Application.routes.draw do
   #devise_scope :user do
   #  root to: "devise/registrations#new"
   #end
-  resources :users
+  resources :users do
+    member do
+      get :setup
+      put :do_setup
+    end
+  end
   resources :text_messages do
     collection do
       post :send, :receive
@@ -16,6 +21,7 @@ Kickit::Application.routes.draw do
     end
   end
   resources :sent_texts
+  resources :reminders
   
   root to: 'static_pages#home'
 

@@ -1,0 +1,10 @@
+<% content_for :title do %><title>Edit reminder</title><% end %>
+<% content_for :h1 do %><h1>Edit reminder</h1><% end %>
+
+<%= form_for @reminder do |f| %>
+	<%= render 'shared/error_messages', object: f.object %>
+	<div class="rem">
+		<%= f.time_select :time, { minute_step: 30, ampm: true, time_separator: "" }, { "data-inline" => "true" } %>
+		<%= f.submit "Update", class: "submit" %>
+	</div>
+<% end %>
