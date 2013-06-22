@@ -32,4 +32,11 @@ class RemindersController < ApplicationController
       render 'edit'
     end
   end
+
+  def destroy
+    @reminder = current_user.reminders.find(params[:id])
+    @reminder.destroy
+    flash[:notice] = "Reminder deleted"
+    redirect_to reminders_path
+  end
 end
