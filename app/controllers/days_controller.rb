@@ -18,7 +18,7 @@ class DaysController < ApplicationController
 
   def failure
   	@day = Day.find(params[:id])
-  	@day.update_attributes(result: 1)
+  	@day.update_attributes(result: 2)
   	redirect_to root_path
   end
 end
