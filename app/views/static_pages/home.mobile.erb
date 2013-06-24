@@ -8,7 +8,7 @@
 	<!-- If signed up only -->
 	<h2 style="margin-bottom:0;">Welcome!</h2>
 	<%= current_user.email %>
-	<%= link_to "Set up a 30-day plan", setup_user_path(current_user), "data-role" => "button", "data-icon" => "arrow-r", 
+	<%= link_to "Set up a 7-day plan", setup_user_path(current_user), "data-role" => "button", "data-icon" => "arrow-r", 
 		"data-iconpos" => "right", "data-ajax" => false, style: "margin-top:40px;" %>
 <% elsif user_signed_in? && current_user.start_date? && current_user.start_date > Date.current %>
 	<!-- If signed up / setup but not started -->
