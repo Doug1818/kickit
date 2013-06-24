@@ -12,7 +12,8 @@
 		"data-iconpos" => "right", "data-ajax" => false, style: "margin-top:40px;" %>
 <% elsif user_signed_in? && current_user.start_date? && current_user.start_date > Date.current %>
 	<!-- If signed up / setup but not started -->
-	<!-- Check list -->
+	<!-- Check list (in the future) -->
+	<%= render 'shared/calendar' %><!-- Calendar (for now) -->
 <% else %>
 	<!-- If not signed up -->
 	<h2>Kick it</h2>
