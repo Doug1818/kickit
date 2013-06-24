@@ -1,12 +1,26 @@
 <% content_for :title do %><title>Home</title><% end %>
 <% content_for :h1 do %><h1>Home</h1><% end %>
 
+<h3 style="margin-top:0;">Reminder times</h3>
+
 <% @reminders.each_with_index do |reminder, i| %>
 	<div style="margin-bottom:25px;">
-		<div><%= "Reminder #{i + 1}: #{reminder.time.strftime('%l:%M %p')}" %></div>
+		<div><%= "Time #{i + 1}: #{reminder.time.strftime('%l:%M %p')}" %></div>
 		<%= link_to "Edit", edit_reminder_path(reminder) %> | 
 		<%= link_to "Delete", reminder, method: :delete, confirm: "You sure?" %>
 	</div>
 <% end %>
 
-<%= link_to "Add a new reminder", new_reminder_path, "data-role" => "button" %>
+<%= link_to "Add a new time", new_reminder_path, "data-role" => "button" %>
+
+<h3>Reminder messages</h3>
+
+<% @remessages.each_with_index do |remessage, i| %>
+	<div style="margin-bottom:25px;">
+		<div><%= "Message #{i + 1}: #{remessage.content}" %></div>
+		<%= link_to "Edit", edit_remessage_path(remessage) %> | 
+		<%= link_to "Delete", remessage, method: :delete, confirm: "You sure?" %>
+	</div>
+<% end %>
+
+<%= link_to "Add a new message", new_remessage_path, "data-role" => "button" %>

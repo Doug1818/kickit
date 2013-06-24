@@ -4,26 +4,25 @@
 <%= form_for @user, url: do_setup_user_path(@user), html: { multipart: true, method: :put } do |f| %>
 	<%= render 'shared/error_messages', object: f.object %>
 	<fieldset>
-		<p>Pick a username<br> (as anonymous as you want)</p>
+		<p><strong>Pick a username</strong><br> (as anonymous as you want)</p>
 		<%= f.text_field :username %>
 	</fieldset>
 	<fieldset>
-		<p>We'll want to send you some reminders</p>
-		<%= f.text_field :phone, placeholder: "Cell number (to receive texts)" %>
+		<p><strong>We'll want to send you some reminders</strong></p>
+		<%= f.text_field :phone, placeholder: "Cell number (to receive texts)", type: "number", pattern: "[0-9]*" %>
 	</fieldset>
 	<fieldset id="reminders">
-		<p>Pick reminder times</p>
+		<p><strong>Pick reminder times.</strong>  Don't worry - you'll be able to edit/remove/add these later.</p>
 		<%= f.fields_for :reminders do |builder| %>
 			<%= render 'reminder_fields', f: builder %>
 		<% end %>
 	</fieldset>
 	<fieldset>
-		<p>Pick a start date</p>
-		<%= f.text_field :start_date, type: "date" %>
+		<p><strong>Pick a start date.</strong> Make sure to give yourself time to do things like remove triggers from your environment, find healthier substitutes, etc.</p>
+		<%= f.text_field :start_date, type: "date", value: Date.current + 1 %>
 	</fieldset>
 	<fieldset>
-		<p>Pick a supporter</p>
-		<p>Who in your life is closest to you and someone with whom you are comfortable sharing your progress?  We will send them a welcome email.</p>
+		<p><strong>Pick a supporter.</strong> Who in your life is closest to you and someone with whom you are comfortable sharing your progress?  We will send them a welcome email and daily updates on your progress.</p>
 		<%= f.select :supporter_relationship, User::RELATIONSHIPS %>
 		<%= f.text_field :supporter_name, placeholder: "Supporter name" %>
 		<%= f.text_field :supporter_email, placeholder: "Supporter email" %>

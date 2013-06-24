@@ -19,12 +19,15 @@ namespace :text do
 			number_to_send_to = user.phone
 			@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
 
+			messages = []
+			u.remessages.each { |m| messages.push(m.content) }
+
 			user.reminders.each do |reminder|
 				if Time.current.hour == reminder.time.hour && reminder.time.min == 0
 					@twilio_client.account.sms.messages.create(
 						:from => "+1#{ENV['TWILIO_PHONE_NUMBER']}",
 						:to => number_to_send_to,
-						:body => "Test reminder."
+						:body => messages.empty? ? "Future you is thanking present you." : messages.sample
 					)
 				end
 			end
@@ -37,12 +40,15 @@ namespace :text do
 			number_to_send_to = user.phone
 			@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
 
+			messages = []
+			u.remessages.each { |m| messages.push(m.content) }
+
 			user.reminders.each do |reminder|
 				if Time.current.hour == reminder.time.hour && reminder.time.min == 30
 					@twilio_client.account.sms.messages.create(
 						:from => "+1#{ENV['TWILIO_PHONE_NUMBER']}",
 						:to => number_to_send_to,
-						:body => "Test reminder."
+						:body => messages.empty? ? "Future you is thanking present you." : messages.sample
 					)
 				end
 			end

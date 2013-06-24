@@ -1,5 +1,5 @@
 class RemindersController < ApplicationController
-  before_filter :authenticate_user!, only: [:new, :index, :edit, :update]
+  before_filter :authenticate_user!, only: [:new, :create, :index, :edit, :update, :destroy]
 
   def new
     @reminder = Reminder.new
@@ -17,6 +17,7 @@ class RemindersController < ApplicationController
 
   def index
   	@reminders = current_user.reminders
+    @remessages = current_user.remessages
   end
 
   def edit
@@ -36,7 +37,7 @@ class RemindersController < ApplicationController
   def destroy
     @reminder = current_user.reminders.find(params[:id])
     @reminder.destroy
-    flash[:notice] = "Reminder deleted"
+    flash[:notice] = "Reminder time deleted"
     redirect_to reminders_path
   end
 end

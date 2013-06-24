@@ -22,6 +22,7 @@ Kickit::Application.routes.draw do
   end
   resources :sent_texts
   resources :reminders
+  resources :remessages
   
   root to: 'static_pages#home'
 
