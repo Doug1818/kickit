@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
 
   RELATIONSHIPS = ["Friend", "Boyfriend", "Girlfriend", "Husband", "Wife", "Father", "Mother", "Son", "Daughter",
     "Brother", "Sister", "Uncle", "Aunt", "Nephew", "Niece", "Cousin", "Other", "Don't share my progress"]
-  HABITS = ["Smoking", "Drinking", "Dipping", "Alcohol", "Coffee", "Soda", "Sweets", "Candy", "Nail biting", 
+  HABITS = ["Smoking", "Drinking", "Dipping", "Alcohol", "Coffee", "Soda", "Sweets", "Processed sugars", "Nail biting", 
     "Nuckle cracking", "Playing with hair", "Losing temper", "Watching crap TV", "Playing video games", 
     "Surfing Facebook / the internet"]
   
