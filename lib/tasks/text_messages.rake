@@ -20,7 +20,7 @@ namespace :text do
 			@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
 
 			messages = []
-			u.remessages.each { |m| messages.push(m.content) }
+			user.remessages.each { |m| messages.push(m.content) }
 
 			user.reminders.each do |reminder|
 				if Time.current.hour == reminder.time.hour && reminder.time.min == 0
@@ -41,7 +41,7 @@ namespace :text do
 			@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
 
 			messages = []
-			u.remessages.each { |m| messages.push(m.content) }
+			user.remessages.each { |m| messages.push(m.content) }
 
 			user.reminders.each do |reminder|
 				if Time.current.hour == reminder.time.hour && reminder.time.min == 30
