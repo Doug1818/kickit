@@ -3,7 +3,7 @@ namespace :text do
 	task :tracking => :environment do
 		User.active_checkins.all.each do |user|
 			number_to_send_to = user.phone
-			std_msg = "This is your daily Kick it check in. Were you successful today? Reply 'Y' or 'N' to check in."
+			std_msg = "This is your daily Kick it check in. Were you successful yesterday? Reply 'Y' or 'N' to check in."
 			@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
 		 
 			@twilio_client.account.sms.messages.create(

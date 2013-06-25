@@ -8,7 +8,7 @@
 		<%= h @today.strftime("%B %Y") %>
 		<%= link_to ">", :month => (@today.end_of_month+1).strftime("%Y-%m-01") %>
 	</h3>
-	<%= calendar_for @days, :year => @today.year, :month => @today.month do |calendar| %>
+	<%= calendar_for @days, :year => @today.year, :month => @today.month, :today => Date.current do |calendar| %>
 		<%= calendar.head('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat')%>
 		<% calendar.day(:day_method => :date) do |date, days| %>
 			<%= date.day %>
