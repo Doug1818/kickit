@@ -1,7 +1,7 @@
 <% content_for :title do %><title>Home</title><% end %>
 <% content_for :h1 do %><h1>Home</h1><% end %>
 
-<% if user_signed_in? && current_user.start_date? && current_user.start_date <= Date.current && Date.current <= current_user.start_date + 30 %>
+<% if user_signed_in? && current_user.start_date? && current_user.start_date <= Date.current && Date.current <= current_user.start_date + 7 %>
 	<!-- If in an active program -->
 	<%= render 'shared/calendar' %>
 <% elsif user_signed_in? && !current_user.start_date? %>

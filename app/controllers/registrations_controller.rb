@@ -5,7 +5,7 @@ skip_before_filter :require_no_authentication, :only => [:new, :create]
     @user = User.new
     if user_signed_in?
       @days = current_user.days
-      @today = params[:month] ? Date.parse(params[:month]) : Date.today
+      @today = params[:month] ? Date.parse(params[:month]) : Date.current
     end
   end
 

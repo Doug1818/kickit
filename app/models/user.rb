@@ -9,13 +9,13 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
   attr_accessible :username, :name, :phone, :habit, :start_date, :end_date, :supporter_name, :supporter_email, :supporter_relationship, 
-    :reminders_attributes
+    :goal, :checkin_msg, :reminders_attributes
   has_many :days, dependent: :destroy
   has_many :sent_texts, dependent: :destroy
   has_many :reminders, dependent: :destroy
   accepts_nested_attributes_for :reminders
   has_many :remessages, dependent: :destroy
-  scope :active_program, where("start_date <= ? AND end_date >= ?", Date.today, Date.today)
+  scope :active_program, where("start_date <= ? AND end_date >= ?", Date.current, Date.current)
   #after_create :create_30_days
 
   #def create_30_days
