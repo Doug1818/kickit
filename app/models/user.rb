@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :reminders
   has_many :remessages, dependent: :destroy
   scope :active_program, where("start_date <= ? AND end_date >= ?", Date.current, Date.current)
+  scope :active_checkins, where("start_date <= ? AND end_date >= ?", Date.current - 1, Date.current - 1)
   #after_create :create_30_days
 
   #def create_30_days
