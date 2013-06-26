@@ -3,7 +3,7 @@ class DaysController < ApplicationController
 
   def index
   	@days = current_user.days
-  	@today = params[:month] ? Date.parse(params[:month]) : Date.today
+  	@today = params[:month] ? Date.parse(params[:month]) : Date.current
   end
 
   def show

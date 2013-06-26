@@ -3,7 +3,7 @@ before_filter :authenticate_user!, only: [:setup, :do_setup]
 
 	def setup
 		@user = current_user
-		t = Time.current
+		t = Time.zone.now
 		@morning_rem = @user.reminders.new(name: "morning", time: DateTime.new(t.year,t.month,t.day,10,0,0,'-4'))
 		@afternoon_rem = @user.reminders.new(name: "afternoon", time: DateTime.new(t.year,t.month,t.day,13,0,0,'-4'))
 		@evening_rem = @user.reminders.new(name: "evening", time: DateTime.new(t.year,t.month,t.day,21,0,0,'-4'))
@@ -20,7 +20,7 @@ before_filter :authenticate_user!, only: [:setup, :do_setup]
 	      flash[:success] = "Set up complete!"
 	      redirect_to root_path
 	      UserMailer.supporter_welcome(@user).deliver
-	      
+
 	      number_to_send_to = @user.phone
 				@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
 				@twilio_client.account.sms.messages.create(

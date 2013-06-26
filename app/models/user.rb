@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
   attr_accessible :username, :name, :phone, :habit, :start_date, :end_date, :supporter_name, :supporter_email, :supporter_relationship, 
-    :goal, :checkin_msg, :reminders_attributes
+    :goal, :checkin_msg, :time_zone, :reminders_attributes
   has_many :days, dependent: :destroy
   has_many :sent_texts, dependent: :destroy
   has_many :reminders, dependent: :destroy
@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
   scope :active_program, where("start_date <= ? AND end_date >= ?", Date.current, Date.current)
   scope :active_checkins, where("start_date <= ? AND end_date >= ?", Date.current - 1, Date.current - 1)
   #after_create :create_30_days
+
+  validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name)
 
   #def create_30_days
   #	30.times { |i| self.days.create(day: i + 1, date: self.start_date + i) } if self.start_date?

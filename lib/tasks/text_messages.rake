@@ -24,7 +24,7 @@ namespace :text do
 			user.remessages.each { |m| messages.push(m.content) }
 
 			user.reminders.each do |reminder|
-				if Time.current.hour == reminder.time.hour && reminder.time.min == 0
+				if Time.zone.now.hour == reminder.time.hour && reminder.time.min == 0
 					@twilio_client.account.sms.messages.create(
 						:from => "+1#{ENV['TWILIO_PHONE_NUMBER']}",
 						:to => number_to_send_to,
@@ -45,7 +45,7 @@ namespace :text do
 			user.remessages.each { |m| messages.push(m.content) }
 
 			user.reminders.each do |reminder|
-				if Time.current.hour == reminder.time.hour && reminder.time.min == 30
+				if Time.zone.now.hour == reminder.time.hour && reminder.time.min == 30
 					@twilio_client.account.sms.messages.create(
 						:from => "+1#{ENV['TWILIO_PHONE_NUMBER']}",
 						:to => number_to_send_to,

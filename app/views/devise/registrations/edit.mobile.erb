@@ -22,6 +22,9 @@
   <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
   <%= f.password_field :current_password %></div>
 
+  <div style="margin-bottom:0;margin-top:25px;"><%= f.label :time_zone %></div>
+  <div style="margin-bottom:40px;"><%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %></div>
+
   <div><%= f.submit "Update" %></div>
 <% end %>
 

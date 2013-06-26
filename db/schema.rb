@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130625041451) do
+ActiveRecord::Schema.define(:version => 20130626013207) do
 
   create_table "days", :force => true do |t|
     t.date     "date"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(:version => 20130625041451) do
     t.date     "end_date"
     t.string   "checkin_msg"
     t.string   "goal"
+    t.string   "time_zone"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
