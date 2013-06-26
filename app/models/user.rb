@@ -17,9 +17,15 @@ class User < ActiveRecord::Base
   has_many :remessages, dependent: :destroy
   scope :active_program, where("start_date <= ? AND end_date >= ?", Date.current, Date.current)
   scope :active_checkins, where("start_date <= ? AND end_date >= ?", Date.current - 1, Date.current - 1)
-  #after_create :create_30_days
 
   validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name)
+
+  before_validation :set_default_time_zone, :on => :create
+  #after_create :create_30_days
+
+  def set_default_time_zone
+    self.time_zone = "Eastern Time (US & Canada)"
+  end
 
   #def create_30_days
   #	30.times { |i| self.days.create(day: i + 1, date: self.start_date + i) } if self.start_date?
