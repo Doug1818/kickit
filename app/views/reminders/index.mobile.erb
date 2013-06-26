@@ -3,7 +3,7 @@
 
 <h3 style="margin-top:0;">Reminder times</h3>
 
-<% @reminders.each_with_index do |reminder, i| %>
+<% @reminders.order("time asc").each_with_index do |reminder, i| %>
 	<div style="margin-bottom:25px;">
 		<div><%= "Time #{i + 1}: #{reminder.time.strftime('%l:%M %p')}" %></div>
 		<%= link_to "Edit", edit_reminder_path(reminder) %> | 
