@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.11'
-gem 'bootstrap-sass', '2.0.0'
+gem 'bootstrap-sass', '2.3.2.0'
 gem 'pg', '0.12.2'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'faker', '1.0.1'
@@ -19,6 +19,7 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'thin'
 gem 'newrelic_rpm'
+gem 'rails_admin'
 
 group :production do
   gem 'google-analytics-rails'
@@ -39,7 +40,7 @@ group :assets do
   gem 'sass-rails',   '3.2.4'
   gem 'coffee-rails', '3.2.2'
   gem 'uglifier', '1.2.3'
-  gem 'jquery-ui-rails'
+  #gem 'jquery-ui-rails' # allow rails_admin to install as a dependency
   gem 'twitter-bootstrap-rails'
   gem 'therubyracer'
   gem 'less-rails'
