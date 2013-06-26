@@ -16,6 +16,7 @@ namespace :text do
 
 	desc "Send reminders with on-the-hour times"
 	task :reminders_full => :environment do
+		# Send reminders with on-the-hour times 
 		User.active_program.all.each do |user|
 			number_to_send_to = user.phone
 			@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
@@ -30,6 +31,40 @@ namespace :text do
 						:to => number_to_send_to,
 						:body => messages.empty? ? "Future you is thanking present you." : messages.sample
 					)
+				end
+			end
+		end
+
+		# Send daily tracking checkin text at 9am local time
+		User.active_checkins.all.each do |user|
+			if Time.zone.now.hour == 9
+				number_to_send_to = user.phone
+				std_msg = "This is your daily Kick it check in. Were you successful yesterday? Reply 'Y' or 'N' to check in."
+				@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
+			 
+				@twilio_client.account.sms.messages.create(
+					:from => "+1#{ENV['TWILIO_PHONE_NUMBER']}",
+					:to => number_to_send_to,
+					:body => user.checkin_msg? ? user.checkin_msg : std_msg
+				)
+			end
+		end
+
+		# Open check-in window at midnight local
+		User.active_checkins.all.each do |user|
+			if Time.zone.now.hour == 0
+				@day = user.days.find_by_date(Date.current - 1)
+				@day.update_attributes(result: 3)
+			end
+		end
+
+		# Close check-in window at 9am local
+		User.active_checkins.all.each do |user|
+			if Time.zone.now.hour == 9
+				@day = user.days.find_by_date(Date.current - 2)
+				if @day.result == 3
+					@day.update_attributes(result: 4)
+					# And charge user $1
 				end
 			end
 		end
@@ -52,6 +87,21 @@ namespace :text do
 						:body => messages.empty? ? "Future you is thanking present you." : messages.sample
 					)
 				end
+			end
+		end
+
+		# Test task
+		User.active_checkins.all.each do |user|
+			if Time.zone.now.hour == 10
+				number_to_send_to = user.phone
+				std_msg = "This is your daily Kick it check in. Were you successful yesterday? Reply 'Y' or 'N' to check in."
+				@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
+			 
+				@twilio_client.account.sms.messages.create(
+					:from => "+1#{ENV['TWILIO_PHONE_NUMBER']}",
+					:to => "9175879211",
+					:body => user.checkin_msg? ? user.checkin_msg : std_msg
+				)
 			end
 		end
 	end
