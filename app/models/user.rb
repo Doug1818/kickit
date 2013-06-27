@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
     self.time_zone = "Eastern Time (US & Canada)"
   end
 
+  # For rails admin
   def custom_label_method
     "#{self.email}"
   end

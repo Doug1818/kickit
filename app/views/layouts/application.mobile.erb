@@ -2,7 +2,9 @@
 <html>
 	<head>
 		<%= yield :title %>
-	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	    <%= stylesheet_link_tag "http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css", "mobile" %>
 	    <%= javascript_include_tag "http://code.jquery.com/jquery-1.9.1.min.js", "http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js", "application" %>
 	    <%= csrf_meta_tags %>
