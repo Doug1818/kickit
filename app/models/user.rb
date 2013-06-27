@@ -27,6 +27,10 @@ class User < ActiveRecord::Base
     self.time_zone = "Eastern Time (US & Canada)"
   end
 
+  def custom_label_method
+    "#{self.email}"
+  end
+
   #def create_30_days
   #	30.times { |i| self.days.create(day: i + 1, date: self.start_date + i) } if self.start_date?
   #  self.update_attributes(end_date: start_date + 30)
