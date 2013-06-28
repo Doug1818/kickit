@@ -78,7 +78,7 @@ Kickit::Application.configure do
   }
 
   # Google Analytics tracker code
-  #GA.tracker = "UA-39300896-1"
+  GA.tracker = "UA-42099746-1"
 
   # Specify what domain to use for mailer URLs (also required for Devise)
   config.action_mailer.default_url_options = { host: 'kick-it-now.com' }
