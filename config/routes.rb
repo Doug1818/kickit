@@ -12,6 +12,9 @@ Kickit::Application.routes.draw do
       get :setup
       put :do_setup
     end
+#    collection do
+#      get :signup
+#    end
   end
   resources :text_messages do
     collection do
@@ -28,6 +31,7 @@ Kickit::Application.routes.draw do
   resources :remessages
   
   root to: 'static_pages#home'
+  match '/carousel',  to: 'static_pages#carousel'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

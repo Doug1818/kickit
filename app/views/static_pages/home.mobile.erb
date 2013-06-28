@@ -15,7 +15,12 @@
 	<!-- Check list (in the future) -->
 	<%= render 'shared/calendar' %><!-- Calendar (for now) -->
 <% else %>
-	<!-- If not signed up -->
+	<!-- If not signed in -->
 	<h2>Kick it</h2>
-	<%= render 'signup' %>
+	<%= form_for @user, :url => session_path(@user) do |f| %>
+		<%= f.email_field :email, placeholder: "Email" %>
+		<%= f.password_field :password, placeholder: "Password" %>
+		<%= f.submit "Sign in" %>
+	<% end %>
+	Don't have an account? <%= link_to 'Sign up', carousel_path, "data-ajax" => false %>
 <% end %>

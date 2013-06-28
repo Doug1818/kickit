@@ -7,4 +7,8 @@ class StaticPagesController < ApplicationController
 	  		@today = params[:month] ? Date.parse(params[:month]) : Date.current
   		end
 	end
+
+	def carousel
+		@user = User.new
+	end
 end

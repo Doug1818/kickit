@@ -1,0 +1,62 @@
+<% content_for :title do %><title>Sign up</title><% end %>
+<% content_for :h1 do %><h1>Sign up</h1><% end %>
+
+<!--<h3 style="text-align:center;margin-top:0;">The 30-day Plan</h3>-->
+<div id="wrapper"></div>
+
+<%= link_to "Sign up", new_user_registration_path, "data-role" => "button", style: "margin-top:10px;" %>
+
+<script type="text/javascript">
+$(function() {
+    if (typeof (carousel) == "undefined") {
+        initChoixPhotos(); }
+});
+
+initChoixPhotos = function () {
+    document.addEventListener('pageshow', function (e) { e.preventDefault(); }, false);
+
+	var	carousel,
+		el,
+		i,
+		page,
+		slides = [
+			'<strong>Swipe</strong> to learn more <br> about <strong>KickIt</strong> >',
+			
+			'<div><strong>The 30-Day Plan</strong></div><p>Tell us a little about yourself what you’re trying to change, and we’ll use that information to help you set realistic goals and make a customized plan.</p>',
+			'<div><strong>The 30-Day Plan</strong></div><p>Success is measured on a day-to-day basis. Each day, enter whether or not you succeeded the day before. Daily check-ins are meant for you stay engaged, stay monitoring yourself, and stay honest.</p>', 
+			'<div><strong>The 30-Day Plan</strong></div><p>The service is free to use, so long as you check in every day to tell us how you did. We don’t want you to lie, so there is no penalty for failing. However, if you fail to check in at all, that’s when we charge.</p><p>If it bothers you that we get money when you screw up, well....good. Don’t screw up. We want you win, we have other ways we’d rather make money.</p>',
+			'<div><strong>The 30-Day Plan</strong></div><p>Invite someone you know and trust to help you out. Most importantly, they’ll see how you’re doing and whether or not you’re checking in.</p>',
+			'<div><strong>The 30-Day Plan</strong></div><p>Track your progress and get feedback about how you’re performing compared to how you started and to others.</p>',
+			'<div><strong>The 30-Day Plan</strong></div><p>Get text messages to help you stick to the plan. They’ll remind you of your goals, help coach you through decisions, and keep you engaged with the program. And they’re easy to adjust if they get annoying.</p>'
+		];
+
+	carousel = new SwipeView('#wrapper', {
+		numberOfPages: slides.length,
+		hastyPageFlip: true
+	});
+
+	// Load initial data
+	for (i=0; i<3; i++) {
+		page = i==0 ? slides.length-1 : i-1;
+
+		el = document.createElement('span');
+		el.innerHTML = slides[page];
+		carousel.masterPages[i].appendChild(el)
+	}
+
+	carousel.onFlip(function () {
+		var el,
+			upcoming,
+			i;
+
+		for (i=0; i<3; i++) {
+			upcoming = carousel.masterPages[i].dataset.upcomingPageIndex;
+
+			if (upcoming != carousel.masterPages[i].dataset.pageIndex) {
+				el = carousel.masterPages[i].querySelector('span');
+				el.innerHTML = slides[upcoming];
+			}
+		}
+	});
+}
+</script>
