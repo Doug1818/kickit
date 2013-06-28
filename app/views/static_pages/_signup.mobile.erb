@@ -22,15 +22,13 @@
 <% end %>
 
 <script type="text/javascript">
-$(document).ready(function(){		
-	if (typeof (carousel) == "undefined") {
-	    initChoixPhotos(); 
-	}
-})
-
+$(function() {
+    if (typeof (carousel) == "undefined") {
+        initChoixPhotos(); }
+});
 
 initChoixPhotos = function () {
-    document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+    document.addEventListener('pageshow', function (e) { e.preventDefault(); }, false);
 
 	var	carousel,
 		el,
@@ -38,7 +36,7 @@ initChoixPhotos = function () {
 		page,
 		slides = [
 			'<strong>Swipe</strong> to know more &gt;&gt;&gt;<br>Or scroll down for <em>Lorem Ipsum</em>',
-			'1. A robot may not injure a human being or, through inaction, allow a human being to come to harm.',
+			'1. <%= image_tag("glyphicons_030_pencil.png", size: "25x25") %>',
 			'2. A robot must obey the orders given to it by human beings, except where such orders would conflict with the First Law.',
 			'3. A robot must protect its own existence as long as such protection does not conflict with the First or Second Laws.'
 		];
