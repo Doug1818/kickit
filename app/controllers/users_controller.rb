@@ -4,9 +4,9 @@ before_filter :authenticate_user!, only: [:setup, :do_setup]
 	def setup
 		@user = current_user
 		t = Time.zone.now
-		@morning_rem = @user.reminders.new(name: "morning", time: DateTime.new(t.year,t.month,t.day,10,0,0,'-4'))
-		@afternoon_rem = @user.reminders.new(name: "afternoon", time: DateTime.new(t.year,t.month,t.day,13,0,0,'-4'))
-		@evening_rem = @user.reminders.new(name: "evening", time: DateTime.new(t.year,t.month,t.day,21,0,0,'-4'))
+		@morning_rem = @user.reminders.new(time: DateTime.new(t.year,t.month,t.day,10,0,0,'-4'))
+		@afternoon_rem = @user.reminders.new(time: DateTime.new(t.year,t.month,t.day,13,0,0,'-4'))
+		@evening_rem = @user.reminders.new(time: DateTime.new(t.year,t.month,t.day,21,0,0,'-4'))
 	end
 
 	def do_setup
@@ -22,12 +22,14 @@ before_filter :authenticate_user!, only: [:setup, :do_setup]
 	      UserMailer.supporter_welcome(@user).deliver
 
 	      number_to_send_to = @user.phone
+	      message = "Welcome to Kick it! We'll be using this number to send you reminders over the course of your program, so you should save it to your contacts as 'Kick it'."
 				@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
 				@twilio_client.account.sms.messages.create(
 					:from => "+1#{ENV['TWILIO_PHONE_NUMBER']}",
 					:to => number_to_send_to,
-					:body => "Welcome to Kick it! We'll be using this number to send you reminders over the course of your program, so you should save it to your contacts as 'Kick it'."
+					:body => message
 				)
+				@received_text = @user.received_texts.create(message: message)
 	    else
 	      flash[:error] = "Set up unsuccessful. Please make sure all fields are filled out correctly."
 	      redirect_to root_path
