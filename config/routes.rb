@@ -27,6 +27,7 @@ Kickit::Application.routes.draw do
     end
   end
   resources :sent_texts
+  resources :received_texts
   resources :reminders
   resources :remessages
   

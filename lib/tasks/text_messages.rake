@@ -7,14 +7,16 @@ task :full_hour_jobs => :environment do
 
 		messages = []
 		user.remessages.each { |m| messages.push(m.content) }
+		message = messages.empty? ? "Future you is thanking present you." : messages.sample
 
 		user.reminders.each do |reminder|
 			if Time.zone.now.hour == reminder.time.hour && reminder.time.min == 0
 				@twilio_client.account.sms.messages.create(
 					:from => "+1#{ENV['TWILIO_PHONE_NUMBER']}",
 					:to => number_to_send_to,
-					:body => messages.empty? ? "Future you is thanking present you." : messages.sample
+					:body => message
 				)
+				received_text = user.received_texts.create(message: message)
 			end
 		end
 	end
@@ -24,13 +26,15 @@ task :full_hour_jobs => :environment do
 		if Time.now.in_time_zone(user.time_zone).hour == 9
 			number_to_send_to = user.phone
 			std_msg = "This is your daily Kick it check in. Were you successful yesterday? Reply 'Y' or 'N' to check in."
+			message = user.checkin_msg? ? user.checkin_msg : std_msg
 			@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
 		 
 			@twilio_client.account.sms.messages.create(
 				:from => "+1#{ENV['TWILIO_PHONE_NUMBER']}",
 				:to => number_to_send_to,
-				:body => user.checkin_msg? ? user.checkin_msg : std_msg
+				:body => message
 			)
+			received_text = user.received_texts.create(message: message)
 		end
 	end
 
@@ -63,14 +67,16 @@ task :half_hour_jobs => :environment do
 
 		messages = []
 		user.remessages.each { |m| messages.push(m.content) }
+		message = messages.empty? ? "Future you is thanking present you." : messages.sample
 
 		user.reminders.each do |reminder|
 			if Time.zone.now.hour == reminder.time.hour && reminder.time.min == 30
 				@twilio_client.account.sms.messages.create(
 					:from => "+1#{ENV['TWILIO_PHONE_NUMBER']}",
 					:to => number_to_send_to,
-					:body => messages.empty? ? "Future you is thanking present you." : messages.sample
+					:body => message
 				)
+				received_text = user.received_texts.create(message: message)
 			end
 		end
 	end
