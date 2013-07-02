@@ -31,8 +31,7 @@ before_filter :authenticate_user!, only: [:setup, :do_setup]
 				)
 				@received_text = @user.received_texts.create(message: message)
 	    else
-	      flash[:error] = "Set up unsuccessful. Please make sure all fields are filled out correctly."
-	      redirect_to root_path
+	      render 'setup'
 	    end
 	end
 end

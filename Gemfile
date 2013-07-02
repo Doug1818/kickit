@@ -20,6 +20,7 @@ gem 'daemons'
 gem 'thin'
 gem 'newrelic_rpm'
 gem 'rails_admin'
+gem 'client_side_validations'
 
 group :production do
   gem 'google-analytics-rails'

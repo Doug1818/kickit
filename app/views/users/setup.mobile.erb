@@ -5,11 +5,11 @@
 	<%= render 'shared/error_messages', object: f.object %>
 	<fieldset>
 		<p><strong>Pick a username</strong><br> (as anonymous as you want)</p>
-		<%= f.text_field :username %>
+		<%= f.text_field :username, placeholder: "Username (required)"  %>
 	</fieldset>
 	<fieldset>
-		<p><strong>We'll want to send you some reminders</strong></p>
-		<%= f.text_field :phone, placeholder: "Cell number (to receive texts)", type: "number", pattern: "[0-9]*" %>
+		<p><strong>We'll want to text you some reminders</strong></p>
+		<%= f.text_field :phone, placeholder: "Cell number (required)", type: "number", pattern: "[0-9]*" %>
 	</fieldset>
 	<fieldset id="reminders">
 		<p><strong>Pick reminder times.</strong>  Don't worry - you'll be able to edit/remove/add these later.</p>
@@ -24,8 +24,8 @@
 	<fieldset>
 		<p><strong>Pick a supporter.</strong> Who in your life is closest to you and someone with whom you are comfortable sharing your progress?  We will send them a welcome email and daily updates on your progress.</p>
 		<%= f.select :supporter_relationship, User::RELATIONSHIPS %>
-		<%= f.text_field :supporter_name, placeholder: "Supporter name" %>
-		<%= f.text_field :supporter_email, placeholder: "Supporter email" %>
+		<%= f.text_field :supporter_name, placeholder: "Supporter name (required)" %>
+		<%= f.text_field :supporter_email, placeholder: "Supporter email (required)" %>
 	</fieldset>
 	<fieldset>
 		<%= f.submit "Start" %>

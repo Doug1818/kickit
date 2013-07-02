@@ -17,5 +17,6 @@
 //= require bootstrap
 //= require formToWizard
 //= require swipeview
+//= require rails.validations
 //= require_tree .
 

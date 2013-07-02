@@ -19,10 +19,31 @@ class User < ActiveRecord::Base
   scope :active_program, where("start_date <= ? AND end_date >= ?", Date.current, Date.current)
   scope :active_checkins, where("start_date <= ? AND end_date >= ?", Date.current - 1, Date.current - 1)
 
+  validates :habit, presence: true
+  validates :phone, presence: true, uniqueness: true, :on => :update
+  validates :username, presence: true, :on => :update
+  validates :start_date, presence: true, :on => :update
+  validates :supporter_name, presence: true, :on => :update
+  validates :supporter_email, presence: true, :on => :update
+  validates :supporter_relationship, presence: true, :on => :update
+  validate  :phone_length, :on => :update
+  validate  :future_date, :on => :update
   validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name)
 
   before_validation :set_default_time_zone, :on => :create
   #after_create :create_30_days
+
+  def phone_length
+    if !self.phone.blank? && self.phone.length != 10
+      self.errors[:phone_number] = "must be 10 digits"
+    end
+  end
+
+  def future_date
+    if self.start_date != nil && self.start_date < Time.zone.now.to_date + 1
+      self.errors[:start_date] << "can't be earlier than tomorrow"
+    end
+  end
 
   def set_default_time_zone
     self.time_zone = "Eastern Time (US & Canada)"
