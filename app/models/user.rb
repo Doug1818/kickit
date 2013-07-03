@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
 
   def sdays
     x = []
-    self.days.order("date desc")[0..6].each { |day| x.push(day.result) if day.result == 1 }
+    self.days.order("date desc")[-7..-1].each { |day| x.push(day.result) if day.result == 1 }
     x.inject(:+)
   end
 
