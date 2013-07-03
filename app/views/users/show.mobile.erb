@@ -15,7 +15,7 @@
 
 	<h3><%= "Their goal: #{@user.goal}" %></h3>
 	<table class="pretty_table">
-		<% @user.days.order("date desc")[0..6].each do |day| %>
+		<% @user.days.order("date desc")[-7..-1].each do |day| %>
 			<tr>
 				<td class="date"><%= day.date.strftime("%a, %b %d") %></td>
 				<td class="result"><%= RESULTS.key(day.result) %></td>
