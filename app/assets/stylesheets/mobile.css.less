@@ -15,6 +15,7 @@
 @pink:              #c3325f;
 @purple:            #7a43b6;
 
+@grayMediumLight: #E0E0E0;
 
 /* typography */
 
@@ -280,4 +281,49 @@ h3 {
     margin: 0 0 0 -20px;
   }
 
+}
+
+/* tables */
+
+.pretty_table {
+  tr {
+    text-align:left;
+    border-bottom: 1px solid @grayMediumLight;
+    &:first-child {
+      border-top: 1px solid @grayMediumLight;
+    }
+    &:nth-child(even) {
+      background: #F8F8F8;
+    }
+    &:last-child {
+      margin-bottom: 20px;
+      border-bottom: none;
+    }
+    .date {
+      width: 150px;
+    }
+    .result {
+      width: 150px;
+    }
+    th {
+      padding: 5px 10px;
+    }
+    td {
+      padding: 5px 10px;
+    }
+  }
+}
+
+/* supmessages */
+
+.msg_info {
+  margin-left: 10px;
+}
+.content {
+  margin-top: 7px;
+  margin-bottom: 20px;
+  border: 1px solid @grayMediumLight;
+  border-radius:10px;
+  background: #F8F8F8;
+  padding: 10px;
 }

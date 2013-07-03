@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :days, dependent: :destroy
   has_many :sent_texts, dependent: :destroy
   has_many :received_texts, dependent: :destroy
+  has_many :supmessages, dependent: :destroy
   has_many :reminders, dependent: :destroy
   accepts_nested_attributes_for :reminders
   has_many :remessages, dependent: :destroy
@@ -52,6 +53,35 @@ class User < ActiveRecord::Base
   # For rails admin
   def custom_label_method
     "#{self.email}"
+  end
+
+  def sdays
+    x = []
+    self.days.order("date desc")[0..6].each { |day| x.push(day.result) if day.result == 1 }
+    x.inject(:+)
+  end
+
+  def completed_days
+    d = Date.current - self.start_date
+    d.to_i
+  end
+
+  def badge
+    if self.sdays == 7
+      "Congratulations on a perfect week!  Well, in terms of #{self.habit} anyway."
+    elsif self.sdays <= 6 && self.sdays >= 5
+      "Strong week.  Strong to Quite Strong."
+    elsif self.sdays <= 4 && self.sdays >= 3
+      "Pretty good success rate, but I know you can do better.  I give it about a B."
+    elsif self.sdays <= 2 && self.completed_days <= 7
+      "The first week is always hard.  Make a comeback in week 2!"
+    elsif self.sdays <= 2 && self.completed_days > 7    
+      "Looks like you had a tough week.  Hit the reset button and start fresh next week."
+    end
+  end
+
+  def whole_num
+    to_i == self ? to_i : self
   end
 
   #def create_30_days

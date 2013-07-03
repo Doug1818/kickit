@@ -34,4 +34,9 @@ before_filter :authenticate_user!, only: [:setup, :do_setup]
 	      render 'setup'
 	    end
 	end
+
+	def show
+		@user = User.find(params[:id])
+		@supmessage = @user.supmessages.build
+	end
 end

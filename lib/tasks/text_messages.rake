@@ -81,3 +81,12 @@ task :half_hour_jobs => :environment do
 		end
 	end
 end
+
+desc "Send weekly supporter email"
+task :weekly_supemail => :environment do
+	User.all.each do |user|
+		if user.start_date? && user.start_date < Date.current && ((Date.current - user.start_date).to_f/7).prettify.is_a?(Integer)
+			UserMailer.supporter_update(user).deliver
+		end
+	end
+end
