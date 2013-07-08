@@ -75,15 +75,15 @@ class User < ActiveRecord::Base
   end
 
   def badge
-    if self.sdays == 7
+    if self.prev_week_sdays == 7
       "Congratulations on a perfect week!  Well, in terms of #{self.habit} anyway."
-    elsif self.sdays <= 6 && self.sdays >= 5
+    elsif self.prev_week_sdays <= 6 && self.prev_week_sdays >= 5
       "Strong week.  Strong to Quite Strong."
-    elsif self.sdays <= 4 && self.sdays >= 3
+    elsif self.prev_week_sdays <= 4 && self.prev_week_sdays >= 3
       "Pretty good success rate, but I know you can do better.  I give it about a B."
-    elsif self.sdays <= 2 && self.completed_days <= 7
+    elsif self.prev_week_sdays <= 2 && self.completed_days <= 7
       "The first week is always hard.  Make a comeback in week 2!"
-    elsif self.sdays <= 2 && self.completed_days > 7    
+    elsif self.prev_week_sdays <= 2 && self.completed_days > 7    
       "Looks like you had a tough week.  Hit the reset button and start fresh next week."
     end
   end
