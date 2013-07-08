@@ -2,7 +2,7 @@
 
 <% if @user.completed_days >= 7 %>
 
-	<h2><%= @user.email %> was successful <%= @user.sdays %> of 7 days last week.  Encourage them with a badge!</h2><br>
+	<h2><%= @user.email %> was successful <%= @user.prev_week_sdays %> of 7 days last week.  Encourage them with a badge!</h2><br>
 
 	<%= form_for @supmessage do |f| %>
 		<%= render 'shared/error_messages', object: f.object %>
@@ -13,7 +13,7 @@
 
 	<h3><%= "Their goal: #{@user.goal}" %></h3>
 	<table class="pretty_table">
-		<% @user.days.order("date desc")[-7..-1].each do |day| %>
+		<% @user.days.reported.order("date desc")[(-7 - 7*(@user.prev_week - 1))..(-1 - 7*(@user.prev_week - 1))].each do |day| %>
 			<tr>
 				<td class="date"><%= day.date.strftime("%a, %b %d") %></td>
 				<td class="result"><%= RESULTS.key(day.result) %></td>

@@ -28,11 +28,15 @@ class User < ActiveRecord::Base
   validates :supporter_email, presence: true, :on => :update
   validates :supporter_relationship, presence: true, :on => :update
   validate  :phone_length, :on => :update
-  validate  :future_date, :on => :update
+  validate  :future_date, :on => :update, :if => :on_setup?
   validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name)
 
   before_validation :set_default_time_zone, :on => :create
   #after_create :create_30_days
+
+  def on_setup?
+    self.start_date == nil
+  end
 
   def phone_length
     if !self.phone.blank? && self.phone.length != 10
@@ -55,9 +59,13 @@ class User < ActiveRecord::Base
     "#{self.email}"
   end
 
-  def sdays
+  def prev_week
+    ((Date.current - 1 - self.start_date)/7).to_i # Current date minus one to account for 1 day checkin lag
+  end
+
+  def prev_week_sdays
     x = []
-    self.days.order("date desc")[-7..-1].each { |day| x.push(day.result) if day.result == 1 }
+    self.days.reported.order("date desc")[(-7 - 7*(self.prev_week - 1))..(-1 - 7*(self.prev_week - 1))].each { |day| x.push(day.result) if day.result == 1 }
     x.inject(:+)
   end
 
@@ -79,11 +87,7 @@ class User < ActiveRecord::Base
       "Looks like you had a tough week.  Hit the reset button and start fresh next week."
     end
   end
-
-  def whole_num
-    to_i == self ? to_i : self
-  end
-
+  
   #def create_30_days
   #	30.times { |i| self.days.create(day: i + 1, date: self.start_date + i) } if self.start_date?
   #  self.update_attributes(end_date: start_date + 30)
