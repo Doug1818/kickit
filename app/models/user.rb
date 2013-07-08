@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
   attr_accessible :username, :name, :phone, :habit, :start_date, :end_date, :supporter_name, :supporter_email, :supporter_relationship, 
-    :goal, :checkin_msg, :time_zone, :reminders_attributes
+    :goal, :checkin_msg, :time_zone, :setup_complete, :reminders_attributes
   has_many :days, dependent: :destroy
   has_many :sent_texts, dependent: :destroy
   has_many :received_texts, dependent: :destroy
@@ -21,21 +21,21 @@ class User < ActiveRecord::Base
   scope :active_checkins, where("start_date <= ? AND end_date >= ?", Date.current - 1, Date.current - 1)
 
   validates :habit, presence: true
-  validates :phone, presence: true, uniqueness: true, :on => :update
-  validates :username, presence: true, :on => :update
-  validates :start_date, presence: true, :on => :update
-  validates :supporter_name, presence: true, :on => :update
-  validates :supporter_email, presence: true, :on => :update
-  validates :supporter_relationship, presence: true, :on => :update
-  validate  :phone_length, :on => :update
-  validate  :future_date, :on => :update, :if => :on_setup?
+  validates :phone, presence: true, uniqueness: true, :on => :update, :if => :setup_complete?
+  validates :username, presence: true, :on => :update, :if => :setup_complete?
+  validates :start_date, presence: true, :on => :update, :if => :setup_complete?
+  validates :supporter_name, presence: true, :on => :update, :if => :setup_complete?
+  validates :supporter_email, presence: true, :on => :update, :if => :setup_complete?
+  validates :supporter_relationship, presence: true, :on => :update, :if => :setup_complete?
+  validate  :phone_length, :on => :update, :if => :setup_complete?
+  validate  :future_date, :on => :update, :if => :setup_complete?
   validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name)
 
   before_validation :set_default_time_zone, :on => :create
   #after_create :create_30_days
 
-  def on_setup?
-    self.end_date == nil # Test end_date because it is generated only after the validations pass
+  def setup_complete?
+    self.setup_complete == true
   end
 
   def phone_length

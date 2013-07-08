@@ -28,6 +28,7 @@
 		<%= f.text_field :supporter_email, placeholder: "Supporter email (required)" %>
 	</fieldset>
 	<fieldset>
+		<%= f.hidden_field :setup_complete, value: true %>
 		<%= f.submit "Start" %>
 	</fieldset>
 <% end %>
