@@ -19,7 +19,7 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'thin'
 gem 'newrelic_rpm'
-gem 'rails_admin'
+#gem 'rails_admin'
 gem 'client_side_validations'
 
 group :production do

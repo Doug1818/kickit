@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
   #after_create :create_30_days
 
   def on_setup?
-    self.start_date == nil
+    self.end_date == nil # Test end_date because it is generated only after the validations pass
   end
 
   def phone_length
