@@ -16,7 +16,7 @@ before_filter :authenticate_user!, only: [:setup, :do_setup]
 	    #end
 	    if @user.update_attributes(params[:user])
 	      7.times { |i| @user.days.create(day: i + 1, date: @user.start_date + i) } if @user.start_date?
-	      @user.update_attributes(end_date: @user.start_date + 6)
+	      @user.update_attributes(end_date: @user.start_date + 6, setup_flag: false)
 	      flash[:success] = "Set up complete!"
 	      redirect_to root_path
 	      UserMailer.supporter_welcome(@user).deliver

@@ -32,15 +32,10 @@ class User < ActiveRecord::Base
   validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name)
 
   before_validation :set_default_time_zone, :on => :create
-  after_save :reset_setup_flag
   #after_create :create_30_days
 
   def setup_complete?
     self.setup_flag == true
-  end
-
-  def reset_setup_flag
-    self.update_attributes(setup_flag: false)
   end
 
   def phone_length
