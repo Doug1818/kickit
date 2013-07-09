@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
   attr_accessible :username, :name, :phone, :habit, :start_date, :end_date, :supporter_name, :supporter_email, :supporter_relationship, 
-    :goal, :checkin_msg, :time_zone, :setup_complete, :reminders_attributes
+    :goal, :checkin_msg, :time_zone, :setup_flag, :reminders_attributes
   has_many :days, dependent: :destroy
   has_many :sent_texts, dependent: :destroy
   has_many :received_texts, dependent: :destroy
@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
 
   validates :habit, presence: true
   validates :phone, presence: true, uniqueness: true, :on => :update, :if => :setup_complete?
-  validates :username, presence: true, :on => :update, :if => :setup_complete?
+  #validates :username, presence: true, :on => :update, :if => :setup_complete?
   validates :start_date, presence: true, :on => :update, :if => :setup_complete?
   validates :supporter_name, presence: true, :on => :update, :if => :setup_complete?
   validates :supporter_email, presence: true, :on => :update, :if => :setup_complete?
@@ -32,10 +32,15 @@ class User < ActiveRecord::Base
   validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name)
 
   before_validation :set_default_time_zone, :on => :create
+  after_save :reset_setup_flag
   #after_create :create_30_days
 
   def setup_complete?
-    self.setup_complete == true
+    self.setup_flag == true
+  end
+
+  def reset_setup_flag
+    self.update_attributes(setup_flag: false)
   end
 
   def phone_length

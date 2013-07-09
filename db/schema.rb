@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130708163423) do
+ActiveRecord::Schema.define(:version => 20130709004649) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -30,6 +30,13 @@ ActiveRecord::Schema.define(:version => 20130708163423) do
 
   add_index "admins", ["email"], :name => "index_admins_on_email", :unique => true
   add_index "admins", ["reset_password_token"], :name => "index_admins_on_reset_password_token", :unique => true
+
+  create_table "cues", :force => true do |t|
+    t.string   "content"
+    t.integer  "habit_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "days", :force => true do |t|
     t.date     "date"
@@ -55,6 +62,12 @@ ActiveRecord::Schema.define(:version => 20130708163423) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
+  create_table "habits", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "rails_admin_histories", :force => true do |t|
     t.text     "message"
@@ -105,6 +118,13 @@ ActiveRecord::Schema.define(:version => 20130708163423) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "todos", :force => true do |t|
+    t.string   "name"
+    t.integer  "habit_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false
     t.string   "encrypted_password",     :default => "",    :null => false
@@ -130,7 +150,7 @@ ActiveRecord::Schema.define(:version => 20130708163423) do
     t.string   "checkin_msg"
     t.string   "goal"
     t.string   "time_zone"
-    t.boolean  "setup_complete",         :default => false
+    t.boolean  "setup_flag",             :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
