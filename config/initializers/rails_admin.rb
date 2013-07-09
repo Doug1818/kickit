@@ -368,7 +368,7 @@ RailsAdmin.config do |config|
 
         list do
           field :email
-          field :habit
+          field :habit_name
           field :start_date do
             strftime_format "%b %d, %Y"
           end
@@ -397,4 +397,26 @@ RailsAdmin.config do |config|
   #     # using `field` instead of `configure` will exclude all other fields and force the ordering
   end
 
+  config.model 'Cue' do
+    list do
+      #field :habit # CAUSING AN ERROR FOR SOME REASON
+      field :content
+      field :created_at
+      field :updated_at
+      field :id
+    end
+  end
+
+  config.model 'Habit' do
+    object_label_method do
+      :custom_label_method
+    end
+
+    list do
+      field :id
+      field :name
+      field :cues
+      field :todos
+    end
+  end
 end

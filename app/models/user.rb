@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
-  attr_accessible :username, :name, :phone, :habit, :start_date, :end_date, :supporter_name, :supporter_email, :supporter_relationship, 
+  attr_accessible :username, :name, :phone, :habit_name, :start_date, :end_date, :supporter_name, :supporter_email, :supporter_relationship, 
     :goal, :checkin_msg, :time_zone, :setup_flag, :reminders_attributes
   has_many :days, dependent: :destroy
   has_many :sent_texts, dependent: :destroy
@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   scope :active_program, where("start_date <= ? AND end_date >= ?", Date.current, Date.current)
   scope :active_checkins, where("start_date <= ? AND end_date >= ?", Date.current - 1, Date.current - 1)
 
-  validates :habit, presence: true
+  validates :habit_name, presence: true
   validates :phone, presence: true, uniqueness: true, :on => :update, :if => :setup_complete?
   #validates :username, presence: true, :on => :update, :if => :setup_complete?
   validates :start_date, presence: true, :on => :update, :if => :setup_complete?
@@ -76,7 +76,7 @@ class User < ActiveRecord::Base
 
   def badge
     if self.prev_week_sdays == 7
-      "Congratulations on a perfect week!  Well, in terms of #{self.habit} anyway."
+      "Congratulations on a perfect week!  Well, in terms of #{self.habit_name} anyway."
     elsif self.prev_week_sdays <= 6 && self.prev_week_sdays >= 5
       "Strong week.  Strong to Quite Strong."
     elsif self.prev_week_sdays <= 4 && self.prev_week_sdays >= 3
@@ -114,10 +114,10 @@ class User < ActiveRecord::Base
   def add_remessages
     soda = "Soda"
     surfing = "Surfing Facebook / the internet"
-    if REMESSAGES.include?(self.habit)
-      if soda == self.habit
+    if REMESSAGES.include?(self.habit_name)
+      if soda == self.habit_name
         SODA.each { |message| self.remessages.create(content: message) }
-      elsif surfing == self.habit
+      elsif surfing == self.habit_name
         SURFING.each { |message| self.remessages.create(content: message) }
       end
     end
