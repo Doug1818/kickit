@@ -56,6 +56,15 @@ task :full_hour_jobs => :environment do
 			end
 		end
 	end
+
+	# SUPPORTER EMAIL: Send weekly supporter email at 9am the day following the last checkin window (end_date + 2)
+	User.all.each do |user|
+		if Time.now.in_time_zone(user.time_zone).hour == 9
+			if user.start_date? && user.start_date < Date.current && ((Date.current - 1 - user.start_date).to_f/7).prettify.is_a?(Integer)
+				UserMailer.supporter_update(user).deliver
+			end
+		end
+	end
 end
 
 desc "Tasks to be performed on the half-hour"
@@ -78,15 +87,6 @@ task :half_hour_jobs => :environment do
 				)
 				received_text = user.received_texts.create(message: message)
 			end
-		end
-	end
-end
-
-desc "Send weekly supporter email"
-task :weekly_supemail => :environment do
-	User.all.each do |user|
-		if user.start_date? && user.start_date < Date.current && ((Date.current - user.start_date).to_f/7).prettify.is_a?(Integer)
-			UserMailer.supporter_update(user).deliver
 		end
 	end
 end
