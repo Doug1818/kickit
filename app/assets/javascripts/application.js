@@ -18,5 +18,7 @@
 //= require formToWizard
 //= require swipeview
 //= require rails.validations
+//= require default
+//= require forms
 //= require_tree .
 

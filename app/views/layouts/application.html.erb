@@ -10,19 +10,17 @@
 	  <%= analytics_init if Rails.env.production? %>
 	</head>
 	<body>
-		<div class="container">
-			<div style="margin-left:auto;margin-right:auto;width:85%;">
-				<% flash.each do |key, value| %>
-					<div class="alert alert-#{key}">
-						<a class="close" data-dismiss="alert">x</a>
-						<%= content_tag(:div, value) %>
-					</div>
-				<% end %>
-				
-				<%= yield %>
+		<div class="fill">
+			<% flash.each do |key, value| %>
+				<div class="alert alert-#{key}">
+					<a class="close" data-dismiss="alert">x</a>
+					<%= content_tag(:div, value) %>
+				</div>
+			<% end %>
+			
+			<%= yield %>
 
-				<%= debug(params) if Rails.env.development? %>
-			</div>
+			<%= debug(params) if Rails.env.development? %>
 		</div>
 	</body>
 </html>

@@ -1,1 +1,7 @@
-<h1>Coming soon</h1>
+<% x = rand(1..1) %>
+
+<% if x == 0 %>
+	<%= render 'landing_a' %>
+<% else %>
+	<%= render 'landing_b' %>
+<% end %>

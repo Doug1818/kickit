@@ -1,5 +1,5 @@
 <!-- if the user has completed a week, show suggested badge, otherwise hide content -->
-
+<div class="container">
 <% if @user.completed_days >= 7 %>
 
 	<h2><%= @user.email %> was successful <%= @user.prev_week_sdays %> of 7 days last week.  Encourage them with a badge!</h2><br>
@@ -29,3 +29,4 @@
 		<% end %>
 	<% end %>
 <% end %>
+</div>

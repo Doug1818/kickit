@@ -1,0 +1,12 @@
+input[type='text'], input[type='email'] {
+  font: 11pt/14pt "Heletica Neue", Helvetica, Arial, sans-serif;
+  width: 95%;
+}
+
+#signup_form {
+  font: 11pt "Heletica Neue", Helvetica, Arial, sans-serif;
+}
+
+#form-submit {
+  font: 11pt/14pt "Heletica Neue", Helvetica, Arial, sans-serif;
+}

@@ -1,0 +1,72 @@
+body, html {
+  font: 11pt "Heletica Neue", Helvetica, Arial, sans-serif;
+}
+
+h2 {
+  font: 16pt Helvetica, Arial, sans-serif;
+}
+
+h3 {
+  font: 12pt Helvetica, Arial, sans-serif;
+}
+
+#menu {
+  font: 9pt/20pt "Heletica Neue", Helvetica, Arial, sans-serif;
+  text-align: center;
+}
+
+.content-wrapper {
+//  border: 1pt solid #f00;
+  clear: both;
+  display: block;
+//  clear: both;
+  height: 100%;
+  top: 0%;
+//  width: 100%;
+}
+
+.content-wrapper .text {
+//  border: 1pt solid #0f0;
+//  clear: left;
+  display: block;
+  height: 40%;
+  line-height: 100%;
+  padding: 2.5%;
+  position: absolute;
+  top: 50%;
+  width: 95%;
+}
+
+.content-wrapper .graphic {
+//  border: 1pt solid #00f;
+  clear: both;
+  display: block;
+//  float: left;
+  position: absolute;
+  height: 35%;
+  top: 10%;
+  width: 100%;
+}
+
+.nav-widget {
+  height: 24pt;
+  width: 24pt;
+}
+
+.bottom-center {
+  bottom: 1pt;
+  left: 0pt;
+  position: absolute;
+  right: 0pt;
+  text-align: center;
+}
+
+
+input[type='text'], input[type='email'] {
+  font: 10pt/12pt "Heletica Neue", Helvetica, Arial, sans-serif;
+  width: 100%;
+}
+
+#signup_form {
+  font: 10pt "Heletica Neue", Helvetica, Arial, sans-serif;
+}

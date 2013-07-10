@@ -1,0 +1,24 @@
+<div id="section-8-graphic" style="height: 40%; margin: 2.5% auto;"></div>
+<div style="color: #fff; margin: 0 auto; width: 50%;">
+  <div style="border-bottom: 1.5pt dashed #fff;">
+    <h2 class="center-align">We help you kick that bad habit.</h2>
+    <div class="center-align"> Kick-It will be having a private beta launch around Winter 2013.  If you want to be a part of it, fill out the little form below.  We’ll send you an email when we’re ready for you.</div>
+    
+    <div class="center-align" style="background: #333; border: 1.5pt dashed #fff; margin-top: 10pt; padding: 10pt;">
+      <form id="signup-form" action="" onsubmit="return validate_email($('form_email').val());" style="width: 100%;">
+        <input type="hidden" name="landing" value="A">
+        <label for="signup-name">My first name is</label> <input class="fill-in-the-blank" id="signup-name" name="name" style="width: 10em" type="text" onblur="field_blur(this, 'Name')" onfocus="field_focus(this, 'Name')" value="Name" />,
+        <label for="signup-email">my email address is</label> <input class="fill-in-the-blank" id="form-email" name="email" type="email" onblur="email_blur(this, 'email')" onfocus="email_focus(this, 'email')" value="email" />,
+        <label for="signup-degree">and I want to </label> 
+        <select class="fill-in-the-blank" id="signup-degree">
+          <option value="quit">&nbsp;&nbsp;&nbsp;quit</option>
+          <option value="reduce">reduce</option>
+        </select>
+        <label for="signup-habit">my habit of</label>
+        <input class="fill-in-the-blank" id="signup-habit" name="habit" type="text" onblur="field_blur(this, 'habit')" onfocus="field_focus(this, 'habit')" value="habit" />.<br />
+        <br />
+        <input id="signup-submit" type="submit" value="Sign Up" />
+      </form>
+    </div>
+  </div>
+</div>
