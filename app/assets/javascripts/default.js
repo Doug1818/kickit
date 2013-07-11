@@ -69,7 +69,6 @@ $(function() {
     "Smokeless Tobacco",
     "Smoking",
     "Snacking",
-    "Soda",
     "Sodium",
     "Staying Up Late",
     "Sugary Drinks",
