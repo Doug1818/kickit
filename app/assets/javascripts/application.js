@@ -11,7 +11,6 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
-//= require jquery_ujs
 //= require twitter/bootstrap
 //= require jquery-ui
 //= require bootstrap
@@ -20,5 +19,4 @@
 //= require rails.validations
 //= require default
 //= require forms
-//= require_tree .
 

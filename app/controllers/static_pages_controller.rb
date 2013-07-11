@@ -1,6 +1,7 @@
 class StaticPagesController < ApplicationController
 
 	def home
+		@lead = Lead.new
 		@user = User.new
 		if user_signed_in?
 			@days = current_user.days

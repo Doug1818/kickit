@@ -1,38 +1,82 @@
-input[type='text'], input[type='email'] {
+input[type="text"], input[type="email"] {
   -webkit-appearance: none;
   background-color: #999;
   border: 1pt solid #fff;
-  border-radius: 0pt;
-  color: #fff;
-  font: 14pt/20pt "Heletica Neue", Helvetica, Arial, sans-serif;
   margin: 2pt;
   padding-left: 5pt;
   padding-right: 5pt;
 //  padding: 2pt 5pt;
   margin-bottom: 1pt;
+  font-family: 'Garamond';
+  /* set backup to Times */
+  font-size: 21pt;
+  font-weight: normal;
+  font-style: italic;
+  color: #84a1d3 !important;
 }
 
 select, option {
   -webkit-appearance: none;
   background-color: #999;
   border-radius: 0pt;
-//  display: block-inline;
-  color: #fff;
-  font: 14pt/20pt "Heletica Neue", Helvetica, Arial, sans-serif;
   height: 24pt;
   text-align: center !important;
+  font-family: 'Garamond';
+  /* set backup to Times */
+  font-size: 21pt;
+  font-weight: normal;
+  font-style: italic;
+  color: #84a1d3 !important;
 }
 
-.full-width {
-  width: 100%;
+#extender {
+  border-bottom: 2pt solid #fff !important;
+  border-bottom-width:150pt;
+}
+
+::-webkit-input-placeholder {
+   color: #84a1d3;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #84a1d3;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #84a1d3;  
+}
+
+:-ms-input-placeholder {  
+   color: #84a1d3;  
+}
+
+label {
+  font-family: 'Garamond';
+  /* set backup to Times */
+  font-size: 21pt;
+  color: #ffffff;
+  font-weight: normal;
+}
+
+.fieldinput {
+  font-family: 'Garamond';
+  /* set backup to Times */
+  font-size: 21pt;
+  color: #84a1d3;
+  font-weight: normal;
+  font-style: italic;
 }
 
 .fill-in-the-blank {
   background: none !important;
   border: none !important;
   border-bottom: 2pt solid #fff !important;
-  color: #0cc !important;
   text-align: center !important;
+  color: #84a1d3 !important;
+}
+
+.full-width {
+  width: 100%;
 }
 
 #signup-form {
@@ -52,7 +96,6 @@ select, option {
 
 input[type='submit'], input[type='button'] {
   -webkit-appearance: none;
-  border-radius: 0pt;
 }
 
 #signup-submit {
@@ -66,13 +109,21 @@ input[type='submit'], input[type='button'] {
 }
 
 .btn {
-  background-color: #0cc; // #3cc; // #39c;
-/*  border: 1pt solid #09f; */
-/*  border: 1pt solid #999; */
-  border: none;
+  background-color: #5673b8;
+  border: 3pt solid #ffffff;
+  -moz-border-radius: 25pt;
+  -webkit-border-radius: 25pt;
+  border-radius: 25pt;
+  width: 224pt;
+  height: 40pt;
+  text-align: middle;
   color: #fff;
-  font: 14pt/20pt "Heletica Neue", Helvetica, Arial, sans-serif;
-  padding: 5pt 10pt;
+  font-family: 'Garamond';
+  /* set backup to Times */
+  font-size: 21pt;
+  font-weight: normal !important;
+  padding: 0;
+  cursor: pointer;
 }
 
 .invalidated-field {

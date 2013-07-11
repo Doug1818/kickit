@@ -6,7 +6,7 @@
       <div class="content-wrapper" id="content-1">
         
         <div class="text">
-          <h2 class="font-accent-dark">Kick-It</h2>
+          <h2>Kick-It</h2>
           We help you kick that bad habit.<br />
           <br />
           <div class="nav"><!--<div style="position: absolute; text-align: right;">-->
@@ -127,16 +127,24 @@
         </div>
         
         <div class="text">
-          <h2>Kick-It will be having a private beta launch around Winter 2013.</h2>
-          <div>If you want to be a part of it, fill out the little form below.  We’ll send you an email when we’re ready for you.</div>
-          
+          <h2 class="center-align">Kick It This New Year</h2>
           <div class="center-align">
-            <form id="signup-form" action="" onsubmit="return validate_email($('form_email').val());">
-              <input type="hidden" name="landing" value="B">
-              <label for="signup-name">My first name is</label> <input class="center-align" id="signup-name" name="name" type="text" onblur="field_blur(this, 'Name')" onfocus="field_focus(this, 'Name')" value="Name" />, <label for="signup-email">my email address is</label> <input class="center-align" id="signup-email" name="email" type="email" onblur="email_blur(this, 'email')" onfocus="email_focus(this, 'email')" value="email" />, and <label for="">I want to</label> <select id="signup-degree"><option value="quit">&nbsp;&nbsp;&nbsp;quit</option><option value="reduce">reduce</option></select> <label for="signup-habit">my habit of</label> <input class="center-align" id="signup-habit" name="habit" type="text" onblur="field_blur(this, 'habit')" onfocus="field_focus(this, 'habit')" value="habit" />.<br />
-              <br />
-              <input id="signup-submit" type="submit" value="Sign Up" />
-            </form>
+            <p>We’ll be having a semi-public beta launch around New Year’s 2014, and private beta launches before then.. If you want to be a part of it, fill out the little form below. We’ll email you when we’re ready for you.</p>
+          </div>
+          <div class="center-align" style="background: #333; border: 1.5pt dashed #fff; margin-top: 10pt; padding: 10pt;">
+            <%= form_for @lead do |f| %>
+              <%= render 'shared/error_messages', object: f.object %>
+              <%= f.hidden_field :ab_value, value: ab_value %>
+              <div style="margin:20px 0;"><%= f.label :first_name, "My first name is" %>
+              <%= f.text_field :first_name, placeholder: "Name", class: "fill-in-the-blank", style: "width:10em" %></div>
+              <div style="margin:20px 0;"><%= f.label :email, "my email address is" %>
+              <%= f.text_field :email, placeholder: "email", class: "fill-in-the-blank", style: "width:12em" %>,</div>
+              <div style="margin:20px 0;"><%= f.label :goal, "and I want to" %>
+              <%= f.select :goal, ["quit","cut back"], {}, { class: "fill-in-the-blank", style: "width:12em" } %></div>
+              <div style="margin:20px 0;"><%= f.label :habit_name, "my habit of" %>
+              <%= f.text_field :habit_name, placeholder: "habit", class: "fill-in-the-blank", style: "width:12em", id: "signup-habit" %>.</div>
+              <%= f.submit "Sign up", class: "btn", style: "margin:10px 0 20px 0;" %>
+            <% end %>
           </div>
         </div>
         

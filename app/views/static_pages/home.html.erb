@@ -1,7 +1,8 @@
-<% x = rand(1..1) %>
+<% x = rand(0..0) %>
+<% x == 0 ? ab_value = "A" : ab_value = "B" %>
 
-<% if x == 0 %>
-	<%= render 'landing_a' %>
+<% if ab_value == "A" %>
+	<%= render 'landing_a', ab_value: ab_value %>
 <% else %>
-	<%= render 'landing_b' %>
+	<%= render 'landing_b', ab_value: ab_value %>
 <% end %>

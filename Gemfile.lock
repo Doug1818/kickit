@@ -92,6 +92,9 @@ GEM
     font-awesome-rails (3.2.1.1)
       railties (>= 3.2, < 5.0)
     formatador (0.2.4)
+    gibbon (0.4.4)
+      httparty
+      multi_json
     google-analytics-rails (0.0.4)
     guard (1.7.0)
       formatador (>= 0.2.4)
@@ -115,6 +118,9 @@ GEM
     heroku-api (0.3.11)
       excon (~> 0.22.1)
     hike (1.2.2)
+    httparty (0.10.2)
+      multi_json (~> 1.0)
+      multi_xml (>= 0.5.2)
     i18n (0.6.4)
     journey (1.0.4)
     jquery-rails (2.1.0)
@@ -163,6 +169,7 @@ GEM
     method_source (0.8.1)
     mime-types (1.23)
     multi_json (1.7.5)
+    multi_xml (0.5.3)
     nested_form (0.3.2)
     net-ssh (2.6.7)
     net-ssh-gateway (1.2.0)
@@ -308,6 +315,7 @@ DEPENDENCIES
   factory_girl_rails (= 1.4.0)
   faker (= 1.0.1)
   figaro
+  gibbon
   google-analytics-rails
   guard-rspec (= 0.5.5)
   guard-spork (= 0.3.2)

@@ -21,6 +21,30 @@ $grayMediumLight: #E0E0E0;
   z-index: 1000;
 }*/
 
+.alert {
+  background-color: #5673b8;
+  border: 3pt solid #ffffff;
+  -moz-border-radius: 7pt;
+  -webkit-border-radius: 7pt;
+  border-radius: 7pt;
+  padding: 8pt;
+  width: 60%;
+  text-align: left;
+  position:absolute;
+  z-index: 1000;
+  margin: 10px auto;
+  left: 0;
+  right:0;
+  a {
+    float: right;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  span {
+    margin-left: 10px;
+  }
+}
+
 .container{
   margin: 30px auto 0 auto;
   width: 80%;
@@ -29,25 +53,61 @@ $grayMediumLight: #E0E0E0;
 }
 
 body, html {
-  background: #666;
-  font: 14pt "Heletica Neue", Helvetica, Arial, sans-serif;
+  background: #717171;
   height: 100%;
   margin: 0pt;
+  font-family: 'Garamond';
+  /* set backup to Times */
+  font-size: 13pt;
+  color: #ffffff;
+  font-weight: normal; 
 }
 
 .fill { 
   height: 100%;
 }
 
+h1 {
+  font-family: 'Garamond';
+  /* set backup to Times */
+  font-size: 55pt;
+  color: #ffffff;
+  font-weight: bold;
+}
+
 h2 {
-  color: #ccc;
-  font: 24pt Helvetica, Arial, sans-serif;
-  margin: 4pt 0pt;
+  font-family: 'Garamond';
+  /* set backup to Times */
+  font-size: 34pt;
+  color: #ffffff;
+  font-weight: bold;
+  margin-bottom: 10px;
+  line-height: 1.0;
 }
 
 h3 {
-  color: #9cc;
-  font: 20pt Helvetica, Arial, sans-serif;
+  font-family: 'Myriad Pro';
+  /* set backup to Helvetica Neue */
+  font-size: 13pt;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+h4 {
+  font-family: 'Garamond';
+  /* set backup to Times */
+  font-size: 21pt;
+  color: #ffffff;
+  font-weight: normal;
+}
+
+p {
+  font-family: 'Garamond';
+  /* set backup to Times */
+  font-size: 13pt;
+  color: #ffffff;
+  font-weight: normal;
+  line-height: 1.5;
 }
 
 img {
@@ -120,10 +180,8 @@ img.space-filling {
 }
 
 
-
-
 .section {
-  background: #666;
+  background: #717171;
   bottom: 0pt;
   color: #fff;
   float: left;
@@ -134,8 +192,8 @@ img.space-filling {
 }
 
 .content-wrapper {
-  background-color: #666;
-  background: rgb(102, 102, 102);
+  background-color: #717171;
+// background: rgb(102, 102, 102);
 //  background: rgba(0, 0, 0, 0.6);
 //  border: 1pt solid Blue;
   border-spacing: 20pt;
@@ -145,8 +203,8 @@ img.space-filling {
   width: 100%;
 
   left: 0pt;
-  top: 20%;
-  height: 60%;
+  top: 10%;
+  height: 80%;
 }
 
 .content-wrapper .text {
@@ -156,7 +214,8 @@ img.space-filling {
   height: 100%;
   line-height: 175%;
   vertical-align: middle;
-  width: 50%;
+  width: 25%;
+  padding-right:150px;
 }
 
 .content-wrapper .graphic {
@@ -167,6 +226,16 @@ img.space-filling {
   text-align: center;
   vertical-align: middle;
   width: 50%;
+}
+
+.content-wrapper .last_graphic {
+//  border: 1pt solid Red;
+  display: table-cell;
+  margin: auto 0pt;
+  height: 100%;
+  text-align: center;
+  vertical-align: middle;
+  width: 25%;
 }
 
 
@@ -207,8 +276,10 @@ img.space-filling {
 }
 
 #section-8-graphic {
-  background: url("/assets/device-with-halo.png") no-repeat center;
+  background: url("/assets/Check-Mark-Logo--Web.png") no-repeat center;
   background-size: contain;
+  margin: 0;
+  padding: 0;
 }
 
 
@@ -332,4 +403,23 @@ ul.ui-autocomplete.ui-menu {
   padding: 10px;
   width: 50%;
   font: 14pt "Heletica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* client_side_validations */
+
+.field_with_errors {
+  .message {
+    position: absolute;
+    margin-top: 5px;
+    line-height: 14px;
+    font-size: 14px;
+    color: #fff;
+    font-weight: bold;
+    background-color: red;
+    border: 3pt solid #fff;
+    -moz-border-radius: 7pt;
+    -webkit-border-radius: 7pt;
+    border-radius: 7pt;
+    padding: 8pt;
+  }
 }
