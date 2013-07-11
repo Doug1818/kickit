@@ -7,7 +7,7 @@ input[type="text"], input[type="email"] {
   padding-right: 5pt;
 //  padding: 2pt 5pt;
   margin-bottom: 1pt;
-  font-family: 'Garamond';
+  font-family: 'EB Garamond', serif;
   /* set backup to Times */
   font-size: 21pt;
   font-weight: normal;
@@ -21,7 +21,7 @@ select, option {
   border-radius: 0pt;
   height: 24pt;
   text-align: center !important;
-  font-family: 'Garamond';
+  font-family: 'EB Garamond', serif;
   /* set backup to Times */
   font-size: 21pt;
   font-weight: normal;
@@ -51,7 +51,7 @@ select, option {
 }
 
 label {
-  font-family: 'Garamond';
+  font-family: 'EB Garamond', serif;
   /* set backup to Times */
   font-size: 21pt;
   color: #ffffff;
@@ -59,7 +59,7 @@ label {
 }
 
 .fieldinput {
-  font-family: 'Garamond';
+  font-family: 'EB Garamond', serif;
   /* set backup to Times */
   font-size: 21pt;
   color: #84a1d3;
@@ -116,14 +116,15 @@ input[type='submit'], input[type='button'] {
   border-radius: 25pt;
   width: 224pt;
   height: 40pt;
-  text-align: middle;
+  text-align: center;
   color: #fff;
-  font-family: 'Garamond';
+  font-family: 'EB Garamond', serif;
   /* set backup to Times */
   font-size: 21pt;
   font-weight: normal !important;
   padding: 0;
   cursor: pointer;
+  display: inline-block;
 }
 
 .invalidated-field {

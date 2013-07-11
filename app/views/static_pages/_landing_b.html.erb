@@ -5,13 +5,13 @@
     <div class="section" id="section-1">
       <div class="content-wrapper" id="content-1">
         
-        <div class="text">
-          <h2>Kick-It</h2>
-          We help you kick that bad habit.<br />
+        <div>
+          <h1>Kick-It</h1>
+          <h2>We help you kick that bad habit.</h2>
           <br />
           <div class="nav"><!--<div style="position: absolute; text-align: right;">-->
-            <h3> SIGN UP TO BE A BETA TESTER <a href="#section-8"><img alt="Sign up" class="middle-align nav-widget" src="/assets/nav_down_white_48.png" /></a></h3><!--</div>-->
-            <h3> SEE HOW KICK-IT WORKS <a href="#section-2"><img alt="Next section" class="middle-align nav-widget" src="/assets/nav_down_white_48.png" /></a></h3>
+            <div><a href="#section-8" class="btn" style="text-decoration:none;">Sign up to be a beta tester</a></div><!--</div>-->
+            <div><a href="#section-2" class="btn" style="text-decoration:none;">See how it works</a></div>
           </div>
         </div>
         
@@ -45,7 +45,7 @@
         
       </div>
       <div class="nav bottom-center">
-        <a href="#section-3"><img alt="Next section" class="nav-widget" src="/assets/nav_down_white.png" /></a>
+        <a href="#section-3"><img alt="Next section" class="nav-widget" src="/assets/nav_down_white_rtm.png" /></a>
       </div>
     </div>
     
@@ -66,7 +66,7 @@
         
       </div>
       <div class="nav bottom-center">
-        <a href="#section-4"><img alt="Next section" class="nav-widget" src="/assets/nav_down_white.png" /></a>
+        <a href="#section-4"><img alt="Next section" class="nav-widget" src="/assets/nav_down_white_rtm.png" /></a>
       </div>
     </div>
     
@@ -89,30 +89,7 @@
         
       </div>
       <div class="nav bottom-center">
-        <a href="#section-5"><img alt="Next section" class="nav-widget" src="/assets/nav_down_white.png" /></a>
-      </div>
-    </div>
-    
-    
-    <!-- SECTION 5 -->
-    
-    <div class="section" id="section-5">
-      <div class="content-wrapper" id="content-5">
-        
-        <div class="text">
-          <h2>Kickin’ It&mdash;Week 1 (Video with Day -3, Day -1, Day 1, Day 7, etc)</h2>
-          <!--   <h3>We check up on you.  We send you encouragement.  We send you reminders.  We bug you.</h3> -->
-          <!--   By periodically reaching out to you and tracking your progress, we help keep you on track.  You can even ask a trusted friend or family member to [participate].<br /> -->
-          <!--   <div>You can even invite someone you know and trust to help you out.  Most importantly, they’ll see how you’re doing and whether or not you’re checking in.</div>-->
-        </div>
-        
-        <div class="graphic" id="section-5-graphic">
-        <!-- <img src="/assets/social-illustration.png" /> -->
-        </div>
-        
-      </div>
-      <div class="nav bottom-center">
-        <a href="#section-8"><img alt="Next section" class="nav-widget" src="/assets/nav_down_white.png" /></a>
+        <a href="#section-8"><img alt="Next section" class="nav-widget" src="/assets/nav_down_white_rtm.png" /></a>
       </div>
     </div>
     
@@ -132,14 +109,14 @@
             <p>We’ll be having a semi-public beta launch around New Year’s 2014, and private beta launches before then. If you want to be a part of it, fill out the little form below. We’ll email you when we’re ready for you.</p>
           </div>
           <div class="center-align" style="background: #333; border: 1.5pt dashed #fff; margin-top: 10pt; padding: 10pt;">
-            <%= form_for @lead do |f| %>
+            <%= form_for @lead, :validate => true do |f| %>
               <%= render 'shared/error_messages', object: f.object %>
               <%= f.hidden_field :ab_value, value: ab_value %>
               <div style="margin:20px 0;"><%= f.label :first_name, "My first name is" %>
               <%= f.text_field :first_name, placeholder: "Name", class: "fill-in-the-blank", style: "width:10em" %></div>
               <div style="margin:20px 0;"><%= f.label :email, "my email address is" %>
               <%= f.text_field :email, placeholder: "email", class: "fill-in-the-blank", style: "width:12em" %>,</div>
-              <div style="margin:20px 0;"><%= f.label :goal, "and I want to" %>
+              <div style="margin:20px 0;"><%= f.label :goal, "and I want to", style: "margin-right:5px;" %>
               <%= f.select :goal, ["quit","cut back"], {}, { class: "fill-in-the-blank", style: "width:12em" } %></div>
               <div style="margin:20px 0;"><%= f.label :habit_name, "my habit of" %>
               <%= f.text_field :habit_name, placeholder: "habit", class: "fill-in-the-blank", style: "width:12em", id: "signup-habit" %>.</div>
