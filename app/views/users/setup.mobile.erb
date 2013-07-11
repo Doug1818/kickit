@@ -4,8 +4,8 @@
 <%= form_for @user, url: do_setup_user_path(@user), html: { multipart: true, method: :put } do |f| %>
 	<%= render 'shared/error_messages', object: f.object %>
 	<fieldset>
-		<p><strong>Pick a username</strong><br> (as anonymous as you want)</p>
-		<%= f.text_field :username, placeholder: "Username (required)"  %>
+		<p><strong>What's your first name?</strong></p>
+		<%= f.text_field :first_name, placeholder: "First name (required)"  %>
 	</fieldset>
 	<fieldset>
 		<p><strong>We'll want to text you some reminders</strong></p>
@@ -21,12 +21,12 @@
 		<p><strong>Pick a start date.</strong> Make sure to give yourself time to do things like remove triggers from your environment, find healthier substitutes, etc.</p>
 		<%= f.text_field :start_date, type: "date", value: Date.current + 1 %>
 	</fieldset>
-	<fieldset>
+	<!--<fieldset>
 		<p><strong>Pick a supporter.</strong> Who in your life is closest to you and someone with whom you are comfortable sharing your progress?  We will send them a welcome email and daily updates on your progress.</p>
 		<%= f.select :supporter_relationship, User::RELATIONSHIPS %>
 		<%= f.text_field :supporter_name, placeholder: "Supporter name (required)" %>
 		<%= f.text_field :supporter_email, placeholder: "Supporter email (required)" %>
-	</fieldset>
+	</fieldset>-->
 	<fieldset>
 		<%= f.hidden_field :setup_flag, value: true %>
 		<%= f.submit "Start" %>

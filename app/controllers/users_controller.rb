@@ -15,12 +15,7 @@ before_filter :authenticate_user!, only: [:setup, :do_setup]
 	    #  @user.start_date = Date.strptime(params[:user][:start_date],"%m/%d/%Y").to_date
 	    #end
 	    if @user.update_attributes(params[:user])
-	      7.times { |i| @user.days.create(day: i + 1, date: @user.start_date + i) } if @user.start_date?
-	      @user.update_attributes(end_date: @user.start_date + 6, setup_flag: false)
-	      flash[:success] = "Set up complete!"
-	      redirect_to root_path
-	      UserMailer.supporter_welcome(@user).deliver
-
+	      
 	      number_to_send_to = @user.phone
 	      message = "Welcome to Kick it! We'll be using this number to send you reminders over the course of your program, so you should save it to your contacts as 'Kick it'."
 				@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
@@ -30,6 +25,12 @@ before_filter :authenticate_user!, only: [:setup, :do_setup]
 					:body => message
 				)
 				@received_text = @user.received_texts.create(message: message)
+				
+		  	21.times { |i| @user.days.create(day: i + 1, date: @user.start_date + i) } if @user.start_date?
+	      @user.update_attributes(end_date: @user.start_date + 20, setup_flag: false)
+	      flash[:success] = "Set up complete!"
+	      redirect_to root_path
+	      #UserMailer.supporter_welcome(@user).deliver
 	    else
 	      render 'setup'
 	    end

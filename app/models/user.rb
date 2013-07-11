@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
-  attr_accessible :username, :name, :phone, :habit_name, :start_date, :end_date, :supporter_name, :supporter_email, :supporter_relationship, 
+  attr_accessible :first_name, :phone, :habit_name, :start_date, :end_date, :supporter_name, :supporter_email, :supporter_relationship, 
     :goal, :checkin_msg, :time_zone, :setup_flag, :reminders_attributes
   has_many :days, dependent: :destroy
   has_many :sent_texts, dependent: :destroy
@@ -22,12 +22,12 @@ class User < ActiveRecord::Base
 
   validates :habit_name, presence: true
   validates :phone, presence: true, uniqueness: true, :on => :update, :if => :setup_complete?
-  #validates :username, presence: true, :on => :update, :if => :setup_complete?
-  validates :start_date, presence: true, :on => :update, :if => :setup_complete?
-  validates :supporter_name, presence: true, :on => :update, :if => :setup_complete?
-  validates :supporter_email, presence: true, :on => :update, :if => :setup_complete?
-  validates :supporter_relationship, presence: true, :on => :update, :if => :setup_complete?
   validate  :phone_length, :on => :update, :if => :setup_complete?
+  validates :first_name, presence: true, :on => :update, :if => :setup_complete?
+  validates :start_date, presence: true, :on => :update, :if => :setup_complete?
+  #validates :supporter_name, presence: true, :on => :update, :if => :setup_complete?
+  #validates :supporter_email, presence: true, :on => :update, :if => :setup_complete?
+  #validates :supporter_relationship, presence: true, :on => :update, :if => :setup_complete?
   validate  :future_date, :on => :update, :if => :setup_complete?
   validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name)
 
@@ -95,9 +95,7 @@ class User < ActiveRecord::Base
 
   RELATIONSHIPS = ["Friend", "Boyfriend", "Girlfriend", "Husband", "Wife", "Father", "Mother", "Son", "Daughter",
     "Brother", "Sister", "Uncle", "Aunt", "Nephew", "Niece", "Cousin", "Other", "Don't share my progress"]
-  HABITS = ["Smoking", "Drinking", "Dipping", "Alcohol", "Coffee", "Soda", "Sweets", "Processed sugars", "Nail biting", 
-    "Nuckle cracking", "Playing with hair", "Losing temper", "Watching crap TV", "Playing video games", 
-    "Surfing Facebook / the internet"]
+  HABITS = ["Smoking", "Drinking", "Caffeine", "Soda", "Sweets / Added Sugars", "Nail Biting", " Facebook / Social Media"]
   
   REMESSAGES = ["Soda", "Surfing Facebook / the internet"]
   

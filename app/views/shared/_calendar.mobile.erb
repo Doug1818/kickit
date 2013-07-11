@@ -1,7 +1,6 @@
 <% if current_user.goal? %>
 <h3 style="margin-top:0;margin-bottom:10px;"><strong>Your Goal: <%= current_user.goal %></strong></h3>
 <% end %>
-
 <div id="calendar">
 	<h3 id="month">
 		<%= link_to "<", :month => (@today.beginning_of_month-1).strftime("%Y-%m-01") %>

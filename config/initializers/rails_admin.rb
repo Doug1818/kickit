@@ -348,7 +348,7 @@ RailsAdmin.config do |config|
   #     configure :supporter_name, :string 
   #     configure :supporter_email, :string 
   #     configure :supporter_relationship, :string 
-  #     configure :username, :string 
+  #     configure :first_name, :string 
   #     configure :end_date, :date 
   #     configure :checkin_msg, :string 
   #     configure :goal, :string 
@@ -368,6 +368,7 @@ RailsAdmin.config do |config|
 
         list do
           field :email
+          field :first_name
           field :habit_name
           field :start_date do
             strftime_format "%b %d, %Y"
@@ -378,7 +379,6 @@ RailsAdmin.config do |config|
           field :supporter_relationship
           field :time_zone
           field :goal
-          field :username
           field :phone
           field :sign_in_count
           field :last_sign_in_at
