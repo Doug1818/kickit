@@ -410,11 +410,12 @@ ul.ui-autocomplete.ui-menu {
 .field_with_errors {
   .message {
     position: absolute;
-    margin-top: 5px;
     line-height: 14px;
-    font-size: 14px;
+    font-size: 13pt;
     color: #fff;
-    font-weight: bold;
+    /*font-weight: bold;*/
+    font-family: 'Garamond';
+    /* set backup to Times */
     background-color: red;
     border: 3pt solid #fff;
     -moz-border-radius: 7pt;
