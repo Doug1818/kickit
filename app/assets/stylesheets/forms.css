@@ -123,6 +123,7 @@ input[type='submit'], input[type='button'] {
   font-size: 21pt;
   font-weight: normal !important;
   padding: 0;
+  padding-bottom: -50px;
   cursor: pointer;
   display: inline-block;
 }
