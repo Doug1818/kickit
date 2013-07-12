@@ -23,6 +23,7 @@ gem 'newrelic_rpm'
 gem 'rails_admin'
 gem 'client_side_validations'
 gem 'gibbon'
+gem 'browser'
 
 group :production do
   gem 'google-analytics-rails'

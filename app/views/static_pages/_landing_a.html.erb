@@ -19,11 +19,15 @@
           <div style="margin:20px 0;"><%= f.label :email, "my email address is" %>
           <%= f.text_field :email, placeholder: "email", class: "fill-in-the-blank", style: "width:12em" %>,</div>
 
-          <div style="margin:20px 0;">
+          <% if browser.firefox? %>
             <%= f.label :goal, "and I want to", style: "margin-right:5px;" %>
-            <select type="text" name="test" class="fill-in-the-blank" style="width:5em;" disabled></select>
-            <%= f.select :goal, ["quit","cut back"], {}, { class: "fill-in-the-blank", style: "width:3.3em;margin:0;padding:0;" } %>
-          </div>
+            <%= f.select :goal, ["quit","cut back"], {}, { class: "fill-in-the-blank", style: "width:10em;background: #ccf !important; border-top: 1pt solid #fff !important;" } %>
+          <% else %>
+            <div style="margin:20px 0;">
+            <%= f.label :goal, "and I want to", style: "margin-right:5px;" %>
+            <input id="foo1" class="fill-in-the-blank" style="width:4em;background: #ccf !important; border-top: 1pt solid #fff !important;" type="text" value="" disabled /><%= f.select :goal, ["quit","cut back"], {}, { class: "fill-in-the-blank", style: "width:3.3em;background: #ccf !important; border-top: 1pt solid #fff !important;" } %><input id="foo2" class="fill-in-the-blank" style="width:3em;background: #ccf !important; border-top: 1pt solid #fff !important;" type="text" value="" disabled />
+            </div>  
+          <% end %>
 
           <div style="margin:20px 0;"><%= f.label :habit_name, "my habit of" %>
           <%= f.text_field :habit_name, placeholder: "habit", class: "fill-in-the-blank", style: "width:12em", id: "signup-habit" %>.</div>
@@ -33,3 +37,21 @@
     </div>
   </div>
 </div>
+
+<style type="text/css">
+select {
+  box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  text-align: center;
+   height: 27pt;
+}
+
+.fill-in-the-blank{
+/*  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;*/
+  margin: 0pt !important;
+  padding: 0pt !important;
+}
+</style>
