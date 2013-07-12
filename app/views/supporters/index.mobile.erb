@@ -1,0 +1,30 @@
+<% content_for :title do %><title>Supporters</title><% end %>
+<% content_for :h1 do %><h1>Supporters</h1><% end %>
+
+<h2 style="margin-top:0;">Supporters</h2>
+<br>
+
+<% if @supporters.any? %>
+	<% @supporters.order("created_at asc").each do |supporter| %>
+		<div style="margin-bottom:25px;">
+			<div><strong><%= supporter.first_name %></strong><%= " (#{supporter.relationship})" %></div>
+			<div><%= supporter.email %></div>
+			<%= link_to "Edit", edit_supporter_path(supporter) %>
+			<% if @supporters.count > 1 %>
+			 | <%= link_to "Delete", supporter, method: :delete, confirm: "You sure?" %>
+			<% end %>
+		</div>
+	<% end %>
+
+	<%= link_to "Add another supporter", new_supporter_path, "data-role" => "button" %>
+<% else %>
+	<p><strong>Pick a supporter.</strong> Who in your life is closest to you and someone with whom you are comfortable sharing your progress?  We will send them a welcome email and daily updates on your progress.</p>
+
+	<%= form_for @supporter do |f| %>
+		<%= render 'shared/error_messages', object: f.object %>
+		<%= f.select :relationship, User::RELATIONSHIPS %>
+		<%= f.text_field :first_name, placeholder: "Supporter first name (required)" %>
+		<%= f.text_field :email, placeholder: "Supporter email (required)", type: "email" %>
+		<%= f.submit "Add supporter", class: "submit" %>
+	<% end %>
+<% end %>

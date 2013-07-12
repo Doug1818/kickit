@@ -13,7 +13,6 @@
 <% elsif user_signed_in? && current_user.start_date? && current_user.start_date > Date.current %>
 	<!-- If signed up / setup but not started -->
 	<%= render 'users/checklist' %>
-	<%= render 'shared/calendar' %><!-- Calendar (for now) -->
 <% else %>
 	<!-- If not signed in -->
 	<h2>Kick it</h2>

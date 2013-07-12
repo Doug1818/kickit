@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
   has_many :reminders, dependent: :destroy
   accepts_nested_attributes_for :reminders
   has_many :remessages, dependent: :destroy
+  has_many :supporters, dependent: :destroy
+  has_many :user_todos, dependent: :destroy
   scope :active_program, where("start_date <= ? AND end_date >= ?", Date.current, Date.current)
   scope :active_checkins, where("start_date <= ? AND end_date >= ?", Date.current - 1, Date.current - 1)
 
@@ -94,7 +96,7 @@ class User < ActiveRecord::Base
   #end
 
   RELATIONSHIPS = ["Friend", "Boyfriend", "Girlfriend", "Husband", "Wife", "Father", "Mother", "Son", "Daughter",
-    "Brother", "Sister", "Uncle", "Aunt", "Nephew", "Niece", "Cousin", "Other", "Don't share my progress"]
+    "Brother", "Sister", "Uncle", "Aunt", "Nephew", "Niece", "Cousin", "Other"]
   HABITS = ["Smoking", "Drinking", "Caffeine", "Soda", "Sweets / Added Sugars", "Nail Biting", " Facebook / Social Media"]
   
   REMESSAGES = ["Soda", "Surfing Facebook / the internet"]
