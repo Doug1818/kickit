@@ -5,14 +5,13 @@
     <div class="section" id="section-1">
       <div class="content-wrapper" id="content-1">
         
-        <div>
-          <h1>Kick-It</h1>
-          <h2>We help you kick that bad habit.</h2>
-          <br />
-          <div class="nav"><!--<div style="position: absolute; text-align: right;">-->
-            <div><a href="#section-8" class="btn" style="text-decoration:none;">Sign up to be a beta tester</a></div><!--</div>-->
+        <div style="text-align:center;margin-top:60pt;margin-left:70pt;">
+          <h1 style="margin-bottom:0;">Kick-It</h1>
+          <div style="font-size:24pt;font-weight:normal;margin-bottom:30pt;">We help you kick that bad habit.</div>
+          <div class="nav">
+            <div style="margin:0 auto;width:224pt;background-color: #5673b8; border: 3pt solid #ffffff; -moz-border-radius: 25pt; -webkit-border-radius: 25pt; border-radius: 25pt; padding: 5.5pt 15pt;"><a href="#section-2" style="color: #fff; font: 21pt 'EB Garamond', serif; text-decoration: none;">See How it Works</a></div>
             <br>
-            <div><a href="#section-2" class="btn" style="text-decoration:none;">See how it works</a></div>
+            <div style="margin:0 auto;width:224pt;background-color: #5673b8; border: 3pt solid #ffffff; -moz-border-radius: 25pt; -webkit-border-radius: 25pt; border-radius: 25pt; padding: 5.5pt 15pt;"><a href="#section-8" style="color: #fff; font: 21pt 'EB Garamond', serif; text-decoration: none;">Apply to Beta Test</a></div>
           </div>
         </div>
         
@@ -104,8 +103,8 @@
         <!--  <img src="/assets/device-with-halo.png" /> -->
         </div>
         
-        <div class="text">
-          <h2 class="center-align">Kick It This New Year</h2>
+        <div class="text" style="padding:0;">
+          <h2 class="center-align" style="margin-top:0;">Kick It This New Year</h2>
           <div class="center-align">
             <p>We’ll be having a semi-public beta launch around New Year’s 2014, and private beta launches before then. If you want to be a part of it, fill out the little form below. We’ll email you when we’re ready for you.</p>
           </div>
@@ -116,18 +115,99 @@
               <div style="margin:20px 0;"><%= f.label :first_name, "My first name is" %>
               <%= f.text_field :first_name, placeholder: "Name", class: "fill-in-the-blank", style: "width:10em" %></div>
               <div style="margin:20px 0;"><%= f.label :email, "my email address is" %>
-              <%= f.text_field :email, placeholder: "email", class: "fill-in-the-blank", style: "width:12em" %>,</div>
-              <div style="margin:20px 0;"><%= f.label :goal, "and I want to", style: "margin-right:5px;" %>
-              <%= f.select :goal, ["quit","cut back"], {}, { class: "fill-in-the-blank", style: "width:12em" } %></div>
+              <%= f.text_field :email, placeholder: "email", class: "fill-in-the-blank", style: "width:10em" %>,</div>
+
+              <% if browser.firefox? %>
+                <%= f.label :goal, "and I want to", style: "margin-right:5px;" %>
+                <%= f.select :goal, ["quit","cut back"], {}, { class: "fill-in-the-blank", style: "width:12em;" } %>
+              <% else %>
+                <div style="margin:20px 0;">
+                <%= f.label :goal, "and I want to", style: "margin-right:5px;" %>
+                <input id="foo1" class="fill-in-the-blank" style="width:4em; border-top: 1pt solid #333 !important;" type="text" value="" disabled /><%= f.select :goal, ["quit","cut back"], {}, { class: "fill-in-the-blank", style: "width:3.3em; border-top: 1pt solid #333 !important;" } %><input id="foo2" class="fill-in-the-blank" style="width:3em; border-top: 1pt solid #333 !important;" type="text" value="" disabled />
+                </div>
+              <% end %>
+
               <div style="margin:20px 0;"><%= f.label :habit_name, "my habit of" %>
-              <%= f.text_field :habit_name, placeholder: "habit", class: "fill-in-the-blank", style: "width:12em", id: "signup-habit" %>.</div>
+              <%= f.text_field :habit_name, placeholder: "habit", class: "fill-in-the-blank", style: "width:10em", id: "signup-habit" %>.</div>
               <%= f.submit "Sign up", class: "btn", style: "margin:10px 0 20px 0;" %>
             <% end %>
           </div>
-        </div>
         
       </div>
-      <div class="nav bottom-center">
+      <div class="nav bottom-center-last">
         <a href="#section-1"><img alt="Back to the top" class="nav-widget" src="/assets/nav_top_white.png" /></a>
       </div>
     </div>
+
+<style type="text/css">
+.content-wrapper{
+  border-spacing: 100pt;
+  display: table;
+}
+
+#content-1, #content-8 {
+  border-spacing: 50pt;
+  display: table;
+}
+
+#content-8 {
+  left: 0pt;
+  top: 5%;
+  height: 90%;
+}
+
+.content-wrapper .graphic{
+  display: table-cell;
+  vertical-align: middle;
+//  background: #99f !important;
+}
+
+.content-wrapper .text{
+  display: table-cell;
+  vertical-align: middle;
+  padding: 0 50px;
+//  background: #99f !important;
+}
+
+
+
+/*.content-wrapper{
+  text-align: center;
+  height: 100%;
+  top: 0;
+}
+/*
+.content-wrapper .graphic{
+  display: inline-block;
+  background: #9f9;
+  margin: 0 20pt;
+  text-align: left;
+  width: 45%;
+}
+
+.content-wrapper .text{
+  display: inline-block;
+  background: #99f;
+  margin: 0 20pt;
+  text-align: left;
+  width: 45%;
+}
+*/
+
+select {
+  box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  text-align: center;
+  text-align: -webkit-center;
+  height: 27pt;
+}
+
+.fill-in-the-blank{
+/*  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;*/
+  margin: 0pt !important;
+  padding: 0pt !important;
+}
+</style>
