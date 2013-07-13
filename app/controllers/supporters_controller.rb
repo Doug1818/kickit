@@ -10,6 +10,7 @@ class SupportersController < ApplicationController
     if @supporter.save
       flash[:success] = "Supporter added"
       redirect_to supporters_path
+      SupporterMailer.supporter_welcome(@supporter).deliver
     else
       render 'new'
     end

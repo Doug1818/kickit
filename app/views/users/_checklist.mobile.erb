@@ -5,13 +5,13 @@
     <tr class="checklist_item">
     	<% if current_user.supporters.any? %>
     		<td><%= image_tag("glyphicons_152_check.png") %></td>
+    		<td><%= link_to "Add Supporters", supporters_path, style: "text-decoration: none;" %>
+    		<%= "(#{current_user.supporters.count} added)" %></td>
+    	</td>
 		<% else %>
 			<td><%= image_tag("glyphicons_153_unchecked.png") %></td>
+			<td><%= link_to "Add Supporters", supporters_path, style: "text-decoration: none;" %></td>
     	<% end %>
-    	<td>
-    		<%= link_to "Add Supporters", supporters_path, style: "text-decoration: none;" %>
-    		<%= "(#{current_user.supporters.count} added)" %>
-    	</td>
     </tr>
     <tr class="checklist_item">
     	<% if 1 == 0 %>

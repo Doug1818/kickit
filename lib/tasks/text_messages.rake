@@ -61,6 +61,7 @@ task :full_hour_jobs => :environment do
 	User.all.each do |user|
 		if Time.now.in_time_zone(user.time_zone).hour == 9
 			if user.start_date? && user.start_date < Date.current && ((Date.current - 1 - user.start_date).to_f/7).prettify.is_a?(Integer)
+				user.supporters.each { |supporter| SupporterMailer.supporter_update(supporter).deliver }
 				UserMailer.supporter_update(user).deliver
 			end
 		end
