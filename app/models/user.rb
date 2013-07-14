@@ -34,7 +34,6 @@ class User < ActiveRecord::Base
   validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name)
 
   before_validation :set_default_time_zone, :on => :create
-  #after_create :create_30_days
 
   def setup_complete?
     self.setup_flag == true
@@ -89,11 +88,6 @@ class User < ActiveRecord::Base
       "Looks like you had a tough week.  Hit the reset button and start fresh next week."
     end
   end
-  
-  #def create_30_days
-  #	30.times { |i| self.days.create(day: i + 1, date: self.start_date + i) } if self.start_date?
-  #  self.update_attributes(end_date: start_date + 30)
-  #end
 
   RELATIONSHIPS = ["Friend", "Boyfriend", "Girlfriend", "Husband", "Wife", "Father", "Mother", "Son", "Daughter",
     "Brother", "Sister", "Uncle", "Aunt", "Nephew", "Niece", "Cousin", "Other"]
@@ -112,14 +106,17 @@ class User < ActiveRecord::Base
 
   after_create :add_remessages
   def add_remessages
-    soda = "Soda"
-    surfing = "Surfing Facebook / the internet"
-    if REMESSAGES.include?(self.habit_name)
-      if soda == self.habit_name
-        SODA.each { |message| self.remessages.create(content: message) }
-      elsif surfing == self.habit_name
-        SURFING.each { |message| self.remessages.create(content: message) }
-      end
-    end
+    habit = Habit.find_by_name(self.habit_name)
+    habit.cues.each { |cue| self.remessages.create(content: cue.content) } if habit != nil
+    habit.todos.each { |todo| self.user_todos.create(name: todo.name) } if habit != nil
+    #soda = "Soda"
+    #surfing = "Surfing Facebook / the internet"
+    #if REMESSAGES.include?(self.habit_name)
+    #  if soda == self.habit_name
+    #    SODA.each { |message| self.remessages.create(content: message) }
+    #  elsif surfing == self.habit_name
+    #    SURFING.each { |message| self.remessages.create(content: message) }
+    #  end
+    #end
   end
 end
