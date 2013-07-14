@@ -10,7 +10,8 @@
     	</td>
 		<% else %>
 			<td><%= image_tag("glyphicons_153_unchecked.png") %></td>
-			<td><%= link_to "Add Supporters", supporters_path, style: "text-decoration: none;" %></td>
+			<td><%= link_to "Add Supporters", supporters_path, style: "text-decoration: none;" %>
+			<%= "(#{current_user.supporters.count} added)" %></td>
     	<% end %>
     </tr>
     <tr class="checklist_item">
@@ -23,15 +24,15 @@
     		<%= link_to "Add Billing Info", "#", style: "text-decoration: none;" %>
     	</td>
     </tr>
-    <% current_user.user_todos.each do |todo| %>
+    <% current_user.user_todos.order("id asc").each do |user_todo| %>
 	    <tr class="checklist_item">
-	    	<% if 1 == 0 %>
+	    	<% if user_todo.completed == true %>
 	    		<td><%= image_tag("glyphicons_152_check.png") %></td>
 			<% else %>
 				<td><%= image_tag("glyphicons_153_unchecked.png") %></td>
 	    	<% end %>
 	    	<td>
-	    		<%= link_to todo.name, "#", style: "text-decoration: none;" %>
+	    		<%= link_to user_todo.name, complete_user_todo_path(user_todo), method: :put, style: "text-decoration: none;" %>
 	    	</td>
 	    </tr>
     <% end if current_user.user_todos.any? %>

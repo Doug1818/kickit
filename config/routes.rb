@@ -33,6 +33,11 @@ Kickit::Application.routes.draw do
   resources :supmessages
   resources :leads
   resources :supporters
+  resources :user_todos do
+    member do
+      put :complete
+    end
+  end
   
   root to: 'static_pages#home'
   match '/carousel',  to: 'static_pages#carousel'
