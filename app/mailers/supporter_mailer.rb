@@ -14,7 +14,7 @@ class SupporterMailer < ActionMailer::Base
     @supporter = supporter
     @user = User.find(supporter.user_id)
 
-    mail from:"KickIt <support@kick-it-now.com>",
+    mail from:"Kick-It <support@kick-it-now.com>",
     to: @supporter.email,
     bcc: "support@kick-it-now.com",
     subject: "[Kick-It] Weekly Update on #{@user.email}"

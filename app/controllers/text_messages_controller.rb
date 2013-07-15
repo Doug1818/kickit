@@ -56,7 +56,7 @@ class TextMessagesController < ApplicationController
 			end
 		else
 			if @user.start_date > Date.current
-				received_msg = "Your Kick it program hasn't started yet."
+				received_msg = "Your Kick-It program hasn't started yet."
 				response = Twilio::TwiML::Response.new { |r| r.Sms received_msg }
 				render :xml => response.text
 				received_text = @user.received_texts.create(message: received_msg)
@@ -66,7 +66,7 @@ class TextMessagesController < ApplicationController
 				render :xml => response.text
 				received_text = @user.received_texts.create(message: received_msg)
 			else
-				received_msg = "You are not signed up for a Kick it program.  To start a new program go to http://www.kick-it-now.com"
+				received_msg = "You are not signed up for a Kick-It program.  To start a new program go to http://www.kick-it-now.com"
 				response = Twilio::TwiML::Response.new { |r| r.Sms received_msg }
 				render :xml => response.text
 				received_text = @user.received_texts.create(message: received_msg)

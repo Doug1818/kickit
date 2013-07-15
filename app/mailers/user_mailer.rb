@@ -6,7 +6,7 @@ class UserMailer < ActionMailer::Base
     
     mail from:"Kick-It <support@kick-it-now.com>",
     to: @user.email,
-    subject: "Welcome to KickIt!"
+    subject: "Welcome to Kick-It!"
   end
 
   def supporter_welcome(user)
@@ -14,7 +14,7 @@ class UserMailer < ActionMailer::Base
     
     mail from:"Kick-It <support@kick-it-now.com>",
     to: @user.supporter_email,
-    subject: "#{@user.email} has named you as a supporter on KickIt!"
+    subject: "#{@user.email} has named you as a supporter on Kick-It!"
   end
 
   def supporter_badge(supmessage)
