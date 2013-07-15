@@ -17,6 +17,7 @@
 //= require bootstrap
 //= require formToWizard
 //= require swipeview
+//= add_remove_fields
 //= require rails.validations
 //= require default
 //= require forms
