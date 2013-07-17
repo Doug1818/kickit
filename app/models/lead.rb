@@ -8,4 +8,12 @@ class Lead < ActiveRecord::Base
   validates :first_name, presence: true
   validates :goal, presence: true
   validates :habit_name, presence: true
+
+  before_save do |lead|
+  	if goal == "and I want to quit"
+  		lead.goal = "quit"
+	elsif goal == "and I want to cut back"
+		lead.goal = "cut back"
+	end
+  end
 end
