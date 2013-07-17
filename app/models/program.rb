@@ -63,5 +63,5 @@ class Program < ActiveRecord::Base
     end
   end
  
-  HABITS = ["Smoking", "Drinking", "Caffeine", "Soda", "Sweets / Added Sugars", "Nail Biting", " Facebook / Social Media"]
+  HABITS = ["Biting Nails", "Checking Facebook", "Late Night Snacking", "Overeating at Meals", "Eating Sweets", "Drinking Soda", "Other"]
 end

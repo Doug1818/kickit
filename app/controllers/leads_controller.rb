@@ -1,8 +1,11 @@
 class LeadsController < ApplicationController
 
+  def new
+    @lead = Lead.new
+  end
+
   def create
     @lead = Lead.new(params[:lead])
-    #binding.pry
     if @lead.save
       flash[:success] = "You have signed up successfully. Thank you for your interest in Kick-It!"
       redirect_to root_path
@@ -15,11 +18,7 @@ class LeadsController < ApplicationController
       end
       #UserMailer.new_user_welcome(@user).deliver
     else
-      if params[:lead][:ab_value] == "A"
-        render 'static_pages/landing_a.html'
-      else
-        render 'static_pages/landing_b.html'
-      end
+      render 'new'
     end
   end
 end
