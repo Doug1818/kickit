@@ -1,16 +1,16 @@
 <% content_for :title do %><title>Home</title><% end %>
 <% content_for :h1 do %><h1>Home</h1><% end %>
 
-<% if user_signed_in? && current_user.start_date? && current_user.start_date <= Date.current && Date.current <= current_user.start_date + 7 %>
+<% if user_signed_in? && current_user.midprogram? %>
 	<!-- If in an active program -->
 	<%= render 'shared/calendar' %>
-<% elsif user_signed_in? && !current_user.start_date? %>
+<% elsif user_signed_in? && current_user.program == nil %>
 	<!-- If signed up only -->
 	<h2 style="margin-bottom:0;">Welcome!</h2>
 	<%= current_user.email %>
 	<%= link_to "Set up a 3-week plan", setup_user_path(current_user), "data-role" => "button", "data-icon" => "arrow-r", 
 		"data-iconpos" => "right", "data-ajax" => false, style: "margin-top:40px;" %>
-<% elsif user_signed_in? && current_user.start_date? && current_user.start_date > Date.current %>
+<% elsif user_signed_in? && current_user.programs.count >= 1 && current_user.next_program.start_date > Date.current %>
 	<!-- If signed up / setup but not started -->
 	<%= render 'users/checklist' %>
 <% else %>

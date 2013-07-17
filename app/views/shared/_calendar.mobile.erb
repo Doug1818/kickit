@@ -1,5 +1,7 @@
-<% if current_user.goal? %>
-<h3 style="margin-top:0;margin-bottom:10px;"><strong>Your Goal: <%= current_user.goal %></strong></h3>
+<% if current_user.program.days.find_by_date(Date.current).goal? %>
+	<h3 style="margin-top:0;margin-bottom:10px;">
+		<strong>Your Goal: <%= current_user.program.days.find_by_date(Date.current).goal %></strong>
+	</h3>
 <% end %>
 <div id="calendar">
 	<h3 id="month">

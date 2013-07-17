@@ -2,13 +2,13 @@
 <br>
 
 <div data-role="controlgroup" class="checklist">
-  <% if current_user.supporters.any? %>
-    <%= link_to "Add Supporters (#{current_user.supporters.count} added)", supporters_path, "data-role" => "button", "data-icon" => "check" %>
+  <% if current_user.next_program.supporters.any? %>
+    <%= link_to "Add Supporters (#{current_user.next_program.supporters.count} added)", supporters_path, "data-role" => "button", "data-icon" => "check" %>
   <% else %>
-    <%= link_to "Add Supporters (#{current_user.supporters.count} added)", supporters_path, "data-role" => "button", "data-icon" => "alert" %>
+    <%= link_to "Add Supporters (#{current_user.next_program.supporters.count} added)", supporters_path, "data-role" => "button", "data-icon" => "alert" %>
   <% end %>
   <%= link_to "Add Billing Info", "#", "data-role" => "button", "data-icon" => "alert" %>
-  <% current_user.user_todos.order("id asc").each do |user_todo| %>
+  <% current_user.next_program.user_todos.order("id asc").each do |user_todo| %>
     <% if user_todo.completed == true %>
       <%= link_to user_todo.name, complete_user_todo_path(user_todo), method: :put, "data-role" => "button", "data-icon" => "check" %>
     <% else %>

@@ -6,7 +6,7 @@ class RemessagesController < ApplicationController
   end
 
   def create
-    @remessage = current_user.remessages.build(params[:remessage])
+    @remessage = current_user.program.remessages.build(params[:remessage])
     if @remessage.save
       flash[:success] = "Reminder message added"
       redirect_to reminders_path
@@ -30,7 +30,7 @@ class RemessagesController < ApplicationController
   end
 
   def destroy
-    @remessage = current_user.remessages.find(params[:id])
+    @remessage = current_user.program.remessages.find(params[:id])
     @remessage.destroy
     flash[:notice] = "Reminder message deleted"
     redirect_to reminders_path

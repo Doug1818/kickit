@@ -2,7 +2,7 @@ class DaysController < ApplicationController
   before_filter :authenticate_user!, only: [:index]
 
   def index
-  	@days = current_user.days
+  	@days = current_user.program.days
   	@today = params[:month] ? Date.parse(params[:month]) : Date.current
   end
 

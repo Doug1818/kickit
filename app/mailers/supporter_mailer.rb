@@ -3,7 +3,8 @@ class SupporterMailer < ActionMailer::Base
 
   def supporter_welcome(supporter)
     @supporter = supporter
-    @user = User.find(supporter.user_id)
+    @program = Program.find(supporter.program_id)
+    @user = User.find(@program.user_id)
     
     mail from:"Kick-It <support@kick-it-now.com>",
     to: @supporter.email,
@@ -12,7 +13,8 @@ class SupporterMailer < ActionMailer::Base
 
   def supporter_update(supporter)
     @supporter = supporter
-    @user = User.find(supporter.user_id)
+    @program = Program.find(supporter.program_id)
+    @user = User.find(@program.user_id)
 
     mail from:"Kick-It <support@kick-it-now.com>",
     to: @supporter.email,

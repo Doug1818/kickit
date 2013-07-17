@@ -12,9 +12,7 @@ Kickit::Application.routes.draw do
       get :setup
       put :do_setup
     end
-#    collection do
-#      get :signup
-#    end
+  resources :programs
   end
   resources :text_messages do
     collection do

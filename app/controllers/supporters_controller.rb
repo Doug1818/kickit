@@ -6,7 +6,7 @@ class SupportersController < ApplicationController
   end
 
   def create
-    @supporter = current_user.supporters.build(params[:supporter])
+    @supporter = current_user.program.supporters.build(params[:supporter])
     if @supporter.save
       flash[:success] = "Supporter added"
       redirect_to supporters_path
@@ -17,7 +17,7 @@ class SupportersController < ApplicationController
   end
 
   def index
-  	@supporters = current_user.supporters
+  	@supporters = current_user.program.supporters
     @supporter = Supporter.new
   end
 
@@ -36,7 +36,7 @@ class SupportersController < ApplicationController
   end
 
   def destroy
-    @supporter = current_user.supporters.find(params[:id])
+    @supporter = current_user.program.supporters.find(params[:id])
     @supporter.destroy
     flash[:notice] = "Supporter removed"
     redirect_to supporters_path

@@ -6,7 +6,7 @@ class RemindersController < ApplicationController
   end
 
   def create
-    @reminder = current_user.reminders.build(params[:reminder])
+    @reminder = current_user.program.reminders.build(params[:reminder])
     if @reminder.save
       flash[:success] = "Reminder added"
       redirect_to reminders_path
@@ -16,8 +16,8 @@ class RemindersController < ApplicationController
   end
 
   def index
-  	@reminders = current_user.reminders
-    @remessages = current_user.remessages
+  	@reminders = current_user.program.reminders
+    @remessages = current_user.program.remessages
   end
 
   def edit
@@ -35,7 +35,7 @@ class RemindersController < ApplicationController
   end
 
   def destroy
-    @reminder = current_user.reminders.find(params[:id])
+    @reminder = current_user.program.reminders.find(params[:id])
     @reminder.destroy
     flash[:notice] = "Reminder time deleted"
     redirect_to reminders_path

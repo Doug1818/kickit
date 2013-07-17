@@ -3,7 +3,7 @@
 
 <%= form_for @supporter do |f| %>
 	<%= render 'shared/error_messages', object: f.object %>
-	<%= f.select :relationship, User::RELATIONSHIPS %>
+	<%= f.select :relationship, Supporter::RELATIONSHIPS %>
 	<%= f.text_field :first_name, placeholder: "Supporter first name (required)" %>
 	<%= f.text_field :email, placeholder: "Supporter email (required)", type: "email" %>
 	<%= f.submit "Update supporter", class: "submit" %>

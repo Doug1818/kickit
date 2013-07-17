@@ -8,35 +8,42 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
-  attr_accessible :first_name, :phone, :habit_name, :start_date, :end_date, :supporter_name, :supporter_email, :supporter_relationship, 
-    :goal, :checkin_msg, :time_zone, :setup_flag, :reminders_attributes
-  has_many :days, dependent: :destroy
-  has_many :sent_texts, dependent: :destroy
-  has_many :received_texts, dependent: :destroy
-  has_many :supmessages, dependent: :destroy
-  has_many :reminders, dependent: :destroy
-  accepts_nested_attributes_for :reminders
-  has_many :remessages, dependent: :destroy
-  has_many :supporters, dependent: :destroy
-  has_many :user_todos, dependent: :destroy
-  scope :active_program, where("start_date <= ? AND end_date >= ?", Date.current, Date.current)
-  scope :active_checkins, where("start_date <= ? AND end_date >= ?", Date.current - 1, Date.current - 1)
+  attr_accessible :first_name, :phone, :time_zone, :first_habit, :programs_attributes, :setup_flag
+  has_many :programs, dependent: :destroy
+  accepts_nested_attributes_for :programs
 
-  validates :habit_name, presence: true
+  validates :first_habit, presence: true
   validates :phone, presence: true, uniqueness: true, :on => :update, :if => :setup_complete?
   validate  :phone_length, :on => :update, :if => :setup_complete?
   validates :first_name, presence: true, :on => :update, :if => :setup_complete?
-  validates :start_date, presence: true, :on => :update, :if => :setup_complete?
-  #validates :supporter_name, presence: true, :on => :update, :if => :setup_complete?
-  #validates :supporter_email, presence: true, :on => :update, :if => :setup_complete?
-  #validates :supporter_relationship, presence: true, :on => :update, :if => :setup_complete?
-  validate  :future_date, :on => :update, :if => :setup_complete?
   validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name)
 
   before_validation :set_default_time_zone, :on => :create
 
-  def setup_complete?
-    self.setup_flag == true
+  def next_program
+    programs = self.programs
+    x = []
+    programs.each { |p| x.push(p.start_date) if p.start_date > Date.today }
+    programs.where("start_date = ?", x.min).first
+  end
+
+  def current_program
+    programs = self.programs
+    current_program = programs.where("start_date <= ? AND end_date >= ?", Date.current, Date.current - 1).first # - 1 for end-date so that calendar is shown on last checkin day (1 day after end_date)
+  end
+
+  def midprogram?
+    programs = self.programs
+    active_programs = programs.where("start_date <= ? AND end_date >= ?", Date.current, Date.current - 1).count # - 1 for end-date so that calendar is shown on last checkin day (1 day after end_date)
+    active_programs >= 1 ? true : false
+  end
+
+  def program
+    if self.midprogram?
+      self.current_program
+    elsif self.next_program != nil
+      self.next_program
+    end
   end
 
   def phone_length
@@ -45,19 +52,23 @@ class User < ActiveRecord::Base
     end
   end
 
-  def future_date
-    if self.start_date != nil && self.start_date < Time.zone.now.to_date + 1
-      self.errors[:start_date] << "can't be earlier than tomorrow"
-    end
-  end
-
   def set_default_time_zone
     self.time_zone = "Eastern Time (US & Canada)"
+  end
+
+  def setup_complete?
+    self.setup_flag == true
   end
 
   # For rails admin
   def custom_label_method
     "#{self.email}"
+  end
+
+  def future_date
+    if self.start_date != nil && self.start_date < Time.zone.now.to_date + 1
+      self.errors[:start_date] << "can't be earlier than tomorrow"
+    end
   end
 
   def prev_week
@@ -87,36 +98,5 @@ class User < ActiveRecord::Base
     elsif self.prev_week_sdays <= 2 && self.completed_days > 7    
       "Looks like you had a tough week.  Hit the reset button and start fresh next week."
     end
-  end
-
-  RELATIONSHIPS = ["Friend", "Boyfriend", "Girlfriend", "Husband", "Wife", "Father", "Mother", "Son", "Daughter",
-    "Brother", "Sister", "Uncle", "Aunt", "Nephew", "Niece", "Cousin", "Other"]
-  HABITS = ["Smoking", "Drinking", "Caffeine", "Soda", "Sweets / Added Sugars", "Nail Biting", " Facebook / Social Media"]
-  
-  REMESSAGES = ["Soda", "Surfing Facebook / the internet"]
-  
-  SODA = ["Have a seltzer today",
-          "Sub in one black or green tea today",
-          "As long as you're improving, it doesn't matter how fast you're improving.",
-          "Future you is thanking present you."]
-  SURFING = ["If Facebook is open right now, close it.",
-          "Today, do a 2-hour block with Self Control or Cold Turkey.",
-          "As long as you're improving, it doesn't matter how fast you're improving.",
-          "Here's a link to a study about how Facebook is good for you: http://www.psmag.com/blogs/news-blog/why-you-cant-stop-checking-your-facebook-profile-52531/"]
-
-  after_create :add_remessages
-  def add_remessages
-    habit = Habit.find_by_name(self.habit_name)
-    habit.cues.each { |cue| self.remessages.create(content: cue.content) } if habit != nil
-    habit.todos.each { |todo| self.user_todos.create(name: todo.name) } if habit != nil
-    #soda = "Soda"
-    #surfing = "Surfing Facebook / the internet"
-    #if REMESSAGES.include?(self.habit_name)
-    #  if soda == self.habit_name
-    #    SODA.each { |message| self.remessages.create(content: message) }
-    #  elsif surfing == self.habit_name
-    #    SURFING.each { |message| self.remessages.create(content: message) }
-    #  end
-    #end
   end
 end

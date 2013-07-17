@@ -1,6 +1,6 @@
 <p><%= "#{@supporter.first_name}," %></p>
 
-<p>I’ve decided it’s time for me to cut down on <%= @user.habit_name.downcase %>, and I’m using a service called Kick-It to help.  You'll get emails on my progress over the course of my three week program, which runs from <%= @user.start_date.strftime("%A, %B %d") %> to <%= @user.end_date.strftime("%A, %B %d") %>. Thanks so much for your support!</p>
+<p>I’ve decided it’s time for me to cut down on <%= @program.habit.downcase %>, and I’m using a service called Kick-It to help.  You'll get emails on my progress over the course of my three week program, which runs from <%= @program.start_date.strftime("%A, %B %d") %> to <%= @program.end_date.strftime("%A, %B %d") %>. Thanks so much for your support!</p>
 
 <p>Best,<br>
 <%= @user.first_name %></p>
