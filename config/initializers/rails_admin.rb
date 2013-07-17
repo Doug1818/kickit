@@ -141,6 +141,7 @@ RailsAdmin.config do |config|
       field :day
       field :result
       field :date
+      field :goal
       field :updated_at
       field :created_at
       field :id
@@ -369,21 +370,11 @@ RailsAdmin.config do |config|
         list do
           field :email
           field :first_name
-          field :habit_name
-          field :start_date do
-            strftime_format "%b %d, %Y"
-          end
-          field :end_date do
-            strftime_format "%b %d, %Y"
-          end
-          field :supporter_relationship
+          field :first_habit
           field :time_zone
-          field :goal
           field :phone
           field :sign_in_count
           field :last_sign_in_at
-          field :supporter_name
-          field :supporter_email
   #       # filters [:id, :name]  # Array of field names which filters should be shown by default in the table header
   #       # items_per_page 100    # Override default_items_per_page
   #       # sort_by :id           # Sort column (default is primary key)
