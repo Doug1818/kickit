@@ -104,11 +104,28 @@
         </div>
         
         <div class="text" style="padding:0;">
-          <h2 class="center-align" style="margin-top:0;">Kick It This New Year</h2>
+          <h2 class="center-align" style="margin-top:0;">Help Us Make Kick-It Better</h2>
           <div class="center-align">
-            <p style="font-size:16pt">We’ll be having a semi-public beta launch around New Year’s 2014, and private beta launches before then. If you want to be a part of it, fill out the little form below. We’ll email you when we’re ready for you.</p>
+           <!-- <p style="font-size:16pt">We’ll be having a semi-public beta launch around New Year’s 2014, and private beta launches before then. If you want to be a part of it, fill out the little form below. We’ll email you when we’re ready for you.</p> -->
+             <p style="font-size:16pt">
+      
+   We're running a Super Private Beta test of Kick-It from July 29 to August 16.  At this time, we are looking for people trying to Stop or Reduce the following behaviors.  There will be more releases later, so sign up even if you don't qualify for the current one now and we'll be in touch as soon as we're ready for you.</p>
+         <div style="float: left; width: 50%; margin-top:0;">
+<ul style="margin-top: 0pt;">
+<li>Biting Nails</li>
+<li>Checking Facebook</li>
+<li>Late Night Snacking</li>
+</ul>
+</div>
+<div style="float: right; width: 50%; margin-top:0;">
+<ul style="margin-top:0;">
+<li>Overeating at Meals</li>
+<li>Eating Sweets</li>
+<li>Drinking Soda</li>
+</ul>
+</div>
           </div>
-          <div class="center-align" style="background: #333; border: 1.5pt dashed #fff; margin-top: 10pt; padding: 10pt;">
+          <div class="center-align" style="background: #333; border: 1.5pt dashed #fff; margin-top: 10pt; padding: 10pt;clear:both;">
             <%= form_for @lead, :validate => true do |f| %>
               <%= render 'shared/error_messages', object: f.object %>
               <%= f.hidden_field :ab_value, value: ab_value %>
