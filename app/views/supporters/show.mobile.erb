@@ -9,7 +9,7 @@
 	<%= form_for @supmessage do |f| %>
 		<%= render 'shared/error_messages', object: f.object %>
 		<%= f.text_area :content, value: @program.badge, style: "height:100px;width:50%" %><br>
-		<%= f.hidden_field :program_id, value: @program.id %>
+		<%= f.hidden_field :supporter_id, value: @supporter.id %>
 		<%= f.submit "Send badge", class: "btn" %>
 	<% end %><br>
 	
@@ -23,9 +23,9 @@
 		<% end %>
 	</table>
 
-	<% if @program.supmessages.count > 0 %>
+	<% if @supporter.supmessages.count > 0 %>
 		<h3>Badge History</h3>
-		<% @program.supmessages.order("created_at desc").each do |supmessage| %>
+		<% @supporter.supmessages.order("created_at desc").each do |supmessage| %>
 			<div class="msg_info"><%= supmessage.created_at.strftime("%a, %b %e, %l:%M%P") %></div>
 			<div class="content"><%= supmessage.content.gsub(/\n/, '<br/>').html_safe %></div>
 		<% end %>
