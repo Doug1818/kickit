@@ -1,5 +1,6 @@
 class Supporter < ActiveRecord::Base
   attr_accessible :email, :first_name, :relationship
+  has_many :supmessages, dependent: :destroy
   belongs_to :user
   belongs_to :program
 

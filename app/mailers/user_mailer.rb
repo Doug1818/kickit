@@ -9,29 +9,14 @@ class UserMailer < ActionMailer::Base
     subject: "Welcome to Kick-It!"
   end
 
-  def supporter_welcome(user)
-    @user = user
-    
-    mail from:"Kick-It <support@kick-it-now.com>",
-    to: @user.supporter_email,
-    subject: "#{@user.email} has named you as a supporter on Kick-It!"
-  end
-
   def supporter_badge(supmessage)
     @supmessage = supmessage
-    @user = User.find(@supmessage.user_id)
+    @supporter = Supporter.find(@supmessage.supporter_id)
+    @program = Program.find(@supporter.program_id)
+    @user = User.find(@program.user_id)
     
-    mail from:"#{@user.supporter_name} <#{@user.supporter_email}>",
+    mail from: @supporter.email,
     to: @user.email,
-    subject: "[Kick-It] #{@user.supporter_name} has sent you a badge!"
-  end
-
-  def supporter_update(user)
-    @user = user
-
-    mail from:"Kick-It <support@kick-it-now.com>",
-    to: @user.supporter_email,
-    bcc: "support@kick-it-now.com",
-    subject: "[Kick-It] Weekly Update on #{@user.email}"
+    subject: "[Kick-It] #{@supporter.first_name} has sent you a badge!"
   end
 end

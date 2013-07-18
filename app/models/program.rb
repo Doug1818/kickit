@@ -5,7 +5,6 @@ class Program < ActiveRecord::Base
   has_many :days, dependent: :destroy
   has_many :sent_texts, dependent: :destroy
   has_many :received_texts, dependent: :destroy
-  has_many :supmessages, dependent: :destroy
   has_many :reminders, dependent: :destroy
   accepts_nested_attributes_for :reminders
   has_many :remessages, dependent: :destroy

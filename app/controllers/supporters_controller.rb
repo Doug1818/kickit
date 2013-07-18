@@ -16,6 +16,13 @@ class SupportersController < ApplicationController
     end
   end
 
+  def show
+    @supporter = Supporter.find(params[:id])
+    @program = Program.find(@supporter.program_id)
+    @user = User.find(@program.user_id)
+    @supmessage = @supporter.supmessages.build
+  end
+
   def index
   	@supporters = current_user.program.supporters
     @supporter = Supporter.new

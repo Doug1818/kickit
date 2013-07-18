@@ -1,14 +1,13 @@
 class SupmessagesController < ApplicationController
-
 	def create
-		@user = User.find(params[:supmessage][:user_id])
-		@supmessage = @user.supmessages.build(content: params[:supmessage][:content])
+		@supporter = Supporter.find(params[:supmessage][:supporter_id])
+		@supmessage = @supporter.supmessages.build(content: params[:supmessage][:content])
     if @supmessage.save
       flash[:success] = "Badge sent"
-      redirect_to user_path(@user)
+      redirect_to supporter_path(@supporter)
       UserMailer.supporter_badge(@supmessage).deliver
     else
-      render 'users/show'
+      render 'supporters/show'
     end
 	end
 end

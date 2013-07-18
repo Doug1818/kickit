@@ -2,30 +2,30 @@
 <% content_for :title do %><title>Kick-It Results</title><% end %>
 <% content_for :h1 do %><h1>Kick-It Results</h1><% end %>
 
-<% if @user.completed_days >= 7 %>
+<% if @program.completed_days >= 7 %>
 
-	<h3><%= @user.email %> was successful <%= @user.prev_week_sdays %> of 7 days last week.  Encourage them with a badge!</h3>
+	<h3><%= @user.email %> was successful <%= @program.prev_week_sdays %> of 7 days last week.  Encourage them with a badge!</h3><br>
 
 	<%= form_for @supmessage do |f| %>
 		<%= render 'shared/error_messages', object: f.object %>
-		<%= f.text_area :content, value: @user.badge, style: "height:75px;" %>
-		<%= f.hidden_field :user_id, value: @user.id %>
+		<%= f.text_area :content, value: @program.badge, style: "height:100px;width:50%" %><br>
+		<%= f.hidden_field :program_id, value: @program.id %>
 		<%= f.submit "Send badge", class: "btn" %>
 	<% end %><br>
-
-	<h3><%= "Their goal: #{@user.goal}" %></h3>
+	
 	<table class="pretty_table">
-		<% @user.days.reported.order("date desc")[(-7 - 7*(@user.prev_week - 1))..(-1 - 7*(@user.prev_week - 1))].each do |day| %>
+		<% @program.days.reported.order("date desc")[(-7 - 7*(@program.prev_week - 1))..(-1 - 7*(@program.prev_week - 1))].each do |day| %>
 			<tr>
 				<td class="date"><%= day.date.strftime("%a, %b %d") %></td>
+				<td class="result"><%= day.goal %></td>
 				<td class="result"><%= RESULTS.key(day.result) %></td>
 			</tr>
 		<% end %>
 	</table>
 
-	<% if @user.supmessages.count > 0 %>
+	<% if @program.supmessages.count > 0 %>
 		<h3>Badge History</h3>
-		<% @user.supmessages.order("created_at desc").each do |supmessage| %>
+		<% @program.supmessages.order("created_at desc").each do |supmessage| %>
 			<div class="msg_info"><%= supmessage.created_at.strftime("%a, %b %e, %l:%M%P") %></div>
 			<div class="content"><%= supmessage.content.gsub(/\n/, '<br/>').html_safe %></div>
 		<% end %>
