@@ -1,6 +1,8 @@
 <% content_for :title do %><title>New Supporter</title><% end %>
 <% content_for :h1 do %><h1>New Supporter</h1><% end %>
 
+<h3>Add Another Supporter</h3>
+
 <%= form_for @supporter do |f| %>
 	<%= render 'shared/error_messages', object: f.object %>
 	<%= f.select :relationship, Supporter::RELATIONSHIPS %>

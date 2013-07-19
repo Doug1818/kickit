@@ -2,7 +2,6 @@
 <% content_for :h1 do %><h1>Supporters</h1><% end %>
 
 <h2 style="margin-top:0;">Supporters</h2>
-<br>
 
 <% if @supporters.any? %>
 	<% @supporters.order("created_at asc").each do |supporter| %>
@@ -18,8 +17,7 @@
 
 	<%= link_to "Add another supporter", new_supporter_path, "data-role" => "button" %>
 <% else %>
-	<p><strong>Pick a supporter.</strong> Who in your life is closest to you and someone with whom you are comfortable sharing your progress?  We will send them a welcome email and daily updates on your progress.</p>
-
+	<h3>Pick a Supporter</h3>
 	<%= form_for @supporter do |f| %>
 		<%= render 'shared/error_messages', object: f.object %>
 		<%= f.select :relationship, Supporter::RELATIONSHIPS %>
@@ -27,4 +25,7 @@
 		<%= f.text_field :email, placeholder: "Supporter email (required)", type: "email" %>
 		<%= f.submit "Add supporter", class: "submit" %>
 	<% end %>
+	<p>Every week, your supporters will get an email showing how you did the week before - which days you were successful, unsuccessful, or failed to check in.</p>
+	<p>They don't have to do very much, but the knowledge that they see your results will help you stay on track.  Pick supporters with whom you're comfortable sharing your progress and who want you to succeed.</p>
+	<p>An email will be sent to them on your behalf that explains how the process works.</p>
 <% end %>
