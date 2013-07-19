@@ -1,0 +1,22 @@
+<%= form_for current_user, url: add_billing_info_user_path(current_user), html: { method: :put, id: "user_billing" } do |f| %>
+	<%= render 'shared/error_messages', object: f.object %>
+	<div>
+		<%= label_tag :card_number, "Credit Card Number" %>
+		<%= text_field_tag :card_number, nil, name: nil, type: "number", pattern: "[0-9]*" %>
+	</div>
+	<div>
+		<%= label_tag :card_code, "Security Code (CVV)" %>
+		<%= text_field_tag :card_code, nil, name: nil, type: "number", pattern: "[0-9]*" %>
+	</div>
+	<div>
+		<%= label_tag :card_month, "Card Expiration" %>
+		<%= select_month nil, {add_month_numbers_true: true}, {name: nil, id: "card_month"} %>
+		<%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"} %>
+	</div>
+	<br>
+	<%= f.hidden_field :stripe_card_token, id: "user_stripe_card_token" %>
+	<div id="stripe_error"><noscript>JavaScript is not enabled and is required for this form. Please enable it in your browser settings.</noscript></div>
+	<div id="checking"><noscript>JavaScript is not enabled and is required for this form. Please enable it in your browser settings.</noscript></div>
+	<div id="submitting"><noscript>JavaScript is not enabled and is required for this form. Please enable it in your browser settings.</noscript></div>
+	<%= f.submit "Add Billing Info" %>
+<% end %>

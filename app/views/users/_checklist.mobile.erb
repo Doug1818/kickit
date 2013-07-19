@@ -7,7 +7,11 @@
   <% else %>
     <%= link_to "Add Supporters (#{current_user.next_program.supporters.count} added)", supporters_path, "data-role" => "button", "data-icon" => "alert" %>
   <% end %>
-  <%= link_to "Add Billing Info", "#", "data-role" => "button", "data-icon" => "alert" %>
+  <% if current_user.stripe_customer_id? %>
+    <%= link_to "Add Billing Info", billing_user_path(current_user), "data-role" => "button", "data-icon" => "check", "data-ajax" => false %>
+  <% else %>
+    <%= link_to "Add Billing Info", billing_user_path(current_user), "data-role" => "button", "data-icon" => "alert", "data-ajax" => false %>
+  <% end %>
   <% current_user.next_program.user_todos.order("id asc").each do |user_todo| %>
     <% if user_todo.completed == true %>
       <%= link_to user_todo.name, complete_user_todo_path(user_todo), method: :put, "data-role" => "button", "data-icon" => "check" %>

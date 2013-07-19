@@ -9,8 +9,8 @@ Kickit::Application.routes.draw do
   #end
   resources :users do
     member do
-      get :setup
-      put :do_setup
+      get :setup, :billing
+      put :do_setup, :add_billing_info
     end
   resources :programs
   end

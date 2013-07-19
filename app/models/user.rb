@@ -8,7 +8,9 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
-  attr_accessible :first_name, :phone, :time_zone, :first_habit, :programs_attributes, :setup_flag
+  attr_accessible :first_name, :phone, :time_zone, :first_habit, :programs_attributes, :setup_flag, 
+    :stripe_card_token, :stripe_customer_id, :stripe_card_type, :stripe_card_last4
+  attr_accessor :stripe_card_token
   has_many :programs, dependent: :destroy
   accepts_nested_attributes_for :programs
 
@@ -19,6 +21,30 @@ class User < ActiveRecord::Base
   validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name)
 
   before_validation :set_default_time_zone, :on => :create
+
+  def save_with_payment
+    # Update or Create stripe customer
+    if self.stripe_customer_id?
+      customer = Stripe::Customer.retrieve(self.stripe_customer_id)
+      customer.card = stripe_card_token
+      customer.save
+      self.update_attributes(
+        stripe_card_type: customer.cards.data[0].type,
+        stripe_card_last4: customer.cards.data[0].last4)
+    else
+      customer = Stripe::Customer.create(
+        :card => stripe_card_token,
+        :email => email,
+        :description => first_name)
+      self.update_attributes(
+        stripe_customer_id: customer.id,
+        stripe_card_type: customer.cards.data[0].type,
+        stripe_card_last4: customer.cards.data[0].last4)
+    end
+  rescue Stripe::InvalidRequestError => e
+    logger.error "Stripe error while creating customer: #{e.mesage}"
+    errors.add :base, "There was a problem with your credit card."
+  end
 
   def next_program
     programs = self.programs

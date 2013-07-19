@@ -24,6 +24,7 @@ gem 'rails_admin'
 gem 'client_side_validations'
 gem 'gibbon'
 gem 'browser'
+gem 'stripe'
 
 group :production do
   gem 'google-analytics-rails'
