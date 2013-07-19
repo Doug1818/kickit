@@ -27,7 +27,7 @@ before_filter :authenticate_user!, only: [:setup, :do_setup, :billing, :add_bill
     #if e == nil && @user.update_attributes(params[:user])
     if @user.update_attributes(params[:user])
 			@program = @user.programs.last
-			@received_text = @program.received_texts.create(message: message)
+			#@received_text = @program.received_texts.create(message: message)
 			@user.update_attributes(setup_flag: false)
       flash[:success] = "Set up complete!"
       redirect_to root_path
