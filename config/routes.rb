@@ -39,8 +39,6 @@ Kickit::Application.routes.draw do
   
   root to: 'static_pages#home'
   match '/carousel',  to: 'static_pages#carousel'
-  match "*path" => redirect("https://www.kick-it-now.com/%{path}"), :constraints => { :protocol => "http://" }
-  match "*path" => redirect("https://www.kick-it-now.com/%{path}"), :constraints => { :subdomain => "" }
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
