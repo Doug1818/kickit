@@ -22,6 +22,7 @@
 	    		<%= link_to 'Profile', edit_user_registration_path, "data-role" => "button" %>
 	    		<%= link_to 'Reminders', reminders_path, "data-role" => "button" %>
 	    		<%= link_to 'Supporters', supporters_path, "data-role" => "button" %>
+	    		<%= link_to 'Billing Info', billing_user_path(current_user), "data-role" => "button", "data-ajax" => false %>
     			</div>
     			<%= link_to 'Sign out', destroy_user_session_path, method: "delete", "data-role" => "button" %>
 			</div>

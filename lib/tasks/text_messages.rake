@@ -27,6 +27,7 @@ task :full_hour_jobs => :environment do
 		user = User.find(program.user_id)
 		if Time.now.in_time_zone(user.time_zone).hour == 9
 			number_to_send_to = user.phone
+			# [Kick-It check in] Were you successful in tracking Facebook time with RescueTime yesterday? Reply 'Y' (Yes), 'N' (No), or 'F' (Free Day)
 			std_msg = "This is your daily Kick-It check in. Were you successful yesterday? Reply 'Y' or 'N' to check in."
 			custom_msg = program.days.find_by_date(Date.current).checkin_msg
 			message = custom_msg != nil ? custom_msg : std_msg

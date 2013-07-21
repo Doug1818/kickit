@@ -4,4 +4,5 @@ class Day < ActiveRecord::Base
   belongs_to :program
   belongs_to :week
   scope :reported, joins(:program).where("result IS NOT NULL")
+  validates :checkin_msg, length: { maximum: 85 }
 end

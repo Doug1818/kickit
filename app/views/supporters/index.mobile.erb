@@ -4,6 +4,7 @@
 <h2 style="margin-top:0;">Supporters</h2>
 
 <% if @supporters.any? %>
+	<br>
 	<% @supporters.order("created_at asc").each do |supporter| %>
 		<div style="margin-bottom:25px;">
 			<div><strong><%= supporter.first_name %></strong><%= " (#{supporter.relationship})" %></div>
