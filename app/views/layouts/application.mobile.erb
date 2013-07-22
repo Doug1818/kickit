@@ -18,11 +18,13 @@
 
 	    	<div data-role="panel" id="mypanel" data-position="right" data-theme="a">
 	    		<div data-role="controlgroup">
-	    		<%= link_to 'Home', root_path, "data-role" => "button" %>
-	    		<%= link_to 'Profile', edit_user_registration_path, "data-role" => "button" %>
-	    		<%= link_to 'Reminders', reminders_path, "data-role" => "button" %>
-	    		<%= link_to 'Supporters', supporters_path, "data-role" => "button" %>
-	    		<%= link_to 'Billing Info', billing_user_path(current_user), "data-role" => "button", "data-ajax" => false %>
+		    		<%= link_to 'Home', root_path, "data-role" => "button" %>
+		    		<%= link_to 'Profile', edit_user_registration_path, "data-role" => "button" %>
+		    		<%= link_to 'Reminders', reminders_path, "data-role" => "button" %>
+		    		<%= link_to 'Supporters', supporters_path, "data-role" => "button" %>
+		    		<% if current_user != nil %>
+		    			<%= link_to 'Billing Info', billing_user_path(current_user), "data-role" => "button", "data-ajax" => false %>
+		    		<% end %>
     			</div>
     			<%= link_to 'Sign out', destroy_user_session_path, method: "delete", "data-role" => "button" %>
 			</div>
