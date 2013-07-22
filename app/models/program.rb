@@ -1,5 +1,5 @@
 class Program < ActiveRecord::Base
-  attr_accessible :start_date, :end_date, :habit, :reminders_attributes
+  attr_accessible :start_date, :end_date, :habit, :daily_commitment, :reminders_attributes
   belongs_to :user
   has_many :weeks, dependent: :destroy
   has_many :days, dependent: :destroy

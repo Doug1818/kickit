@@ -47,6 +47,7 @@ before_filter :authenticate_user!, only: [:setup, :do_setup, :billing, :add_bill
 
   def add_billing_info
     current_user.stripe_card_token = params[:user][:stripe_card_token]
+    current_user.program.update_attributes(daily_commitment: params[:user][:program][:daily_commitment]) if params[:user][:program] != nil
     if current_user.save_with_payment
       flash[:success] = "Billing info added successfully"
       redirect_to root_path
