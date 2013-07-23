@@ -35,9 +35,11 @@ before_filter :authenticate_user!, only: [:setup, :do_setup, :billing, :add_bill
     else
       @program = @user.programs.build
       t = Time.zone.now
-      @morning_rem = @program.reminders.build(time: DateTime.new(t.year,t.month,t.day,10,0,0,'-4'))
-      @afternoon_rem = @program.reminders.build(time: DateTime.new(t.year,t.month,t.day,13,0,0,'-4'))
-      @evening_rem = @program.reminders.build(time: DateTime.new(t.year,t.month,t.day,21,0,0,'-4'))
+      if @user.programs.count >= 1
+        @morning_rem = @program.reminders.build(time: DateTime.new(t.year,t.month,t.day,10,0,0,'-4'))
+        @afternoon_rem = @program.reminders.build(time: DateTime.new(t.year,t.month,t.day,13,0,0,'-4'))
+        @evening_rem = @program.reminders.build(time: DateTime.new(t.year,t.month,t.day,21,0,0,'-4'))
+      end
       render 'setup'
     end
 	end
