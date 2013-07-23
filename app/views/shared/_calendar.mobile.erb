@@ -25,6 +25,8 @@
 							<%= link_to image_tag("glyphicons_030_pencil.png", size: "15x15"), day_path(day) %>
 						<% elsif day.result == 4 %>
 							<%= link_to image_tag("glyphicons_196_circle_exclamation_mark.png", size: "15x15"), day_path(day) %>
+						<% elsif day.result == 5 %>
+							<%= link_to "FREE DAY", day_path(day), class: "free_day" %>
 						<% end %>
 					<% else %>
 						<%= link_to image_tag("iconmonstr-help-icon.png", size: "20x20"), day_path(day) %>
@@ -34,7 +36,14 @@
 		<% end %>
 	<% end %>
 </div>
-<!--<% if current_user.program.days.find_by_date(Date.current).goal? %>
-	<h3>Dollars lost from missed checkins:</h3>
-	<h3>Free days left this week:</h3>
-<% end %>-->
+<div style="text-align:center;">
+<% if current_user.program.this_week.missed > 0 %>
+	<p style="margin-bottom:10px;"><strong style="font-size:1.4em;">
+		$<%= current_user.program.this_week.missed*current_user.program.daily_commitment %> 
+		lost</strong> from missed checkins</p>
+<% end %>
+<% if current_user.program.this_week.free_days > 0 %>
+	<p style="margin-top:0;"><strong style="font-size:1.4em;">
+		<%= pluralize(current_user.program.free_days_left, 'free day') %></strong> left this week</p>
+<% end %>
+</div>

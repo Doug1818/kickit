@@ -50,22 +50,15 @@ class User < ActiveRecord::Base
     programs = self.programs
     x = []
     programs.each { |p| x.push(p.start_date) if p.start_date > Date.today }
-    programs.where("start_date = ?", x.min).first
+    programs.find { |p| p.start_date == x.min }
   end
 
   def current_program
-    programs = self.programs
-    current_program = programs.where("start_date <= ? AND end_date >= ?", Date.current, Date.current - 1).first # - 1 for end-date so that calendar is shown on last checkin day (1 day after end_date)
-  end
-
-  def midprogram?
-    programs = self.programs
-    active_programs = programs.where("start_date <= ? AND end_date >= ?", Date.current, Date.current - 1).count # - 1 for end-date so that calendar is shown on last checkin day (1 day after end_date)
-    active_programs >= 1 ? true : false
+    self.programs.find { |p| p.start_date <= Date.current && p.end_date >= Date.current - 1 } # - 1 for end-date so that calendar is shown on last checkin day (1 day after end_date)
   end
 
   def program
-    if self.midprogram?
+    if self.current_program != nil
       self.current_program
     elsif self.next_program != nil
       self.next_program

@@ -16,6 +16,8 @@
 	<%= link_to "No", failure_day_path(@day), method: :put, "data-role" => "button", "data-inline" => true %>
 <% elsif @day.result == 4 %>
 	<div>You missed your check in this day. We charged you a buck.</div>
+<% elsif @day.result == 5 %>
+	<div>You used one of your Free Days this day.</div>
 <% else %>
 	<div>Too early to check in.</div>
 <% end %>

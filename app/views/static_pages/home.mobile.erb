@@ -1,7 +1,7 @@
 <% content_for :title do %><title>Home</title><% end %>
 <% content_for :h1 do %><h1>Home</h1><% end %>
 
-<% if user_signed_in? && current_user.midprogram? %>
+<% if user_signed_in? && current_user.current_program != nil %>
 	<!-- If in an active program -->
 	<%= render 'shared/calendar' %>
 <% elsif user_signed_in? && current_user.program == nil %>

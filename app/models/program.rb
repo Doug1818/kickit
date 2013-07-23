@@ -29,6 +29,14 @@ class Program < ActiveRecord::Base
     weeks_num.times { |i| self.weeks.create(week: i + 1, start_date: self.start_date + i*7, end_date: self.start_date + 6 + i*7 ) }
   end
  
+  def this_week
+    self.weeks.find { |w| w.start_date <= Date.current && w.end_date >= Date.current }
+  end
+
+  def free_days_left
+    self.this_week.free_days - self.this_week.used_free_days
+  end
+
   def future_date
     if self.start_date != nil && self.start_date < Time.zone.now.to_date + 1
       self.errors[:start_date] << "can't be earlier than tomorrow"
@@ -41,7 +49,7 @@ class Program < ActiveRecord::Base
 
   def prev_week_sdays
     x = []
-    self.days.reported.order("date desc")[(-7 - 7*(self.prev_week - 1))..(-1 - 7*(self.prev_week - 1))].each { |day| x.push(day.result) if day.result == 1 }
+    self.days.reported.order("date desc")[(-7 - 7*(self.prev_week - 1))..(-1 - 7*(self.prev_week - 1))].each { |day| x.push(1) if day.result == 1 }
     x.inject(:+)
   end
 
