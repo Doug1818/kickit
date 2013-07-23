@@ -14,7 +14,7 @@ class TextMessagesController < ApplicationController
 		end
 		if !@day.nil? && Time.zone.now >= @day.date + 1 + 9.hours && Time.zone.now <= @day.date + 2 + 9.hours # User is in an active program (@day is not nil) and in the 9am-9am 24hr check-in window
 			if sent_msg.upcase == "Y" || sent_msg.upcase == "N" || sent_msg.upcase == "F"
-				if @day.result == 1 || @day.result == 2
+				if @day.result == 1 || @day.result == 2 || @day.result == 5
 					if Time.zone.now.hour >= 0 && Time.zone.now.hour < 9 # If it's between midnight and 9am
 						received_msg = "You have already checked in for #{(Date.current - 1).strftime("%a, %b %d")}. To check in for #{Date.current.strftime("%a, %b %d")} go to http://www.kick-it-now.com or check in by text after 9am."
 						response = Twilio::TwiML::Response.new { |r| r.Sms received_msg }
