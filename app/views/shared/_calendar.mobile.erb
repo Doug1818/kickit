@@ -38,12 +38,13 @@
 </div>
 <div style="text-align:center;">
 <% if current_user.program.this_week.missed > 0 %>
-	<p style="margin-bottom:10px;"><strong style="font-size:1.4em;">
+	<p style="margin-bottom:5px;"><strong style="font-size:1.4em;">
 		$<%= current_user.program.this_week.missed*current_user.program.daily_commitment %> 
 		lost</strong> from missed checkins</p>
 <% end %>
 <% if current_user.program.this_week.free_days > 0 %>
-	<p style="margin-top:0;"><strong style="font-size:1.4em;">
-		<%= pluralize(current_user.program.free_days_left, 'free day') %></strong> left this week</p>
+	<p style="margin-top:5px;"><strong style="font-size:1.4em;">
+		<%= "#{current_user.program.free_days_left} #{'free day'.pluralize(current_user.program.free_days_left)}" %>
+	</strong> left this week</p>
 <% end %>
 </div>
