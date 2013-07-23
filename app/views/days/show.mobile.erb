@@ -12,8 +12,13 @@
 	<div>You were not successful this day.</div>
 <% elsif @day.result == 3 %>
 	<div>Were you successful this day?</div>
-	<%= link_to "Yes", success_day_path(@day), method: :put, "data-role" => "button", "data-inline" => true %>
-	<%= link_to "No", failure_day_path(@day), method: :put, "data-role" => "button", "data-inline" => true %>
+	<div data-role="controlgroup">
+	    <%= link_to "Yes", success_day_path(@day), method: :put, "data-role" => "button" %>
+		<%= link_to "No", failure_day_path(@day), method: :put, "data-role" => "button" %>
+		<% if Program.find(@day.program_id).free_days_left > 0 %>
+			<%= link_to "Use A Free Day", free_day_path(@day), method: :put, "data-role" => "button" %>
+		<% end %>
+	</div>
 <% elsif @day.result == 4 %>
 	<div>You missed your check in this day. We charged you a buck.</div>
 <% elsif @day.result == 5 %>

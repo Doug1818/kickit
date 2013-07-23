@@ -21,4 +21,10 @@ class DaysController < ApplicationController
   	@day.update_attributes(result: 2)
   	redirect_to root_path
   end
+
+  def free
+    @day = Day.find(params[:id])
+    @day.update_attributes(result: 5)
+    redirect_to root_path
+  end
 end

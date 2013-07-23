@@ -21,7 +21,7 @@ Kickit::Application.routes.draw do
   end
   resources :days do
     member do
-      put :success, :failure
+      put :success, :failure, :free
     end
   end
   resources :sent_texts
