@@ -1,3 +1,21 @@
+//$(function() {
+//    $("#custom-collapsible").click(function() {
+//        $('.ui-collapsible-heading-toggle').removeClass('ui-btn-down-c')
+//     });
+//});
+//
+//$(function() {
+//    $( "#custom-collapsible" ).on( "collapsiblecollapse", function( event, ui ) {
+//        $('.ui-collapsible-heading-toggle').removeClass('ui-btn-down-c')
+//    });
+//});
+//
+//$( "#custom-collapsible" ).collapsible({
+//  collapse: function() {
+//    $('.ui-collapsible-heading-toggle').removeClass('ui-btn-down-c')
+//  }
+//});
+
 /* SMOOTH AUTOSCROLLING */
 
 $(function() {
