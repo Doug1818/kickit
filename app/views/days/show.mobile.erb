@@ -7,11 +7,11 @@
 </div>
 
 <% if @day.result == 1 %>
-	<div>You were successful this day.</div>
+	<div>You were successful on this day.</div>
 <% elsif @day.result == 2 %>
-	<div>You were not successful this day.</div>
+	<div>You were not successful on this day.</div>
 <% elsif @day.result == 3 %>
-	<div>Were you successful this day?</div>
+	<div>Were you successful on this day?</div>
 	<div data-role="controlgroup">
 	    <%= link_to "Yes", success_day_path(@day), method: :put, "data-role" => "button" %>
 		<%= link_to "No", failure_day_path(@day), method: :put, "data-role" => "button" %>
@@ -20,7 +20,7 @@
 		<% end %>
 	</div>
 <% elsif @day.result == 4 %>
-	<div>You missed your check in this day. We charged you a buck.</div>
+	<div>You missed your check-in on this day. We charged you a buck.</div>
 <% elsif @day.result == 5 %>
 	<div>You used one of your Free Days this day.</div>
 <% else %>

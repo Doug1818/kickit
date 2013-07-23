@@ -9,11 +9,10 @@
 			<%= f.text_field :first_name, placeholder: "First name (required)"  %>
 		</fieldset>
 		<fieldset>
-			<p><strong>We'll want to text you some reminders</strong></p>
+			<p><strong>We'll want to send you some SMS reminders, what's the best number to text you at?</strong></p>
 			<%= f.text_field :phone, placeholder: "Cell number (required)", type: "number", pattern: "[0-9]*" %>
 		</fieldset>
 	<% end %>
-	<!-- Double nested form? Reminders nested in programs nested in users -->
 	<%= f.fields_for :programs do |b| %>
 		<% if @user.programs.count >= 1  %>
 			<fieldset><%= b.select :habit, Program::HABITS, prompt: "What do you want to kick?" %></fieldset>
@@ -21,7 +20,7 @@
 			<%= b.hidden_field :habit, value: @user.first_habit %>
 		<% end %>
 		<fieldset id="reminders">
-			<p><strong>Pick reminder times.</strong>  Don't worry - you'll be able to edit/remove/add these later.</p>
+			<p><strong>Pick reminder times.</strong>  You'll be able to edit/remove/add these later.</p>
 			<%= b.fields_for :reminders do |builder| %>
 				<%= render 'reminder_fields', f: builder %>
 			<% end %>
@@ -37,6 +36,6 @@
 	<% end %>
 	<fieldset>
 		<%= f.hidden_field :setup_flag, value: true %>
-		<%= f.submit "Start" %>
+		<%= f.submit "Finish Setup" %>
 	</fieldset>
 <% end %>
