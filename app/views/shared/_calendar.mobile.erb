@@ -1,7 +1,6 @@
 <% if current_user.program.days.find_by_date(Date.current).goal? %>
-	<h3 style="margin-top:0;margin-bottom:10px;">
-		<strong>Today's Goal: <%= current_user.program.days.find_by_date(Date.current).goal %></strong>
-	</h3>
+	<h3 style="margin-bottom:0;">Today's Goal:</h3>
+	<h4 style="margin-top:0;margin-bottom:10px;"><%= current_user.program.days.find_by_date(Date.current).goal %></h4>
 <% end %>
 <div id="calendar">
 	<h3 id="month">
@@ -38,13 +37,13 @@
 </div>
 <div style="text-align:center;">
 <% if current_user.program.this_week.missed > 0 %>
-	<p style="margin-bottom:5px;"><strong style="font-size:1.4em;">
+	<h4 style="margin-top:5px;margin-bottom:5px;"><strong>
 		$<%= current_user.program.this_week.missed*current_user.program.daily_commitment %> 
-		lost</strong> from missed checkins</p>
+		lost</strong> from missed checkins</h4>
 <% end %>
 <% if current_user.program.this_week.free_days > 0 %>
-	<p style="margin-top:5px;"><strong style="font-size:1.4em;">
+	<h4 style="margin-top:5px;"><strong>
 		<%= "#{current_user.program.free_days_left} #{'free day'.pluralize(current_user.program.free_days_left)}" %>
-	</strong> left this week</p>
+	</strong> left this week</h4>
 <% end %>
 </div>

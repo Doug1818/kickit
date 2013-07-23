@@ -1,3 +1,9 @@
+$(function () {
+    $('#togsupinfo').click(function(){
+        $('#supinfo').toggle();
+    });
+});
+
 //$(function() {
 //    $("#custom-collapsible").click(function() {
 //        $('.ui-collapsible-heading-toggle').removeClass('ui-btn-down-c')

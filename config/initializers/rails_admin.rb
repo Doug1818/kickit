@@ -303,7 +303,6 @@ RailsAdmin.config do |config|
           field :program
           field :message
           field :created_at
-          field :updated_at
           field :id
   #       # filters [:id, :name]  # Array of field names which filters should be shown by default in the table header
   #       # items_per_page 100    # Override default_items_per_page
@@ -463,7 +462,7 @@ RailsAdmin.config do |config|
     list do
       field :program
       field :message
-      field :updated_at
+      field :created_at
       field :id
     end
   end

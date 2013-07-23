@@ -6,21 +6,22 @@
 <% @reminders.order("time asc").each_with_index do |reminder, i| %>
 	<div style="margin-bottom:25px;">
 		<div><%= "Time #{i + 1}: #{reminder.time.strftime('%l:%M %p')}" %></div>
-		<%= link_to "Edit", edit_reminder_path(reminder) %> | 
-		<%= link_to "Delete", reminder, method: :delete, confirm: "You sure?" %>
+		<%= link_to "Edit", edit_reminder_path(reminder), class: "link" %> | 
+		<%= link_to "Delete", reminder, method: :delete, confirm: "You sure?", class: "link" %>
 	</div>
 <% end %>
 
-<%= link_to "Add a new time", new_reminder_path, "data-role" => "button" %>
+<%= link_to "Add a New Time", new_reminder_path, "data-role" => "button", "data-theme" => "d" %>
+<br>
 
 <h3>Reminder messages</h3>
 
 <% @remessages.each_with_index do |remessage, i| %>
 	<div style="margin-bottom:25px;">
 		<div><%= "Message #{i + 1}: #{remessage.content}" %></div>
-		<%= link_to "Edit", edit_remessage_path(remessage) %> | 
-		<%= link_to "Delete", remessage, method: :delete, confirm: "You sure?" %>
+		<%= link_to "Edit", edit_remessage_path(remessage), class: "link" %> | 
+		<%= link_to "Delete", remessage, method: :delete, confirm: "You sure?", class: "link" %>
 	</div>
 <% end %>
 
-<%= link_to "Add a new message", new_remessage_path, "data-role" => "button" %>
+<%= link_to "Add a New Message", new_remessage_path, "data-role" => "button", "data-theme" => "d" %>

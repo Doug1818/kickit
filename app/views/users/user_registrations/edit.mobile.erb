@@ -17,22 +17,22 @@
   <% end %>
 
   <br />
-  <div><%= f.label :password %>
+  <div><%= f.label :password, "New Password" %>
   <%= f.password_field :password, :autocomplete => "off", placeholder: "Leave blank if no change" %></div>
 
   <br />
-  <div><%= f.label :password_confirmation %>
+  <div><%= f.label :password_confirmation, "New Password Confirmation" %>
   <%= f.password_field :password_confirmation, placeholder: "Leave blank if no change" %></div>
 
   <br />
-  <div><%= f.label :current_password %>
+  <div><%= f.label :current_password, "Current Password" %>
   <%= f.password_field :current_password, placeholder: "Needed to confirm changes" %></div>
 
   <br />
-  <div><%= f.label :time_zone %></div>
+  <div><%= f.label :time_zone, "Time Zone" %></div>
   <div style="margin-bottom:40px;"><%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %></div>
 
-  <div><%= f.submit "Update" %></div>
+  <div><%= f.submit "Update", "data-theme" => "d" %></div>
 <% end %>
 
 <br>

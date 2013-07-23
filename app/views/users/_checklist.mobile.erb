@@ -1,8 +1,8 @@
 <h2>Pre-start Checklist</h2>
-<h3 style="margin:0">Your 3-week program starts on <%= current_user.next_program.start_date.strftime("%A, %B %d") %></h3>
+<h4 style="margin:0">Your 3-week program starts on <%= current_user.next_program.start_date.strftime("%A, %B %d") %></h4>
 <br>
 
-<h3 style="margin-top:0">Required</h3>
+<h3 style="margin-bottom:5px">Required</h3>
 <div data-role="controlgroup" class="checklist">
   <% if current_user.next_program.supporters.any? %>
     <%= link_to "Add Supporters (#{current_user.next_program.supporters.count} added)", supporters_path, "data-role" => "button", "data-icon" => "check" %>
@@ -15,13 +15,13 @@
     <%= link_to "Add Billing Info", billing_user_path(current_user), "data-role" => "button", "data-icon" => "alert", "data-ajax" => false %>
   <% end %>
 </div>
-<h3>Optional</h3>
+<h3 style="margin-top:20px;margin-bottom:5px">Optional</h3>
 <div data-role="controlgroup" class="checklist">
   <% current_user.next_program.user_todos.order("id asc").each do |user_todo| %>
     <% if user_todo.completed == true %>
-      <%= link_to user_todo.name, complete_user_todo_path(user_todo), method: :put, "data-role" => "button", "data-icon" => "check" %>
+      <%= link_to user_todo.name, complete_user_todo_path(user_todo), method: :put, "data-role" => "button", "data-icon" => "check", style: "font-weight:normal;" %>
     <% else %>
-      <%= link_to user_todo.name, complete_user_todo_path(user_todo), method: :put, "data-role" => "button", "data-icon" => "alert" %>
+      <%= link_to user_todo.name, complete_user_todo_path(user_todo), method: :put, "data-role" => "button", "data-icon" => "alert", style: "font-weight:normal;" %>
     <% end %>
   <% end %>
 </div>

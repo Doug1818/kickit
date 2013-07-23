@@ -6,10 +6,12 @@
 	<%= render 'shared/calendar' %>
 <% elsif user_signed_in? && current_user.program == nil %>
 	<!-- If signed up only -->
-	<h2 style="margin-bottom:0;">Welcome!</h2>
-	<%= current_user.email %>
+	<div style="text-align:center;">
+		<h2 style="margin-bottom:0;">Welcome!</h2>
+		<%= current_user.email %>
+	</div>
 	<%= link_to "Set up a 3-week plan", setup_user_path(current_user), "data-role" => "button", "data-icon" => "arrow-r", 
-		"data-iconpos" => "right", "data-ajax" => false, style: "margin-top:40px;" %>
+		"data-iconpos" => "right", "data-ajax" => false, style: "margin-top:20px;" %>
 <% elsif user_signed_in? && current_user.programs.count >= 1 && current_user.next_program.start_date > Date.current %>
 	<!-- If signed up / setup but not started -->
 	<%= render 'users/checklist' %>
@@ -19,7 +21,7 @@
 	<%= form_for @user, :url => session_path(@user) do |f| %>
 		<%= f.email_field :email, placeholder: "Email" %>
 		<%= f.password_field :password, placeholder: "Password" %>
-		<%= f.submit "Sign in" %>
+		<%= f.submit "Sign in", "data-theme" => "d" %>
 	<% end %>
 	Don't have an account? <%= link_to 'Request a Beta Invite', carousel_path, "data-ajax" => false %>
 <% end %>
