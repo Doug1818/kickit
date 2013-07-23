@@ -18,6 +18,11 @@ class Program < ActiveRecord::Base
   # validate only one active program
   after_create :build_program
   
+  # For rails admin
+  def custom_label_method
+    "#{User.find(self.user_id).email}"
+  end
+
   def build_program
   	days_num = 21
     weeks_num = days_num/7

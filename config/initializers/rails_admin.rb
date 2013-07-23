@@ -137,7 +137,7 @@ RailsAdmin.config do |config|
   #   # Section specific configuration:
 
     list do
-      field :user
+      field :program
       field :day
       field :result
       field :date
@@ -156,6 +156,17 @@ RailsAdmin.config do |config|
   #     # also see the create, update, modal and nested sections, which override edit in specific cases (resp. when creating, updating, modifying from another model in a popup modal or modifying from another model nested form)
   #     # you can override a cross-section field configuration in any section with the same syntax `configure :field_name do ... end`
   #     # using `field` instead of `configure` will exclude all other fields and force the ordering
+  end
+
+  config.model 'Week' do
+    list do
+      field :program
+      field :week
+      field :start_date
+      field :end_date
+      field :free_days
+      field :id
+    end
   end
 
 
@@ -189,9 +200,8 @@ RailsAdmin.config do |config|
   #   # Section specific configuration:
 
         list do
-          field :user
+          field :program
           field :content
-          field :created_at
           field :updated_at
           field :id
   #       # filters [:id, :name]  # Array of field names which filters should be shown by default in the table header
@@ -239,7 +249,7 @@ RailsAdmin.config do |config|
   #   # Section specific configuration:
 
         list do
-          field :user
+          field :program
           field :time do
             strftime_format "%l:%M %p"
           end
@@ -290,7 +300,7 @@ RailsAdmin.config do |config|
   #   # Section specific configuration:
 
         list do
-          field :user
+          field :program
           field :message
           field :created_at
           field :updated_at
@@ -388,13 +398,10 @@ RailsAdmin.config do |config|
   #     # using `field` instead of `configure` will exclude all other fields and force the ordering
   end
 
-  config.model 'Cue' do
-    list do
-      #field :habit # CAUSING AN ERROR FOR SOME REASON
-      field :content
-      field :created_at
-      field :updated_at
-      field :id
+  config.model 'Program' do
+
+    object_label_method do
+      :custom_label_method
     end
   end
 
@@ -408,6 +415,56 @@ RailsAdmin.config do |config|
       field :name
       field :cues
       field :todos
+    end
+  end
+
+  #config.model 'Todo' do
+  #  list do
+  #    field :habit
+  #    field :name
+  #    field :created_at
+  #    field :updated_at
+  #    field :id
+  #  end
+  #end
+
+  #config.model 'Cue' do
+  #  list do
+  #    #field :habit # CAUSING AN ERROR FOR SOME REASON
+  #    field :content
+  #    field :created_at
+  #    field :updated_at
+  #    field :id
+  #  end
+  #end
+
+  config.model 'Supporter' do
+    list do
+      field :program
+      field :first_name
+      field :email
+      field :relationship
+      field :created_at
+      field :id
+    end
+  end
+
+  config.model 'UserTodo' do
+    list do
+      field :program
+      field :name
+      field :completed
+      field :updated_at
+      field :id
+    end
+  end
+
+  config.model 'ReceivedText' do
+    list do
+      field :program
+      field :message
+      field :updated_at
+      field :id
     end
   end
 end
