@@ -103,7 +103,7 @@ task :half_hour_jobs => :environment do
 	end
 end
 
-task :test => :environment do
+task :blah => :environment do
 	# TRACKING: Send daily tracking checkin text at 9am local time
 	Program.active_checkins.all.each do |program|
 		user = User.find(program.user_id)
