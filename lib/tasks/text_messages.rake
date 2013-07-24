@@ -121,7 +121,7 @@ task :test => :environment do
 		 
 			@twilio_client.account.sms.messages.create(
 				:from => "+1#{ENV['TWILIO_PHONE_NUMBER']}",
-				:to => number_to_send_to,
+				:to => "9175879211",
 				:body => message
 			)
 			received_text = program.received_texts.create(message: message)
