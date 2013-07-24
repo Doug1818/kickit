@@ -26,5 +26,17 @@
 	<div id="stripe_error"><noscript>JavaScript is not enabled and is required for this form. Please enable it in your browser settings.</noscript></div>
 	<div id="checking"><noscript>JavaScript is not enabled and is required for this form. Please enable it in your browser settings.</noscript></div>
 	<div id="submitting"><noscript>JavaScript is not enabled and is required for this form. Please enable it in your browser settings.</noscript></div>
-	<%= f.submit "Add Billing Info" %>
+	<%= f.submit "Add Billing Info", "data-theme" => "d" %>
 <% end %>
+<a href="javascript:void(0);" class="togsupinfo link">Billing FAQ</a>
+<div class="supinfo" style="display:none;margin-top:10px;">
+	<p style="margin-top:0;"><strong>When do I get charged?</strong><br>If you respond to your check-in text every day, Kick-It is 100% free.  For each day that you do not check in, the credit card you enter will be charged $1.</p>
+
+	<p><strong>What if $1.00 per miss isn't enough to motivate me?</strong><br>You can up the ante in the Daily Commitment field.  If you decide to do that, any penalties we collect in excess of $1.00 for a given day will be donated to a public health-related charity in your name.</p>
+
+	<p><strong>How will it show up on my statement?</strong><br>It will show up as KICK-IT-NOW.COM and be in even increments of your Daily Commitment.</p>
+
+	<p><strong>What's the logic behind charging me for missed check-ins?</strong><br>Some people are highly motivated by the risk of losing money.  However, we don't want you to get penalized for missing your goals, because occasional small failures are a natural part of making a hard change.  However, it is important to stay engaged and keep trying, so what we penalize is failing to report yesterday's result.</p>
+
+	<p><strong>Any additional questions?</strong><br>Email <a href="mailto:support@kick-it-now.com" class="link">support@kick-it-now.com</a></p>
+</div>
