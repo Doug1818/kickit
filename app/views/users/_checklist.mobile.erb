@@ -3,30 +3,68 @@
 <br>
 
 <h3 style="margin-bottom:5px">Required</h3>
-<div data-role="controlgroup" class="checklist">
+<ul data-role="listview" data-inset="true">
   <% if current_user.next_program.supporters.any? %>
-    <%= link_to "Add Supporters (#{current_user.next_program.supporters.count} added)", supporters_path, "data-role" => "button", "data-icon" => "check", "data-ajax" => false %>
+    <li data-icon="false">
+      <a href=<%= supporters_path %> data-ajax="false" style="font-weight: bold;">
+      <img src="/assets/checklist_checked.png" class="ui-li-icon ui-corner-none">
+      <%= "Add Supporters (#{current_user.next_program.supporters.count} added)" %></a>
+    </li>
   <% else %>
-    <%= link_to "Add Supporters (#{current_user.next_program.supporters.count} added)", supporters_path, "data-role" => "button", "data-icon" => "alert", "data-ajax" => false %>
+    <li data-icon="false">
+      <a href=<%= supporters_path %> data-ajax="false" style="font-weight: bold;">
+      <img src="/assets/checklist_unchecked.png" class="ui-li-icon ui-corner-none">
+      <%= "Add Supporters (#{current_user.next_program.supporters.count} added)" %></a>
+    </li>
   <% end %>
   <% if current_user.stripe_customer_id? %>
-    <%= link_to "Add Billing Info", billing_user_path(current_user), "data-role" => "button", "data-icon" => "check", "data-ajax" => false %>
+    <li data-icon="false">
+      <a href=<%= billing_user_path(current_user) %> data-ajax="false" style="font-weight: bold;">
+      <img src="/assets/checklist_checked.png" class="ui-li-icon ui-corner-none">Add Billing Info</a>
+    </li>
   <% else %>
-    <%= link_to "Add Billing Info", billing_user_path(current_user), "data-role" => "button", "data-icon" => "alert", "data-ajax" => false %>
+    <li data-icon="false">
+      <a href=<%= billing_user_path(current_user) %> data-ajax="false" style="font-weight: bold;">
+      <img src="/assets/checklist_unchecked.png" class="ui-li-icon ui-corner-none">Add Billing Info</a>
+    </li>
   <% end %>
-</div>
+</ul>
 <h3 style="margin-top:20px;margin-bottom:5px">Optional</h3>
-<div data-role="controlgroup" class="checklist">
+
+<ul data-role="listview" data-inset="true">
   <% current_user.next_program.user_todos.order("id asc").each do |user_todo| %>
     <% if user_todo.completed == true %>
-      <%= link_to user_todo.name, complete_user_todo_path(user_todo), method: :put, "data-role" => "button", "data-icon" => "check", style: "font-weight:normal;" %>
+      <li data-icon="false">
+        <a href=<%= complete_user_todo_path(user_todo) %> data-method="put">
+        <img src="/assets/checklist_checked.png" class="ui-li-icon ui-corner-none"><%= user_todo.name %></a>
+      </li>
     <% else %>
-      <%= link_to user_todo.name, complete_user_todo_path(user_todo), method: :put, "data-role" => "button", "data-icon" => "alert", style: "font-weight:normal;" %>
+      <li data-icon="false">
+        <a href=<%= complete_user_todo_path(user_todo) %> data-method="put">
+        <img src="/assets/checklist_unchecked.png" class="ui-li-icon ui-corner-none"><%= user_todo.name %></a>
+      </li>
     <% end %>
   <% end %>
-</div>
+</ul>
 
 <style type="text/css">
+.ui-icon-myapp-email {
+  background-image: url("app-icon-email.png");
+}
+
+.ui-listview .ui-btn-text .ui-link-inherit {
+    white-space : normal !important;
+    font-weight: normal;
+}
+
+.ui-listview .ui-btn-text .ui-link-inherit img {
+   position: absolute;
+   top: 50%;
+   left: 5px;
+   margin-top: -9px; /* image height/2 */
+   margin-left: 7px;
+}
+
 .ui-btn-text {
   white-space: normal;
 }
@@ -35,14 +73,10 @@
   text-align: left
 }
 
-.ui-icon-empty {
-  background: none;
-}
-
 .ui-icon-checked {
-  background-image: url("assets/glyphicons_152_check.png");
+  background: url("/assets/checklist_checked.png");
 }
 .ui-icon-unchecked {
-  background-image: url("assets/glyphicons_153_unchecked.png");
+  background: url("/assets/checklist_unchecked.png");
 }
 </style>
