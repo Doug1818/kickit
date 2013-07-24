@@ -107,7 +107,7 @@ task :test => :environment do
 	# TRACKING: Send daily tracking checkin text at 9am local time
 	Program.active_checkins.all.each do |program|
 		user = User.find(program.user_id)
-		if Time.now.in_time_zone(user.time_zone).hour == 12
+		if Time.now.in_time_zone(user.time_zone).hour == 13
 			number_to_send_to = user.phone
 			if program.free_days_left > 0
 				std_msg = "[Kick-It] Were you successful yesterday? Reply 'Y' (Yes), 'N' (No), or 'F' (Free Day)."
