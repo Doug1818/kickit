@@ -20,7 +20,7 @@
 	    		<div data-role="controlgroup">
 		    		<%= link_to 'Profile', edit_user_registration_path, "data-role" => "button" %>
 		    		<%= link_to 'Reminders', reminders_path, "data-role" => "button" %>
-		    		<%= link_to 'Supporters', supporters_path, "data-role" => "button" %>
+		    		<%= link_to 'Supporters', supporters_path, "data-role" => "button", "data-ajax" => false %>
 		    		<% if current_user != nil %>
 		    			<%= link_to 'Billing Info', billing_user_path(current_user), "data-role" => "button", "data-ajax" => false %>
 		    		<% end %>
