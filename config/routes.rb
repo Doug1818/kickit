@@ -40,6 +40,10 @@ Kickit::Application.routes.draw do
   root to: 'static_pages#home'
   match '/carousel',  to: 'static_pages#carousel'
 
+  unless Rails.application.config.consider_all_requests_local
+    match '*not_found', to: 'errors#error_404'
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
