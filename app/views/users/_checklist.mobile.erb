@@ -5,9 +5,9 @@
 <h3 style="margin-bottom:5px">Required</h3>
 <div data-role="controlgroup" class="checklist">
   <% if current_user.next_program.supporters.any? %>
-    <%= link_to "Add Supporters (#{current_user.next_program.supporters.count} added)", supporters_path, "data-role" => "button", "data-icon" => "check" %>
+    <%= link_to "Add Supporters (#{current_user.next_program.supporters.count} added)", supporters_path, "data-role" => "button", "data-icon" => "check", "data-ajax" => false %>
   <% else %>
-    <%= link_to "Add Supporters (#{current_user.next_program.supporters.count} added)", supporters_path, "data-role" => "button", "data-icon" => "alert" %>
+    <%= link_to "Add Supporters (#{current_user.next_program.supporters.count} added)", supporters_path, "data-role" => "button", "data-icon" => "alert", "data-ajax" => false %>
   <% end %>
   <% if current_user.stripe_customer_id? %>
     <%= link_to "Add Billing Info", billing_user_path(current_user), "data-role" => "button", "data-icon" => "check", "data-ajax" => false %>

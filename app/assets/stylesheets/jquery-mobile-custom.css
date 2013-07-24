@@ -985,7 +985,7 @@ a.ui-link-inherit {
 }
 /* loading icon */
 .ui-icon-loading {
-	background: url(images/ajax-loader.gif);
+	background: url(/assets/ajax-loader.gif);
 	background-size: 46px 46px;
 }
 /* Button corner class

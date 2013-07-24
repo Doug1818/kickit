@@ -25,19 +25,19 @@
 		    			<%= link_to 'Billing Info', billing_user_path(current_user), "data-role" => "button", "data-ajax" => false %>
 		    		<% end %>
     			</div>
-    			<%= link_to 'Sign out', destroy_user_session_path, method: "delete", "data-role" => "button" %>
+    			<%= link_to 'Sign Out', destroy_user_session_path, method: "delete", "data-role" => "button" %>
 			</div>
 
 	        <div data-role="header" data-theme="d">
-	            <%= link_to 'Home', root_path, "data-icon" => "home", "data-iconpos" => "notext", class: "ui-icon-alt",
+	            <%= link_to 'Home', root_path, "data-icon" => "home", "data-iconpos" => "notext",
 	            	"data-role" => "button", "data-theme" => "c", "data-inline" => "true", "data-ajax" => "false" %>
 	            <%= yield :h1 %>
 	            <% if user_signed_in? && current_user.programs.count >= 1 %>
-		          <a href="#mypanel" data-icon="bars" data-iconpos="notext" data-theme="c" class="ui-icon-alt">Options</a>
+		          <a href="#mypanel" data-icon="bars" data-iconpos="notext" data-theme="c">Options</a>
 	          	<% elsif user_signed_in? && current_user.programs.count == 0 %>
 	          		<%= link_to 'Sign out', destroy_user_session_path, method: "delete", "data-role" => "button", "data-theme" => "c", "data-inline" => "true" %>
 	            <% else %>
-            		<%= link_to 'Sign in', new_user_session_path, "data-role" => "button", "data-theme" => "c", "data-inline" => "true" %>
+            		<%= link_to 'Sign In', new_user_session_path, "data-role" => "button", "data-theme" => "c", "data-inline" => "true" %>
             	<% end %>  
 	        </div>
 	 
@@ -66,40 +66,17 @@
 
 <style type="text/css">
 .test {
-padding: 8px 35px 8px 14px;
+padding: 8px 14px;
 margin-bottom: 18px;
-color: #c09853;
-text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-background-color: #fcf8e3;
-border: 1px solid #fbeed5;
-border-radius: 4px;
-}
-.test-heading {
-color: inherit;
-}
-.test .close {
-position: relative;
-top: -2px;
-right: -21px;
-line-height: 18px;
+background-color: #5673b8;
+border: 1px solid #ffffff;
+border-radius: 7px;
 }
 
-.test-success {
-color: #468847;
-background-color: #dff0d8;
-border-color: #d6e9c6;
-}
-
-.test-danger,
-.test-error {
-color: #b94a48;
-background-color: #f2dede;
-border-color: #eed3d7;
-}
-
-.test-info {
-color: #3a87ad;
-background-color: #d9edf7;
-border-color: #bce8f1;
+.test a {
+	float: right;
+	text-decoration: none;
+	color: #ffffff !important;
+	font-weight: bold !important;
 }
 </style>

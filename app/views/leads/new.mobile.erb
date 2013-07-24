@@ -1,7 +1,7 @@
 <% content_for :title do %><title>Beta Sign up</title><% end %>
 <% content_for :h1 do %><h1>Beta Sign up</h1><% end %>
 
-<h2>Help Us Make Kick-It Better</h2>
+<h3 style="margin-bottom:10px;">Help Us Make Kick-It Better</h3>
 <p>We're running a Super Private Beta test of Kick-It from July 29 to August 16. At this time, we are looking for people trying to Stop or Reduce the habits in the dropdown below. There will be more releases later, so select "Other" if you want us to keep you up to date on our supported behaviors.</p>
 
 <%= form_for @lead do |f| %>
@@ -11,5 +11,5 @@
   <div><%= f.text_field :email, placeholder: "my email address is", type: "email" %></div>
   <div><%= f.select :goal, ["and I want to quit","and I want to cut back"] %></div>
   <div><%= f.select :habit_name, Program::HABITS, prompt: "my habit of" %></div>
-  <%= f.submit "Sign up" %>
+  <%= f.submit "Sign Up", "data-theme" => "d" %>
 <% end %>
