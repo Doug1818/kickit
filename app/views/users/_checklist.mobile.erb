@@ -29,8 +29,9 @@
     </li>
   <% end %>
 </ul>
-<h3 style="margin-top:20px;margin-bottom:5px">Optional</h3>
 
+<% if current_user.next_program.user_todos.any? %>
+<h3 style="margin-top:20px;margin-bottom:5px">Optional</h3>
 <ul data-role="listview" data-inset="true">
   <% current_user.next_program.user_todos.order("id asc").each do |user_todo| %>
     <% if user_todo.completed == true %>
@@ -46,6 +47,7 @@
     <% end %>
   <% end %>
 </ul>
+<% end %>
 
 <style type="text/css">
 .ui-icon-myapp-email {
