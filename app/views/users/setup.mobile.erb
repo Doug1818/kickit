@@ -1,5 +1,5 @@
-<% content_for :title do %><title>Set up</title><% end %>
-<% content_for :h1 do %><h1>Set up</h1><% end %>
+<% content_for :title do %><title>Set Up</title><% end %>
+<% content_for :h1 do %><h1>Set Up</h1><% end %>
 
 <%= form_for @user, url: do_setup_user_path(@user), html: { multipart: true, method: :put } do |f| %>
 	<%= render 'shared/error_messages', object: f.object %>

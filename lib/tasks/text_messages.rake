@@ -28,8 +28,8 @@ task :full_hour_jobs => :environment do
 		if Time.now.in_time_zone(user.time_zone).hour == 9
 			number_to_send_to = user.phone
 			if program.free_days_left > 0
-				std_msg = "[Kick-It] Were you successful yesterday? Reply 'Y' (Yes), 'N' (No), or 'F' (Free Day)."
-				custom_msg = "[Kick-It] #{program.days.find_by_date(Date.current).checkin_msg} Reply 'Y' (Yes), 'N' (No), or 'F' (Free Day)."
+				std_msg = "[Kick-It] Were you successful yesterday? Reply 'Y' (Yes), 'N' (No), or 'F' (Free Day) to check in."
+				custom_msg = "[Kick-It] #{program.days.find_by_date(Date.current).checkin_msg} Reply 'Y' (Yes), 'N' (No), or 'F' (Free Day) to check in."
 			else
 				std_msg = "[Kick-It] Were you successful yesterday? Reply 'Y' or 'N' to check in."
 				custom_msg = "[Kick-It] #{program.days.find_by_date(Date.current).checkin_msg} Reply 'Y' or 'N' to check in."
