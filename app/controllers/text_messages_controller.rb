@@ -40,11 +40,18 @@ class TextMessagesController < ApplicationController
 					end
 				elsif @day.result == 3
 					if sent_msg.upcase == "F"
-						@day.update_attributes(result: 5)
-						received_msg = "Thanks for checking in today! You have #{@program.free_days_left} #{'free day'.pluralize(@program.free_days_left)} left this week."
-						response = Twilio::TwiML::Response.new { |r| r.Sms received_msg }
-						render :xml => response.text
-						received_text = @program.received_texts.create(message: received_msg)
+						if @program.free_days_left >= 1
+							@day.update_attributes(result: 5)
+							received_msg = "Thanks for checking in today! You have #{@program.free_days_left} #{'free day'.pluralize(@program.free_days_left)} left this week."
+							response = Twilio::TwiML::Response.new { |r| r.Sms received_msg }
+							render :xml => response.text
+							received_text = @program.received_texts.create(message: received_msg)
+						else
+							received_msg = "You do not have any free days available. Please check in with 'Y' or 'N'."
+							response = Twilio::TwiML::Response.new { |r| r.Sms received_msg }
+							render :xml => response.text
+							received_text = @program.received_texts.create(message: received_msg)
+						end
 					else
 						if sent_msg.upcase == "Y"
 							@day.update_attributes(result: 1)
