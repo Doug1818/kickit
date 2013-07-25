@@ -33,7 +33,7 @@
 <% if current_user.next_program.user_todos.any? %>
 <h3 style="margin-top:20px;margin-bottom:5px">Optional</h3>
 <ul data-role="listview" data-inset="true">
-  <% current_user.next_program.user_todos.order("id asc").each do |user_todo| %>
+  <% current_user.next_program.user_todos.order("created_at desc").each do |user_todo| %>
     <% if user_todo.completed == true %>
       <li data-icon="false">
         <a href=<%= complete_user_todo_path(user_todo) %> data-method="put">
