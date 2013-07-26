@@ -16,7 +16,7 @@ class TextMessagesController < ApplicationController
 			received_msg = "Thanks for your message. We'll get back to you soon with any follow up required."
 			response = Twilio::TwiML::Response.new { |r| r.Sms received_msg }
 			render :xml => response.text
-			received_text = @program.csmessages.create(message: received_msg)
+			received_text = @program.csmessages.create(message: sent_msg)
 			received_text = @program.received_texts.create(message: received_msg)
 		else
 			if !@day.nil? && Time.zone.now >= @day.date + 1 + 9.hours && Time.zone.now <= @day.date + 2 + 9.hours # User is in an active program (@day is not nil) and in the 9am-9am 24hr check-in window
