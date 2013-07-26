@@ -8,6 +8,7 @@ class Program < ActiveRecord::Base
   has_many :reminders, dependent: :destroy
   accepts_nested_attributes_for :reminders
   has_many :remessages, dependent: :destroy
+  has_many :csmessages, dependent: :destroy
   has_many :supporters, dependent: :destroy
   has_many :user_todos, dependent: :destroy
   scope :active_program, where("start_date <= ? AND end_date >= ?", Date.current, Date.current)
