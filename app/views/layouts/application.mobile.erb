@@ -18,39 +18,41 @@
 		</script>
 	</head>
 	<body>
-	    <div data-role="page">
+    <div data-role="page">
 
-	    	<div data-role="panel" id="mypanel" data-position="right" data-theme="a">
-	    		<div data-role="controlgroup">
-		    		<%= link_to 'Profile', edit_user_registration_path, "data-role" => "button" %>
-		    		<%= link_to 'Reminders', reminders_path, "data-role" => "button" %>
-		    		<%= link_to 'Supporters', supporters_path, "data-role" => "button", "data-ajax" => false %>
-		    		<% if current_user != nil %>
-		    			<%= link_to 'Billing Info', billing_user_path(current_user), "data-role" => "button", "data-ajax" => false %>
-		    		<% end %>
-    			</div>
-    			<%= link_to 'Sign Out', destroy_user_session_path, method: "delete", "data-role" => "button" %>
+    	<div data-role="panel" id="mypanel" data-position="right" data-theme="a">
+    		<div data-role="controlgroup">
+	    		<%= link_to 'Profile', edit_user_registration_path, "data-role" => "button" %>
+	    		<%= link_to 'Reminders', reminders_path, "data-role" => "button" %>
+	    		<%= link_to 'Supporters', supporters_path, "data-role" => "button", "data-ajax" => false %>
+	    		<% if current_user != nil %>
+	    			<%= link_to 'Billing Info', billing_user_path(current_user), "data-role" => "button", "data-ajax" => false %>
+	    		<% end %>
+  			</div>
+  			<%= link_to 'Sign Out', destroy_user_session_path, method: "delete", "data-role" => "button" %>
 			</div>
 
-	        <div data-role="header" data-theme="d">
-	            <%= link_to 'Home', root_path, "data-icon" => "home", "data-iconpos" => "notext",
-	            	"data-role" => "button", "data-theme" => "c", "data-inline" => "true", "data-ajax" => "false" %>
-	            <%= yield :h1 %>
-	            <% if user_signed_in? && current_user.programs.count >= 1 %>
-		          <a href="#mypanel" data-icon="bars" data-iconpos="notext" data-theme="c">Options</a>
-	          	<% elsif user_signed_in? && current_user.programs.count == 0 %>
-	          		<%= link_to 'Sign out', destroy_user_session_path, method: "delete", "data-role" => "button", "data-theme" => "c", "data-inline" => "true" %>
-	            <% else %>
-            		<%= link_to 'Sign In', new_user_session_path, "data-role" => "button", "data-theme" => "c", "data-inline" => "true" %>
-            	<% end %>  
-	        </div>
-	 
-	        <div data-role="content">
-	        	<div>
+      <div data-role="header" data-theme="d">
+          <%= link_to 'Home', root_path, "data-icon" => "home", "data-iconpos" => "notext",
+          	"data-role" => "button", "data-theme" => "c", "data-inline" => "true", "data-ajax" => "false" %>
+          <%= yield :h1 %>
+          <% if user_signed_in? && current_user.programs.count >= 1 %>
+          <a href="#mypanel" data-icon="bars" data-iconpos="notext" data-theme="c">Options</a>
+        	<% elsif user_signed_in? && current_user.programs.count == 0 %>
+        		<%= link_to 'Sign out', destroy_user_session_path, method: "delete", "data-role" => "button", "data-theme" => "c", "data-inline" => "true" %>
+          <% else %>
+        		<%= link_to 'Sign In', new_user_session_path, "data-role" => "button", "data-theme" => "c", "data-inline" => "true" %>
+        	<% end %>  
+      </div>
+ 
+      <div data-role="content">
+      	<div>
 					<% flash.each do |key, value| %>
-						<div class="test test-#{key}">
-							<a class="close" data-dismiss="alert">&times;</a>
-							<%= content_tag(:div, value) %>
+						<div>
+							<a class="test test-#{key}" data-dismiss="alert">
+								<%= content_tag(:span, value) %>
+								<div class="close">&times;</div>
+							</a>
 						</div>
 					<% end %>
 					
@@ -58,29 +60,40 @@
 
 					<%= debug(params) if Rails.env.development? %>
 				</div>
-	        </div>
-	 
-	        <!--<div data-role="footer">
-	            <h4>My Footer</h4>
-	        </div>-->
-	 
-	    </div>
+      </div>
+        <!--<div data-role="footer">
+            <h4>My Footer</h4>
+        </div>-->
+    </div>
 	</body>
 </html>
 
 <style type="text/css">
 .test {
-padding: 8px 14px;
-margin-bottom: 18px;
-background-color: #f8a159;
-border: 1px solid #ffffff;
-border-radius: 7px;
+	display: block;
+	margin: 0 auto 20px auto;
+	padding: 0;
+	width: 100%;
+	height: 35px;
+	line-height: 35px;
+	background-color: #f8a159;
+	border: 1px solid #ffffff;
+	border-radius: 7px;
+	color: #ffffff !important;
+	font-weight: normal !important;
 }
 
-.test a {
+.test span {
+	text-decoration: none;
+	text-align: left;
+	margin-left: 10px;
+}
+
+.close {
 	float: right;
 	text-decoration: none;
 	color: #ffffff !important;
 	font-weight: bold !important;
+	padding-right: 10px;
 }
 </style>
