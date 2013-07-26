@@ -37,12 +37,12 @@
     <% if user_todo.completed == true %>
       <li data-icon="false">
         <a href=<%= complete_user_todo_path(user_todo) %> data-method="put">
-        <img src="/assets/checklist_checked.png" class="ui-li-icon ui-corner-none"><%= user_todo.name %></a>
+        <img src="/assets/checklist_checked.png" class="ui-li-icon ui-corner-none"><%= user_todo.name.html_safe %></a>
       </li>
     <% else %>
       <li data-icon="false">
         <a href=<%= complete_user_todo_path(user_todo) %> data-method="put">
-        <img src="/assets/checklist_unchecked.png" class="ui-li-icon ui-corner-none"><%= user_todo.name %></a>
+        <img src="/assets/checklist_unchecked.png" class="ui-li-icon ui-corner-none"><%= user_todo.name.html_safe %></a>
       </li>
     <% end %>
   <% end %>
@@ -50,6 +50,14 @@
 <% end %>
 
 <style type="text/css">
+.checklist_image {
+  display: inline !important;
+  position: static !important;
+  height: 24px;
+  width: 24px;
+  margin-bottom: -5px !important;
+}
+
 .ui-icon-myapp-email {
   background-image: url("app-icon-email.png");
 }
