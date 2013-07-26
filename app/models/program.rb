@@ -21,7 +21,7 @@ class Program < ActiveRecord::Base
   
   # For rails admin
   def custom_label_method
-    "#{User.find(self.user_id).email}"
+    "#{User.find(self.user_id).email}" if self.user_id?
   end
 
   def build_program
