@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130726134720) do
+ActiveRecord::Schema.define(:version => 20130727162910) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -48,14 +48,16 @@ ActiveRecord::Schema.define(:version => 20130726134720) do
   create_table "days", :force => true do |t|
     t.date     "date"
     t.integer  "result"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
     t.integer  "user_id"
     t.integer  "day"
     t.integer  "week_id"
     t.string   "goal"
     t.string   "checkin_msg"
     t.integer  "program_id"
+    t.integer  "want_count",  :default => 0
+    t.integer  "did_count",   :default => 0
   end
 
   create_table "delayed_jobs", :force => true do |t|

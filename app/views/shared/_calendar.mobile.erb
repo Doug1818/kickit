@@ -1,3 +1,4 @@
+<!-- Required Alert -->
 <% if current_user.program.supporters.empty? && !current_user.stripe_customer_id? %>
 	<div class="required_alert">You need to <%= link_to "choose a supporter", supporters_path, style:"text-decoration:none !important;", "data-ajax" => false %> and <%= link_to "provide billing information", billing_user_path(current_user), style:"text-decoration:none !important;", "data-ajax" => false %>.</div>
 <% elsif current_user.program.supporters.empty? && current_user.stripe_customer_id? %>
@@ -6,10 +7,27 @@
 	<div class="required_alert">You need to <%= link_to "provide billing information", billing_user_path(current_user), style:"text-decoration:none !important;", "data-ajax" => false %>.</div>
 <% end %>
 
+<!-- Todays's Goal -->
 <% if current_user.program.days.find_by_date(Date.current).goal? %>
 	<h3 style="margin-bottom:0;">Today's Goal:</h3>
 	<h4 style="margin-top:0;margin-bottom:10px;"><%= current_user.program.days.find_by_date(Date.current).goal %></h4>
 <% end %>
+
+<!-- Counters -->
+<div class="ui-grid-a counters" style="margin:0 !important;">
+	<div class="ui-block-a">
+		<%= form_for @day, url: want_day_path(@day), html: { method: :put } do |f| %>
+			<%= f.submit "Wanted To (#{@day.want_count})", "data-theme" => "d" %>
+		<% end %>
+	</div>
+	<div class="ui-block-b">
+		<%= form_for @day, url: did_day_path(@day), html: { method: :put } do |f| %>
+			<%= f.submit "Did Do (#{@day.did_count})", "data-theme" => "d" %>
+		<% end %>
+	</div>
+</div>
+
+<!-- Calendar -->
 <div id="calendar">
 	<h3 id="month">
 		<%= link_to "<", :month => (@today.beginning_of_month-1).strftime("%Y-%m-01") %>
@@ -43,6 +61,8 @@
 		<% end %>
 	<% end %>
 </div>
+
+<!-- Dollar balance and Free Days balance -->
 <div style="text-align:center;">
 <% if current_user.program.this_week.missed > 0 %>
 	<h4 style="margin-top:5px;margin-bottom:5px;"><strong>

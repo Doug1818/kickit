@@ -10,6 +10,18 @@ class DaysController < ApplicationController
   	@day = Day.find(params[:id])
   end
 
+  def want
+    @day = Day.find(params[:id])
+    @day.update_attributes(want_count: @day.want_count += 1)
+    redirect_to root_path
+  end
+
+  def did
+    @day = Day.find(params[:id])
+    @day.update_attributes(did_count: @day.did_count += 1)
+    redirect_to root_path
+  end
+
   def success
   	@day = Day.find(params[:id])
   	@day.update_attributes(result: 1)
