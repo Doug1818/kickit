@@ -22,7 +22,7 @@
 	</div>
 	<div class="ui-block-b">
 		<%= form_for @day, url: did_day_path(@day), html: { method: :put } do |f| %>
-			<%= f.submit "Did Do (#{@day.did_count})", "data-theme" => "d" %>
+			<%= f.submit "Did (#{@day.did_count})", "data-theme" => "d" %>
 		<% end %>
 	</div>
 </div>
