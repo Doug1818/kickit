@@ -1,7 +1,7 @@
 <% if current_user.program.supporters.empty? && !current_user.stripe_customer_id? %>
 	<div class="required_alert">You need to <%= link_to "choose a supporter", supporters_path, style:"text-decoration:none !important;", "data-ajax" => false %> and <%= link_to "provide billing information", billing_user_path(current_user), style:"text-decoration:none !important;", "data-ajax" => false %>.</div>
 <% elsif current_user.program.supporters.empty? && current_user.stripe_customer_id? %>
-	<div class="required_alert">You need to <%= link_to "choose a supporter", supporters_pathstyle:"text-decoration:none !important;", "data-ajax" => false %>.</div>
+	<div class="required_alert">You need to <%= link_to "choose a supporter", supporters_path, style:"text-decoration:none !important;", "data-ajax" => false %>.</div>
 <% elsif current_user.program.supporters.any? && !current_user.stripe_customer_id? %>
 	<div class="required_alert">You need to <%= link_to "provide billing information", billing_user_path(current_user), style:"text-decoration:none !important;", "data-ajax" => false %>.</div>
 <% end %>
