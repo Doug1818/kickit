@@ -9,6 +9,16 @@ class UserMailer < ActionMailer::Base
     subject: "Welcome to Kick-It!"
   end
 
+  def start_tomorrow(user)
+    @user = user
+    @program = @user.program
+    @goal = @program.days.first.goal
+    
+    mail from:"Kick-It <support@kick-it-now.com>",
+    to: @user.email,
+    subject: "[Kick-It] Your Program Starts Tomorrow!"
+  end
+
   def supporter_badge(supmessage)
     @supmessage = supmessage
     @supporter = Supporter.find(@supmessage.supporter_id)
