@@ -76,6 +76,32 @@ task :full_hour_jobs => :environment do
 			end
 		end
 	end
+
+	# WELCOME TEXT: Send welcome text at 9am on first morning
+	Program.start_today.all.each do |program|
+		user = User.find(program.user_id)
+		if Time.now.in_time_zone(user.time_zone).hour == 9
+			number_to_send_to = user.phone
+			msg_1 = "Welcome to Kick-It! We'll be using this number to send you reminders over the course of your program, so you should save it to your contacts."
+			msg_2 = "If you have questions or feedback, you can text '@' and then your message - e.g. '@ Cool App'"
+
+			@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
+			@twilio_client.account.sms.messages.create(
+				:from => "+1#{ENV['TWILIO_PHONE_NUMBER']}",
+				:to => number_to_send_to,
+				:body => msg_1
+			)
+			received_text = program.received_texts.create(message: msg_1)
+
+			@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
+			@twilio_client.account.sms.messages.create(
+				:from => "+1#{ENV['TWILIO_PHONE_NUMBER']}",
+				:to => number_to_send_to,
+				:body => msg_2
+			)
+			received_text = program.received_texts.create(message: msg_2)
+		end
+	end
 end
 
 desc "Tasks to be performed on the half-hour"
