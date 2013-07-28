@@ -1,21 +1,3 @@
-//$(document).on('pagebeforeshow', function(){
-//    $('.togsupinfo').click(function(){
-//        $('.supinfo').toggle();
-//    });
-//});
-
-//$('[data-role="page"]').on('pageshow', function () {
-//    $('.togsupinfo').click(function(){
-//        $('.supinfo').toggle();
-//    });
-//});
-
-$(function () {
-    $('.togsupinfo').click(function(){
-        $('.supinfo').toggle();
-    });
-});
-
 /* SMOOTH AUTOSCROLLING */
 
 $(function() {

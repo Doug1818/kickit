@@ -2,32 +2,40 @@
 <% content_for :title do %><title>Kick-It Results</title><% end %>
 <% content_for :h1 do %><h1>Kick-It Results</h1><% end %>
 
-<% if @program.completed_days >= 7 %>
+<div data-role="page">
+	<%= render 'shared/panel' %>
+	<%= render 'shared/header' %>
+	<div data-role="content">
+		<%= render 'shared/flash', flash: flash %>
+		<% if @program.completed_days >= 7 %>
 
-	<h3><%= @user.email %> was successful <%= @program.prev_week_sdays %> of 7 days last week.  Encourage them with a badge!</h3><br>
+			<h3><%= @user.email %> was successful <%= @program.prev_week_sdays %> of 7 days last week.  Encourage them with a badge!</h3><br>
 
-	<%= form_for @supmessage do |f| %>
-		<%= render 'shared/error_messages', object: f.object %>
-		<%= f.text_area :content, value: @program.badge, style: "height:100px;width:50%" %><br>
-		<%= f.hidden_field :supporter_id, value: @supporter.id %>
-		<%= f.submit "Send badge", class: "btn" %>
-	<% end %><br>
-	
-	<table class="pretty_table">
-		<% @program.days.reported.order("date desc")[(-7 - 7*(@program.prev_week - 1))..(-1 - 7*(@program.prev_week - 1))].each do |day| %>
-			<tr>
-				<td class="date"><%= day.date.strftime("%a, %b %d") %></td>
-				<td class="result"><%= day.goal %></td>
-				<td class="result"><%= RESULTS.key(day.result) %></td>
-			</tr>
+			<%= form_for @supmessage do |f| %>
+				<%= render 'shared/error_messages', object: f.object %>
+				<%= f.text_area :content, value: @program.badge, style: "height:100px;width:50%" %><br>
+				<%= f.hidden_field :supporter_id, value: @supporter.id %>
+				<%= f.submit "Send badge", class: "btn" %>
+			<% end %><br>
+			
+			<table class="pretty_table">
+				<% @program.days.reported.order("date desc")[(-7 - 7*(@program.prev_week - 1))..(-1 - 7*(@program.prev_week - 1))].each do |day| %>
+					<tr>
+						<td class="date"><%= day.date.strftime("%a, %b %d") %></td>
+						<td class="result"><%= day.goal %></td>
+						<td class="result"><%= RESULTS.key(day.result) %></td>
+					</tr>
+				<% end %>
+			</table>
+
+			<% if @supporter.supmessages.count > 0 %>
+				<h3>Badge History</h3>
+				<% @supporter.supmessages.order("created_at desc").each do |supmessage| %>
+					<div class="msg_info"><%= supmessage.created_at.strftime("%a, %b %e, %l:%M%P") %></div>
+					<div class="content"><%= supmessage.content.gsub(/\n/, '<br/>').html_safe %></div>
+				<% end %>
+			<% end %>
 		<% end %>
-	</table>
-
-	<% if @supporter.supmessages.count > 0 %>
-		<h3>Badge History</h3>
-		<% @supporter.supmessages.order("created_at desc").each do |supmessage| %>
-			<div class="msg_info"><%= supmessage.created_at.strftime("%a, %b %e, %l:%M%P") %></div>
-			<div class="content"><%= supmessage.content.gsub(/\n/, '<br/>').html_safe %></div>
-		<% end %>
-	<% end %>
-<% end %>
+		<%= debug(params) if Rails.env.development? %>
+	</div>
+</div>

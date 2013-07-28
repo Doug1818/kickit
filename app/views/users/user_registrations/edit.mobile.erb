@@ -1,39 +1,47 @@
 <% content_for :title do %><title>Profile</title><% end %>
 <% content_for :h1 do %><h1>Profile</h1><% end %>
 
-<h3>Edit <%= resource_name.to_s.humanize %></h3>
+<div data-role="page">
+  <%= render 'shared/panel' %>
+  <%= render 'shared/header' %>
+  <div data-role="content">
+    <%= render 'shared/flash', flash: flash %>
+    <h3>Edit <%= resource_name.to_s.humanize %></h3>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
 
-  <div><%= f.label :email %>
-  <%= f.email_field :email, :autofocus => true %></div>
-  <br />
-  <div><%= f.label :phone %>
-  <%= f.text_field :phone %></div>
+      <div><%= f.label :email %>
+      <%= f.email_field :email, :autofocus => true %></div>
+      <br />
+      <div><%= f.label :phone %>
+      <%= f.text_field :phone %></div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
 
-  <br />
-  <div><%= f.label :password, "New Password" %>
-  <%= f.password_field :password, :autocomplete => "off", placeholder: "Leave blank if no change" %></div>
+      <br />
+      <div><%= f.label :password, "New Password" %>
+      <%= f.password_field :password, :autocomplete => "off", placeholder: "Leave blank if no change" %></div>
 
-  <br />
-  <div><%= f.label :password_confirmation, "New Password Confirmation" %>
-  <%= f.password_field :password_confirmation, placeholder: "Leave blank if no change" %></div>
+      <br />
+      <div><%= f.label :password_confirmation, "New Password Confirmation" %>
+      <%= f.password_field :password_confirmation, placeholder: "Leave blank if no change" %></div>
 
-  <br />
-  <div><%= f.label :current_password, "Current Password" %>
-  <%= f.password_field :current_password, placeholder: "Needed to confirm changes" %></div>
+      <br />
+      <div><%= f.label :current_password, "Current Password" %>
+      <%= f.password_field :current_password, placeholder: "Needed to confirm changes" %></div>
 
-  <br />
-  <div><%= f.label :time_zone, "Time Zone" %></div>
-  <div style="margin-bottom:40px;"><%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %></div>
+      <br />
+      <div><%= f.label :time_zone, "Time Zone" %></div>
+      <div style="margin-bottom:40px;"><%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %></div>
 
-  <div><%= f.submit "Update", "data-theme" => "d" %></div>
-<% end %>
+      <div><%= f.submit "Update", "data-theme" => "d" %></div>
+    <% end %>
 
-<br>
-Unhappy? <%= link_to "Cancel My Account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, class: "link" %>
+    <br>
+    Unhappy? <%= link_to "Cancel My Account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, class: "link" %>
+    <%= debug(params) if Rails.env.development? %>
+  </div>
+</div>

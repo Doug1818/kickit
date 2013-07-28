@@ -1,29 +1,44 @@
 <% content_for :title do %><title>Home</title><% end %>
 <% content_for :h1 do %><h1>Home</h1><% end %>
 
-<% if user_signed_in? && current_user.current_program != nil %>
-	<!-- If in an active program -->
-	<%= render 'shared/calendar' %>
-<% elsif user_signed_in? && current_user.program == nil %>
-	<!-- If signed up only -->
-	<div style="text-align:center;">
-		<h2 style="margin-bottom:0;">Welcome!</h2>
-		<%= current_user.email %>
+<div data-role="page">
+	<%= render 'shared/panel' %>
+	<%= render 'shared/header' %>
+	<div data-role="content">
+		<%= render 'shared/flash', flash: flash %>
+
+		<% if user_signed_in? && current_user.current_program != nil %>
+			<!-- If in an active program -->
+			<%= render 'shared/calendar' %>
+		<% elsif user_signed_in? && current_user.program == nil %>
+			<!-- If signed up only -->
+			<div style="text-align:center;">
+				<h2 style="margin-bottom:0;">Welcome!</h2>
+				<%= current_user.email %>
+			</div>
+			<%= link_to "Set up a 3-week plan", setup_user_path(current_user), "data-role" => "button", "data-icon" => "arrow-r", 
+				"data-iconpos" => "right", style: "margin-top:20px;" %>
+		<% elsif user_signed_in? && current_user.programs.count >= 1 && current_user.next_program.start_date > Date.current %>
+			<!-- If signed up / setup but not started -->
+			<%= render 'users/checklist' %>
+		<% else %>
+			<!-- If not signed in -->
+			<h2>Kick-It</h2>
+			<%= form_for @user, :url => session_path(@user) do |f| %>
+				<%= f.email_field :email, placeholder: "Email" %>
+				<%= f.password_field :password, placeholder: "Password" %>
+				<%= f.check_box :remember_me %> <%= f.label :remember_me, "Remember Me" %>
+				<%= f.submit "Sign In", "data-theme" => "d" %>
+			<% end %>
+			No Account? <%= link_to 'Request a Beta Invite', carousel_path, class: "link" %><br>
+			<%= link_to "Forgot Your Password?", new_password_path(@user), class: "link" %>
+		<% end %>
+		<%= debug(params) if Rails.env.development? %>
 	</div>
-	<%= link_to "Set up a 3-week plan", setup_user_path(current_user), "data-role" => "button", "data-icon" => "arrow-r", 
-		"data-iconpos" => "right", "data-ajax" => false, style: "margin-top:20px;" %>
-<% elsif user_signed_in? && current_user.programs.count >= 1 && current_user.next_program.start_date > Date.current %>
-	<!-- If signed up / setup but not started -->
-	<%= render 'users/checklist' %>
-<% else %>
-	<!-- If not signed in -->
-	<h2>Kick-It</h2>
-	<%= form_for @user, :url => session_path(@user) do |f| %>
-		<%= f.email_field :email, placeholder: "Email" %>
-		<%= f.password_field :password, placeholder: "Password" %>
-		<%= f.check_box :remember_me %> <%= f.label :remember_me, "Remember Me" %>
-		<%= f.submit "Sign In", "data-theme" => "d" %>
-	<% end %>
-	No Account? <%= link_to 'Request a Beta Invite', carousel_path, "data-ajax" => false, class: "link" %><br>
-	<%= link_to "Forgot Your Password?", new_password_path(@user), class: "link" %>
-<% end %>
+</div>
+
+<script type="text/javascript">
+$(document).on('pagebeforeshow', function(){
+    alert('Pageinit');
+});
+</script>

@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
         stripe_card_last4: customer.cards.data[0].last4)
     end
   rescue Stripe::InvalidRequestError => e
-    logger.error "Stripe error while creating customer: #{e.mesage}"
+    logger.error "Stripe error while creating customer: #{e.message}"
     errors.add :base, "There was a problem with your credit card."
   end
 

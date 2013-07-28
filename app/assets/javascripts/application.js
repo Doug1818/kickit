@@ -15,8 +15,6 @@
 //= require jquery-ui
 //= require jquery_ujs
 //= require bootstrap
-//= require formToWizard
-//= require swipeview
 //= require add_remove_fields
 //= require rails.validations
 //= require default

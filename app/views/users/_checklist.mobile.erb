@@ -6,25 +6,25 @@
 <ul data-role="listview" data-inset="true">
   <% if current_user.next_program.supporters.any? %>
     <li data-icon="false">
-      <a href=<%= supporters_path %> data-ajax="false" style="font-weight: bold;">
+      <a href=<%= supporters_path %> style="font-weight: bold;">
       <img src="/assets/checklist_checked.png" class="ui-li-icon ui-corner-none">
       <%= "Add Supporters (#{current_user.next_program.supporters.count} added)" %></a>
     </li>
   <% else %>
     <li data-icon="false">
-      <a href=<%= supporters_path %> data-ajax="false" style="font-weight: bold;">
+      <a href=<%= supporters_path %> style="font-weight: bold;">
       <img src="/assets/checklist_unchecked.png" class="ui-li-icon ui-corner-none">
       <%= "Add Supporters (#{current_user.next_program.supporters.count} added)" %></a>
     </li>
   <% end %>
   <% if current_user.stripe_customer_id? %>
     <li data-icon="false">
-      <a href=<%= billing_user_path(current_user) %> data-ajax="false" style="font-weight: bold;">
+      <a href=<%= billing_user_path(current_user) %> style="font-weight: bold;">
       <img src="/assets/checklist_checked.png" class="ui-li-icon ui-corner-none">Add Billing Info</a>
     </li>
   <% else %>
     <li data-icon="false">
-      <a href=<%= billing_user_path(current_user) %> data-ajax="false" style="font-weight: bold;">
+      <a href=<%= billing_user_path(current_user) %> style="font-weight: bold;">
       <img src="/assets/checklist_unchecked.png" class="ui-li-icon ui-corner-none">Add Billing Info</a>
     </li>
   <% end %>

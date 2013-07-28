@@ -1,10 +1,17 @@
-<% content_for :title do %><title>Sign up</title><% end %>
-<% content_for :h1 do %><h1>Sign up</h1><% end %>
+<% content_for :title do %><title>Sign Up</title><% end %>
+<% content_for :h1 do %><h1>Sign Up</h1><% end %>
 
-<!--<h3 style="text-align:center;margin-top:0;">The 30-day Plan</h3>-->
-<div id="wrapper"></div>
+<div data-role="page">
+	<%= render 'shared/panel' %>
+	<%= render 'shared/header' %>
+	<div data-role="content">
+		<%= render 'shared/flash', flash: flash %>
+		<div id="wrapper"></div>
 
-<%= link_to "Request a Beta Invite", new_lead_path, "data-role" => "button", "data-theme" => "d", style: "margin-top:10px;" %>
+		<%= link_to "Request a Beta Invite", new_lead_path, "data-role" => "button", "data-theme" => "d", style: "margin-top:10px;" %>
+		<%= debug(params) if Rails.env.development? %>
+	</div>
+</div>
 
 <script type="text/javascript">
 $(function() {

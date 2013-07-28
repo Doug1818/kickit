@@ -1,10 +1,18 @@
 <% content_for :title do %><title>New Reminder</title><% end %>
 <% content_for :h1 do %><h1>New Reminder</h1><% end %>
 
-<%= form_for @reminder do |f| %>
-	<%= render 'shared/error_messages', object: f.object %>
-	<div class="rem">
-		<%= f.time_select :time, { minute_step: 30, ampm: true, time_separator: "" }, { "data-inline" => "true" } %>
-		<%= f.submit "Add Reminder", class: "submit", "data-theme" => "d" %>
+<div data-role="page">
+	<%= render 'shared/panel' %>
+	<%= render 'shared/header' %>
+	<div data-role="content">
+		<%= render 'shared/flash', flash: flash %>
+		<%= form_for @reminder do |f| %>
+			<%= render 'shared/error_messages', object: f.object %>
+			<div class="rem">
+				<%= f.time_select :time, { minute_step: 30, ampm: true, time_separator: "" }, { "data-inline" => "true" } %>
+				<%= f.submit "Add Reminder", class: "submit", "data-theme" => "d" %>
+			</div>
+		<% end %>
+		<%= debug(params) if Rails.env.development? %>
 	</div>
-<% end %>
+</div>
