@@ -56,7 +56,7 @@ task :full_hour_jobs => :environment do
 	end
 
 	# CLOSE_WINDOW: Close check-in window at 9am local
-	Program.active_checkins.all.each do |program|
+	Program.close_window.all.each do |program|
 		user = User.find(program.user_id)
 		if Time.now.in_time_zone(user.time_zone).hour == 9
 			@day = program.days.find_by_date(Date.current - 2)

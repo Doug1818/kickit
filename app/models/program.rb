@@ -14,6 +14,7 @@ class Program < ActiveRecord::Base
   has_many :user_todos, dependent: :destroy
   scope :active_program, where("start_date <= ? AND end_date >= ?", Date.current, Date.current)
   scope :active_checkins, where("start_date <= ? AND end_date >= ?", Date.current - 1, Date.current - 1)
+  scope :close_window, where("start_date <= ? AND end_date >= ?", Date.current - 2, Date.current - 2)
   validates :habit, presence: true
   validates :start_date, presence: true, :on => :create
   validate  :future_date, :on => :create
