@@ -72,19 +72,19 @@ class TextMessagesController < ApplicationController
 						end
 					end
 				else
-					received_msg = "Invalid check-in. Please enter either 'Y' or 'N'. Thank you!"
+					received_msg = "Invalid check-in. Please enter either 'Y' or 'N' or type '@' at the start of your message to reach customer support. Thank you!"
 					response = Twilio::TwiML::Response.new { |r| r.Sms received_msg }
 					render :xml => response.text
 					received_text = @program.received_texts.create(message: received_msg)
 				end
 			else
 				if @program.start_date > Date.current
-					received_msg = "Your Kick-It program hasn't started yet."
+					received_msg = "Your Kick-It program hasn't started yet. Type '@' at the start of your message to reach customer support."
 					response = Twilio::TwiML::Response.new { |r| r.Sms received_msg }
 					render :xml => response.text
 					received_text = @program.received_texts.create(message: received_msg)
 				elsif @program.start_date == Date.current
-					received_msg = "Your first check-in will be tomorrow morning."
+					received_msg = "Your first check-in will be tomorrow morning. Type '@' at the start of your message to reach customer support."
 					response = Twilio::TwiML::Response.new { |r| r.Sms received_msg }
 					render :xml => response.text
 					received_text = @program.received_texts.create(message: received_msg)
