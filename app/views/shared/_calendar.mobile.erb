@@ -1,10 +1,10 @@
 <!-- Required Alert -->
 <% if current_user.program.supporters.empty? && !current_user.stripe_customer_id? %>
-	<div class="required_alert">You need to <%= link_to "choose a supporter", supporters_path, style:"text-decoration:none !important;" %> and <%= link_to "provide billing information", billing_user_path(current_user), style:"text-decoration:none !important;" %>.</div>
+	<div class="required_alert">You need to <%= link_to "choose a supporter", supporters_path %> and <%= link_to "provide billing information", billing_user_path(current_user) %>.</div>
 <% elsif current_user.program.supporters.empty? && current_user.stripe_customer_id? %>
-	<div class="required_alert">You need to <%= link_to "choose a supporter", supporters_path, style:"text-decoration:none !important;" %>.</div>
+	<div class="required_alert">You need to <%= link_to "choose a supporter", supporters_path %>.</div>
 <% elsif current_user.program.supporters.any? && !current_user.stripe_customer_id? %>
-	<div class="required_alert">You need to <%= link_to "provide billing information", billing_user_path(current_user), style:"text-decoration:none !important;" %>.</div>
+	<div class="required_alert">You need to <%= link_to "provide billing information", billing_user_path(current_user) %>.</div>
 <% end %>
 
 <!-- Todays's Goal -->
