@@ -4,11 +4,11 @@
  alert('Alert!');
 });*/
 
-$(document).ready(function() {
+$(document).on('pagebeforeshow', function(){
  $("#new_user").formToWizard();
 });
 
-$(document).ready(function() {
+$(document).on('pagebeforeshow', function(){
  $(".edit_user").formToWizard();
 });
 

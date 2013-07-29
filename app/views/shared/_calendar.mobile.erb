@@ -1,10 +1,10 @@
 <!-- Required Alert -->
 <% if current_user.program.supporters.empty? && !current_user.stripe_customer_id? %>
-	<div class="required_alert">You need to <%= link_to "choose a supporter", supporters_path, "data-ajax" => false %> and <%= link_to "provide billing information", billing_user_path(current_user), "data-ajax" => false %>.</div>
+	<div class="required_alert">You need to <%= link_to "choose a supporter", supporters_path %> and <%= link_to "provide billing information", billing_user_path(current_user) %>.</div>
 <% elsif current_user.program.supporters.empty? && current_user.stripe_customer_id? %>
-	<div class="required_alert">You need to <%= link_to "choose a supporter", supporters_path, "data-ajax" => false %>.</div>
+	<div class="required_alert">You need to <%= link_to "choose a supporter", supporters_path %>.</div>
 <% elsif current_user.program.supporters.any? && !current_user.stripe_customer_id? %>
-	<div class="required_alert">You need to <%= link_to "provide billing information", billing_user_path(current_user), "data-ajax" => false %>.</div>
+	<div class="required_alert">You need to <%= link_to "provide billing information", billing_user_path(current_user) %>.</div>
 <% end %>
 
 <!-- Todays's Goal -->
@@ -64,14 +64,14 @@
 
 <!-- Dollar balance and Free Days balance -->
 <div style="text-align:center;">
-<% if current_user.program.this_week.missed > 0 %>
-	<h4 style="margin-top:5px;margin-bottom:5px;"><strong>
-		$<%= current_user.program.this_week.missed*current_user.program.daily_commitment %> 
-		lost</strong> from missed checkins</h4>
-<% end %>
-<% if current_user.program.this_week.free_days > 0 %>
-	<h4 style="margin-top:5px;"><strong>
-		<%= "#{current_user.program.free_days_left} #{'free day'.pluralize(current_user.program.free_days_left)}" %>
-	</strong> left this week</h4>
-<% end %>
+	<% if current_user.program.this_week.missed > 0 %>
+		<h4 style="margin-top:5px;margin-bottom:5px;"><strong>
+			$<%= current_user.program.this_week.missed*current_user.program.daily_commitment %> 
+			lost</strong> from missed checkins</h4>
+	<% end %>
+	<% if current_user.program.this_week.free_days > 0 %>
+		<h4 style="margin-top:5px;"><strong>
+			<%= "#{current_user.program.free_days_left} #{'free day'.pluralize(current_user.program.free_days_left)}" %>
+		</strong> left this week</h4>
+	<% end %>
 </div>

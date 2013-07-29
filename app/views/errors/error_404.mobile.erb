@@ -1,9 +1,17 @@
 <% content_for :title do %><title>Error</title><% end %>
 <% content_for :h1 do %><h1>Error</h1><% end %>
 
-<h2>We're sorry</h2>
-<p>Something went wrong.</p>
+<div data-role="page">
+	<%= render 'shared/panel' %>
+	<%= render 'shared/header' %>
+	<div data-role="content">
+		<%= render 'shared/flash', flash: flash %>
+		<h2>We're sorry</h2>
+		<p>Something went wrong.</p>
 
-<p>Please go back to the <%= link_to "Kick-It home page", root_path, class: "link" %> and try again.</p>
+		<p>Please go back to the <%= link_to "Kick-It home page", root_path, class: "link" %> and try again.</p>
 
-<p>If the problem persists, please <a href="mailto:support@kick-it-now.com" class="link">report</a> your problem and the query that caused it.</p>
+		<p>If the problem persists, please <a href="mailto:support@kick-it-now.com" class="link">report</a> your problem and the query that caused it.</p>
+		<%= debug(params) if Rails.env.development? %>
+	</div>
+</div>

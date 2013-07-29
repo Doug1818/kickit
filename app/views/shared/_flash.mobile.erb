@@ -1,0 +1,45 @@
+<% flash.each do |key, value| %>
+	<div>
+		<a class="test test-#{key}">
+			<div class="close">&times;</div>
+			<%= content_tag(:span, value) %>
+		</a>
+	</div>
+<% end %>
+
+<style type="text/css">
+.test {
+	display: block;
+	margin: 0 auto 20px auto;
+	padding: 7px 10px;
+	background-color: #f8a159;
+	border: 1px solid #ffffff;
+	border-radius: 7px;
+	color: #ffffff !important;
+	font-weight: normal !important;
+}
+
+.test span {
+	text-decoration: none;
+	text-align: left;
+}
+
+.close {
+	float: right;
+	text-decoration: none;
+	color: #ffffff !important;
+	font-weight: bold !important;
+	padding-left: 9px;  // I think this should match the padding you use above in class "test" minus the border thickness
+	position: relative;
+	right: 0;
+	top: 0;
+}
+</style>
+
+<script type="text/javascript">
+$(document).on('pagebeforeshow', function(){       
+    $('.test').click(function(){
+        $('.test').hide();
+    });
+});
+</script>

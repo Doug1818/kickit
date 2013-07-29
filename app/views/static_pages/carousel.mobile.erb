@@ -1,59 +1,14 @@
-<% content_for :title do %><title>Sign up</title><% end %>
-<% content_for :h1 do %><h1>Sign up</h1><% end %>
+<% content_for :title do %><title>Sign Up</title><% end %>
+<% content_for :h1 do %><h1>Sign Up</h1><% end %>
 
-<!--<h3 style="text-align:center;margin-top:0;">The 30-day Plan</h3>-->
-<div id="wrapper"></div>
+<div data-role="page" id="car">
+	<%= render 'shared/panel' %>
+	<%= render 'shared/header' %>
+	<div data-role="content">
+		<%= render 'shared/flash', flash: flash %>
+		<div id="wrapper"></div>
 
-<%= link_to "Request a Beta Invite", new_lead_path, "data-role" => "button", "data-theme" => "d", style: "margin-top:10px;" %>
-
-<script type="text/javascript">
-$(function() {
-    if (typeof (carousel) == "undefined") {
-        initChoixPhotos(); }
-});
-
-initChoixPhotos = function () {
-    document.addEventListener('pageshow', function (e) { e.preventDefault(); }, false);
-
-	var	carousel,
-		el,
-		i,
-		page,
-		slides = [
-			'<strong>Swipe</strong> to learn more <br> about <strong>Kick-It</strong> >',
-			
-			'<div><strong>We Create a Custom Plan…</strong></div><p>First, you tell us a little about yourself and what habit you’re trying to kick. We take that information and come up with a personalized plan for you.</p>',
-			'<div><strong>…And then Help You <br>Keep to It.</strong></div><p>Making a plan is, of course, the easy part. The hard part is actually doing it on a daily basis. We use the latest behavioral sciences research on social and financial incentives, timely reminders, and proven coaching strategies to keep you engaged and improving.</p>', 
-			'<div><strong>Free to Use…<br>So Long as You Use It</strong></div><p>The service is free so long as you check in once a day and report how you did the day before. If you don’t check in, however, we charge you for that. We call it a “Reverse Subscription,” because you only pay if you don’t use it.</p>'
-		];
-
-	carousel = new SwipeView('#wrapper', {
-		numberOfPages: slides.length,
-		hastyPageFlip: true
-	});
-
-	// Load initial data
-	for (i=0; i<3; i++) {
-		page = i==0 ? slides.length-1 : i-1;
-
-		el = document.createElement('span');
-		el.innerHTML = slides[page];
-		carousel.masterPages[i].appendChild(el)
-	}
-
-	carousel.onFlip(function () {
-		var el,
-			upcoming,
-			i;
-
-		for (i=0; i<3; i++) {
-			upcoming = carousel.masterPages[i].dataset.upcomingPageIndex;
-
-			if (upcoming != carousel.masterPages[i].dataset.pageIndex) {
-				el = carousel.masterPages[i].querySelector('span');
-				el.innerHTML = slides[upcoming];
-			}
-		}
-	});
-}
-</script>
+		<%= link_to "Request a Beta Invite", new_lead_path, "data-role" => "button", "data-theme" => "d", style: "margin-top:10px;" %>
+		<%= debug(params) if Rails.env.development? %>
+	</div>
+</div>

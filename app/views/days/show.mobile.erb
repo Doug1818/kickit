@@ -1,28 +1,36 @@
 <% content_for :title do %><title><%= @day.date.strftime("%a, %b %d") %></title><% end %>
 <% content_for :h1 do %><h1><%= @day.date.strftime("%a, %b %d") %></h1><% end %>
 
-<div style="margin-bottom:10px;">
-	<%= link_to "Back", :back, "data-role" => "button", "data-icon" => "arrow-l", 
-		"data-iconpos" => "left", "data-inline" => true, "data-mini" => true %>
-</div>
+<div data-role="page">
+	<%= render 'shared/panel' %>
+	<%= render 'shared/header' %>
+	<div data-role="content">
+		<%= render 'shared/flash', flash: flash %>
+		<div style="margin-bottom:10px;">
+			<%= link_to "Back", :back, "data-role" => "button", "data-icon" => "arrow-l", 
+				"data-iconpos" => "left", "data-inline" => true, "data-mini" => true %>
+		</div>
 
-<% if @day.result == 1 %>
-	<div>You were successful on this day.</div>
-<% elsif @day.result == 2 %>
-	<div>You were not successful on this day.</div>
-<% elsif @day.result == 3 %>
-	<div>Were you successful on this day?</div>
-	<div data-role="controlgroup">
-	    <%= link_to "Yes", success_day_path(@day), method: :put, "data-role" => "button" %>
-		<%= link_to "No", failure_day_path(@day), method: :put, "data-role" => "button" %>
-		<% if Program.find(@day.program_id).free_days_left > 0 %>
-			<%= link_to "Use A Free Day", free_day_path(@day), method: :put, "data-role" => "button" %>
+		<% if @day.result == 1 %>
+			<div>You were successful on this day.</div>
+		<% elsif @day.result == 2 %>
+			<div>You were not successful on this day.</div>
+		<% elsif @day.result == 3 %>
+			<div>Were you successful on this day?</div>
+			<div data-role="controlgroup">
+			    <%= link_to "Yes", success_day_path(@day), method: :put, "data-role" => "button" %>
+				<%= link_to "No", failure_day_path(@day), method: :put, "data-role" => "button" %>
+				<% if Program.find(@day.program_id).free_days_left > 0 %>
+					<%= link_to "Use A Free Day", free_day_path(@day), method: :put, "data-role" => "button" %>
+				<% end %>
+			</div>
+		<% elsif @day.result == 4 %>
+			<div>You missed your check-in on this day. We charged you a buck.</div>
+		<% elsif @day.result == 5 %>
+			<div>You used one of your Free Days this day.</div>
+		<% else %>
+			<div>Too early to check in.</div>
 		<% end %>
+		<%= debug(params) if Rails.env.development? %>
 	</div>
-<% elsif @day.result == 4 %>
-	<div>You missed your check-in on this day. We charged you a buck.</div>
-<% elsif @day.result == 5 %>
-	<div>You used one of your Free Days this day.</div>
-<% else %>
-	<div>Too early to check in.</div>
-<% end %>
+</div>

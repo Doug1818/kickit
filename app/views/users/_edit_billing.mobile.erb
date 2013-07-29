@@ -34,7 +34,7 @@
 </div>
 
 <script type="text/javascript">
-  $(function () {
+  $(document).on('pagebeforeshow', function(){
     $('#togglecard').click(function(){
       $('#edit_card').toggle();
     });

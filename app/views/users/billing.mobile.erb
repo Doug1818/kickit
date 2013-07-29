@@ -1,54 +1,18 @@
 <% content_for :title do %><title>Billing Info</title><% end %>
 <% content_for :h1 do %><h1>Billing Info</h1><% end %>
 
-<h3>Billing Info</h3>
+<div data-role="page" id="billing">
+  <%= render 'shared/panel' %>
+  <%= render 'shared/header' %>
+  <div data-role="content">
+    <%= render 'shared/flash', flash: flash %>
+    <h3>Billing Info</h3>
 
-<% if current_user.stripe_customer_id? %>
-	<%= render 'edit_billing' %>
-<% else %>
-	<%= render 'new_billing' %>
-<% end %>
-
-<script type="text/javascript">
-var subscription;
-
-$(function() {
-  Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'));
-  subscription.setupForm();
-});
-
-subscription = {
-  setupForm: function() {
-    $('#user_billing').submit(function() {
-      $('input[type=submit]').attr('disabled', true);
-      $('#checking').text("Checking card information...");
-      subscription.processCard();
-      return false;
-    });
-  },
-  processCard: function() {
-    var card;
-    card = {
-      number: $('#card_number').val(),
-      cvc: $('#card_code').val(),
-      expMonth: $('#card_month').val(),
-      expYear: $('#card_year').val()
-    };
-    Stripe.createToken(card, subscription.handleStripeResponse);
-  },
-  handleStripeResponse: function(status, response) {
-    if (status == 200) {
-      $('#user_stripe_card_token').val(response.id);
-      $('#stripe_error').hide();
-      $('#checking').hide();
-      $('#submitting').text("Submitting securely...");
-      $('#user_billing')[0].submit();
-    } else {
-    	$('#checking').hide();
-      $('#stripe_error').text(response.error.message);
-      $('.ui-submit').removeClass('ui-btn-active')
-      $('input[type=submit]').attr('disabled', false);
-    }
-  }
-};
-</script>
+    <% if current_user.stripe_customer_id? %>
+    	<%= render 'edit_billing' %>
+    <% else %>
+    	<%= render 'new_billing' %>
+    <% end %>
+    <%= debug(params) if Rails.env.development? %>
+  </div>
+</div>

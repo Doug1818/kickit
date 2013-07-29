@@ -1,12 +1,20 @@
 <% content_for :title do %><title>Sign up</title><% end %>
 <% content_for :h1 do %><h1>Sign up</h1><% end %>
 
-<%= form_for @user do |f| %>
-	<%= render 'shared/error_messages', object: f.object %>
-	<%= f.select :first_habit, Program::HABITS, prompt: "What do you want to kick?" %>
-	<%= f.email_field :email, placeholder: "Enter your email" %>
-	<%= f.password_field :password, placeholder: "Pick a password" %>
-	<%= f.password_field :password_confirmation, placeholder: "Confirm it" %>
-	<%= f.submit "Sign up" %>
-<% end %>
-<div style="margin-top:25px;">Already have an account? <%= link_to "Sign in", root_path %></div>
+<div data-role="page">
+	<%= render 'shared/panel' %>
+	<%= render 'shared/header' %>
+	<div data-role="content">
+		<%= render 'shared/flash', flash: flash %>
+		<%= form_for @user do |f| %>
+			<%= render 'shared/error_messages', object: f.object %>
+			<%= f.select :first_habit, Program::HABITS, prompt: "What do you want to kick?" %>
+			<%= f.email_field :email, placeholder: "Enter your email" %>
+			<%= f.password_field :password, placeholder: "Pick a password" %>
+			<%= f.password_field :password_confirmation, placeholder: "Confirm it" %>
+			<%= f.submit "Sign up" %>
+		<% end %>
+		<div style="margin-top:25px;">Already have an account? <%= link_to "Sign in", root_path %></div>
+		<%= debug(params) if Rails.env.development? %>
+	</div>
+</div>

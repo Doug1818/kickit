@@ -1,15 +1,23 @@
 <% content_for :title do %><title>Beta Sign up</title><% end %>
 <% content_for :h1 do %><h1>Beta Sign up</h1><% end %>
 
-<h3 style="margin-bottom:10px;">Help Us Make Kick-It Better</h3>
-<p>We're running a Super Private Beta test of Kick-It from July 29 to August 16. At this time, we are looking for people trying to Stop or Reduce the habits in the dropdown below. There will be more releases later, so select "Other" if you want us to keep you up to date on our supported behaviors.</p>
+<div data-role="page">
+	<%= render 'shared/panel' %>
+	<%= render 'shared/header' %>
+	<div data-role="content">
+		<%= render 'shared/flash', flash: flash %>
+		<h3 style="margin-bottom:10px;">Help Us Make Kick-It Better</h3>
+		<p>We're running a Super Private Beta test of Kick-It from July 29 to August 16. At this time, we are looking for people trying to Stop or Reduce the habits in the dropdown below. There will be more releases later, so select "Other" if you want us to keep you up to date on our supported behaviors.</p>
 
-<%= form_for @lead do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
-  <%= f.hidden_field :ab_value, value: "mobile" %>
-  <div><%= f.text_field :first_name, placeholder: "My first name is" %></div>
-  <div><%= f.text_field :email, placeholder: "my email address is", type: "email" %></div>
-  <div><%= f.select :goal, ["and I want to quit","and I want to cut back"] %></div>
-  <div><%= f.select :habit_name, Program::HABITS, prompt: "my habit of" %></div>
-  <%= f.submit "Sign Up", "data-theme" => "d" %>
-<% end %>
+		<%= form_for @lead do |f| %>
+		  <%= render 'shared/error_messages', object: f.object %>
+		  <%= f.hidden_field :ab_value, value: "mobile" %>
+		  <div><%= f.text_field :first_name, placeholder: "My first name is" %></div>
+		  <div><%= f.text_field :email, placeholder: "my email address is", type: "email" %></div>
+		  <div><%= f.select :goal, ["and I want to quit","and I want to cut back"] %></div>
+		  <div><%= f.select :habit_name, Program::HABITS, prompt: "my habit of" %></div>
+		  <%= f.submit "Sign Up", "data-theme" => "d" %>
+		<% end %>
+		<%= debug(params) if Rails.env.development? %>
+	</div>
+</div>
