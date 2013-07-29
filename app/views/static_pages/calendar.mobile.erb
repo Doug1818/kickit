@@ -1,0 +1,12 @@
+<% content_for :title do %><title>Home</title><% end %>
+<% content_for :h1 do %><h1>Home</h1><% end %>
+
+<div data-role="page" id="calendar">
+	<%= render 'shared/panel' %>
+	<%= render 'shared/header' %>
+	<div data-role="content">
+		<%= render 'shared/flash', flash: flash %>
+		<%= render 'shared/calendar' %>
+		<%= debug(params) if Rails.env.development? %>
+	</div>
+</div>

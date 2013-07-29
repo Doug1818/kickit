@@ -1,6 +1,6 @@
 <div data-role="header" data-theme="d">
-  <%= link_to 'Home', root_path, "data-icon" => "home", "data-iconpos" => "notext",
-  	"data-role" => "button", "data-theme" => "c", "data-inline" => "true" %>
+  <%= link_to 'Home', find_path, "data-icon" => "home", "data-iconpos" => "notext", 
+    "data-role" => "button", "data-theme" => "c", "data-inline" => "true" %>
   <%= yield :h1 %>
   <% if user_signed_in? && current_user.programs.count >= 1 %>
   <a href="#mypanel" data-icon="bars" data-iconpos="notext" data-theme="c">Options</a>

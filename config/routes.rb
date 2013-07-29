@@ -39,6 +39,9 @@ Kickit::Application.routes.draw do
   
   root to: 'static_pages#home'
   match '/carousel',  to: 'static_pages#carousel'
+  match '/calendar',  to: 'static_pages#calendar'
+  match '/signedup',  to: 'static_pages#signedup'
+  match '/checklist',  to: 'static_pages#checklist'
 
   unless Rails.application.config.consider_all_requests_local
     match '*not_found', to: 'errors#error_404'

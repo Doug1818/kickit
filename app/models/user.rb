@@ -47,14 +47,22 @@ class User < ActiveRecord::Base
   end
 
   def next_program
-    programs = self.programs
-    x = []
-    programs.each { |p| x.push(p.start_date) if p.start_date > Date.today }
-    programs.find { |p| p.start_date == x.min }
+    if self.programs.count >= 1
+      programs = self.programs
+      x = []
+      programs.each { |p| x.push(p.start_date) if p.start_date > Date.today }
+      programs.find { |p| p.start_date == x.min }
+    else
+      nil
+    end
   end
 
   def current_program
-    self.programs.find { |p| p.start_date <= Date.current && p.end_date >= Date.current - 1 } # - 1 for end-date so that calendar is shown on last checkin day (1 day after end_date)
+    if self.programs.count >= 1
+      self.programs.find { |p| p.start_date <= Date.current && p.end_date >= Date.current - 1 } # - 1 for end-date so that calendar is shown on last checkin day (1 day after end_date)
+    else
+      nil
+    end
   end
 
   def program

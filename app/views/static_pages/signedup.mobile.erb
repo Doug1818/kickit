@@ -1,0 +1,17 @@
+<% content_for :title do %><title>Home</title><% end %>
+<% content_for :h1 do %><h1>Home</h1><% end %>
+
+<div data-role="page" id="signedup">
+	<%= render 'shared/panel' %>
+	<%= render 'shared/header' %>
+	<div data-role="content">
+		<%= render 'shared/flash', flash: flash %>
+		<div style="text-align:center;">
+			<h2 style="margin-bottom:0;">Welcome!</h2>
+			<%= current_user.email %>
+		</div>
+		<%= link_to "Set up a 3-week plan", setup_user_path(current_user), "data-role" => "button", "data-icon" => "arrow-r", 
+			"data-iconpos" => "right", style: "margin-top:20px;" %>
+		<%= debug(params) if Rails.env.development? %>
+	</div>
+</div>
