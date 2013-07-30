@@ -35,6 +35,7 @@ class Program < ActiveRecord::Base
     habit = Habit.find_by_name(self.habit)
     habit.cues.each { |cue| self.remessages.create(content: cue.content) } if habit != nil
     habit.todos.each { |todo| self.user_todos.create(name: todo.name) } if habit != nil
+    self.user_todos.create(name: "Hit the<img src=\"/assets/share-button.png\" class=\"checklist_image\" /> button then 'Add to Home Screen' to create a bookmark icon on your iPhone")
     days_num.times { |i| self.days.create(day: i + 1, date: self.start_date + i) } if start_date != nil
     weeks_num.times { |i| self.weeks.create(week: i + 1, start_date: self.start_date + i*7, end_date: self.start_date + 6 + i*7 ) }
   end
