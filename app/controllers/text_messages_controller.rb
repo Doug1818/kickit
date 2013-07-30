@@ -72,10 +72,12 @@ class TextMessagesController < ApplicationController
 						end
 					end
 				else
-					received_msg = "Invalid check-in. Please enter either 'Y' or 'N' or type '@' at the start of your message to reach customer support. Thank you!"
-					response = Twilio::TwiML::Response.new { |r| r.Sms received_msg }
-					render :xml => response.text
-					received_text = @program.received_texts.create(message: received_msg)
+					unless @program.sent_texts.last.message.length > 140 && @program.sent_texts.last.message[0] == "@" # Check for truncated customer support text
+						received_msg = "Invalid check-in. Please enter either 'Y' or 'N' or type '@' at the start of your message to reach customer support. Thank you!"
+						response = Twilio::TwiML::Response.new { |r| r.Sms received_msg }
+						render :xml => response.text
+						received_text = @program.received_texts.create(message: received_msg)
+					end
 				end
 			else
 				if @program.start_date > Date.current
