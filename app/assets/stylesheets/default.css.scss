@@ -387,6 +387,8 @@ ul.ui-autocomplete.ui-menu {
 .pretty_table {
   tr {
     text-align:left;
+    vertical-align: top;
+    line-height: 1.1em;
     border-bottom: 1px solid #fff;
     &:first-child {
       border-top: 1px solid #fff;
@@ -402,7 +404,7 @@ ul.ui-autocomplete.ui-menu {
       width: 150px;
     }
     .result {
-      width: 90px;
+      width: 125px;
     }
     .goal {
       width: 220px;

@@ -1,6 +1,6 @@
 <p><%= "#{@supporter.first_name}," %></p>
 
-<p><%= @user.email %> was <strong>successful <%= @program.prev_week_sdays %> of 7 days last week</strong> in cutting down on <%= @program.habit.downcase %>.</p>
+<p><%= @user.email %> was <strong>successful <%= @program.prev_week_sdays %> of <%= 7 - @program.last_week.used_free_days %> days last week</strong> in cutting down on <%= @program.habit.downcase %>.</p>
 
 <p>To view daily results and send them some encouragement, <%= link_to "click here", supporter_url(@supporter) %>.</p>
 

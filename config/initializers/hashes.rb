@@ -1,1 +1,1 @@
-RESULTS = { "Successful" => 1, "Unsuccessful" => 2, "Failed to check in" => 4 }
+RESULTS = { "Successful" => 1, "Unsuccessful" => 2, "Failed to check in" => 4, "Used a Free Day" => 5 }
