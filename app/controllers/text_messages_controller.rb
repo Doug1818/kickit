@@ -72,9 +72,10 @@ class TextMessagesController < ApplicationController
 						end
 					end
 				else
-					#binding.pry
 					last_sent_msg = @program.sent_texts.order("created_at desc")[1].message
-					unless last_sent_msg.length > 140 && last_sent_msg[0] == "@" # Check for truncated customer support text
+					if last_sent_msg.length > 140 && last_sent_msg[0] == "@" # Check for truncated customer support text
+						render :nothing => true
+					else
 						received_msg = "Invalid check-in. Please enter either 'Y' or 'N' or type '@' at the start of your message to reach customer support. Thank you!"
 						response = Twilio::TwiML::Response.new { |r| r.Sms received_msg }
 						render :xml => response.text
