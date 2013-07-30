@@ -1,35 +1,28 @@
-<% content_for :title do %><title><%= @day.date.strftime("%a, %b %d") %></title><% end %>
-<% content_for :h1 do %><h1><%= @day.date.strftime("%a, %b %d") %></h1><% end %>
-
-<div data-role="page">
-	<%= render 'shared/panel' %>
-	<%= render 'shared/header' %>
+<div data-role="dialog">
+	<div data-role="header" data-theme="d">
+    <h1><%= @day.date.strftime("%A, %B %d") %></h1>
+	</div>
 	<div data-role="content">
 		<%= render 'shared/flash', flash: flash %>
-		<div style="margin-bottom:10px;">
-			<%= link_to "Back", find_path, "data-role" => "button", "data-icon" => "arrow-l", 
-				"data-iconpos" => "left", "data-inline" => true, "data-mini" => true %>
-		</div>
-
 		<% if @day.result == 1 %>
-			<div>You were successful on this day.</div>
+			<h4>You were successful on this day.</h4>
 		<% elsif @day.result == 2 %>
-			<div>You were not successful on this day.</div>
+			<h4>You were not successful on this day.</h4>
 		<% elsif @day.result == 3 %>
-			<div>Were you successful on this day?</div>
+			<h4>Were you successful on this day?</h4>
 			<div data-role="controlgroup">
-			    <%= link_to "Yes", success_day_path(@day), method: :put, "data-role" => "button" %>
-				<%= link_to "No", failure_day_path(@day), method: :put, "data-role" => "button" %>
+			    <%= link_to "Yes", success_day_path(@day), method: :put, "data-role" => "button", "data-theme" => "d" %>
+				<%= link_to "No", failure_day_path(@day), method: :put, "data-role" => "button", "data-theme" => "d" %>
 				<% if Program.find(@day.program_id).free_days_left > 0 %>
-					<%= link_to "Use A Free Day", free_day_path(@day), method: :put, "data-role" => "button" %>
+					<%= link_to "Use A Free Day", free_day_path(@day), method: :put, "data-role" => "button", "data-theme" => "d" %>
 				<% end %>
 			</div>
 		<% elsif @day.result == 4 %>
-			<div>You missed your check-in on this day. We charged you a buck.</div>
+			<h4>You missed your check-in on this day. We charged you a buck.</h4>
 		<% elsif @day.result == 5 %>
-			<div>You used one of your Free Days this day.</div>
+			<h4>You used one of your Free Days this day.</h4>
 		<% else %>
-			<div>Too early to check in.</div>
+			<h4>Too early to check in.</h4>
 		<% end %>
 		<%= debug(params) if Rails.env.development? %>
 	</div>
