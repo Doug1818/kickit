@@ -387,22 +387,25 @@ ul.ui-autocomplete.ui-menu {
 .pretty_table {
   tr {
     text-align:left;
-    border-bottom: 1px solid $grayMediumLight;
+    border-bottom: 1px solid #fff;
     &:first-child {
-      border-top: 1px solid $grayMediumLight;
+      border-top: 1px solid #fff;
     }
     &:nth-child(even) {
-      background: #F8F8F8;
+      background: #717171;
     }
     &:last-child {
       margin-bottom: 20px;
-      border-bottom: none;
+      border-bottom: 1px solid #fff;
     }
     .date {
       width: 150px;
     }
     .result {
-      width: 150px;
+      width: 90px;
+    }
+    .goal {
+      width: 220px;
     }
     th {
       padding: 5px 10px;

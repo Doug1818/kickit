@@ -14,7 +14,7 @@
 					<div><%= supporter.email %></div>
 					<%= link_to "Edit", edit_supporter_path(supporter), class: "link" %>
 					<% if @supporters.count > 1 %>
-					 | <%= link_to "Delete", supporter, method: :delete, confirm: "You sure?", class: "link" %>
+					 | <%= link_to "Delete", supporter, method: :delete, confirm: "Are you sure you want to remove #{supporter.first_name} as a supporter?", class: "link" %>
 					<% end %>
 				</div>
 			<% end %>

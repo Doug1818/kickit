@@ -2,20 +2,21 @@
 <div class="container">
 <% if @program.completed_days >= 7 %>
 
-	<h2><%= @user.email %> was successful <%= @program.prev_week_sdays %> of 7 days last week.  Encourage them with a badge!</h2><br>
+	<h4 style="margin-bottom:0;"><%= @user.email %> was successful <%= @program.prev_week_sdays %> of 7 days last week.</h4>  
+	<p style="margin-bottom:0; margin-top:0;">Give them some encouragement.  Use one of our suggested messages or write your own.</p><br>
 
 	<%= form_for @supmessage do |f| %>
 		<%= render 'shared/error_messages', object: f.object %>
 		<%= f.text_area :content, value: @program.badge, style: "height:100px;width:50%" %><br>
 		<%= f.hidden_field :supporter_id, value: @supporter.id %>
-		<%= f.submit "Send badge", class: "btn" %>
+		<%= f.submit "Send message", class: "btn-supporter" %>
 	<% end %><br>
 	
-	<table class="pretty_table">
+	<table style="margin-top:0;" class="pretty_table">
 		<% @program.days.reported.order("date desc")[(-7 - 7*(@program.prev_week - 1))..(-1 - 7*(@program.prev_week - 1))].each do |day| %>
 			<tr>
-				<td class="date"><%= day.date.strftime("%a, %b %d") %></td>
-				<td class="result"><%= day.goal %></td>
+				<td class="date"><%= day.date.strftime("%A, %B %d") %></td>
+				<td class="goal"><%= day.goal %></td>
 				<td class="result"><%= RESULTS.key(day.result) %></td>
 			</tr>
 		<% end %>
