@@ -1,6 +1,6 @@
 <div data-role="dialog">
 	<div data-role="header" data-theme="d">
-    <h1><%= @day.date.strftime("%A, %B %d") %></h1>
+    <h1><%= @day.date.strftime("%a, %b %d") %></h1>
 	</div>
 	<div data-role="content">
 		<%= render 'shared/flash', flash: flash %>
