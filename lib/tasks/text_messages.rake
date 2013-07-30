@@ -77,6 +77,14 @@ task :full_hour_jobs => :environment do
 		end
 	end
 
+	# PRE-START-DATE REMINDER EMAIL: Send reminder email at 6pm the day before the program start
+	Program.start_tomorrow.all.each do |program|
+		user = User.find(program.user_id)
+		if Time.now.in_time_zone(user.time_zone).hour == 18
+			UserMailer.start_tomorrow(user).deliver
+		end
+	end
+
 	# WELCOME TEXT: Send welcome text at 9am on first morning
 	Program.start_today.all.each do |program|
 		user = User.find(program.user_id)
