@@ -1,5 +1,6 @@
 class UserTodosController < ApplicationController
-  before_filter :authenticate_user!, only: [:complete]
+  #before_filter :authenticate_user!, only: [:complete]
+  skip_before_filter :verify_authenticity_token
 
   def complete
     @user_todo = UserTodo.find(params[:id])
