@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
     if self.programs.count >= 1
       programs = self.programs
       x = []
-      programs.each { |p| x.push(p.start_date) if p.start_date > Date.today }
+      programs.each { |p| x.push(p.start_date) if p.start_date > Date.current }
       programs.find { |p| p.start_date == x.min }
     else
       nil
