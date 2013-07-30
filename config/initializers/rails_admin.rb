@@ -380,8 +380,9 @@ RailsAdmin.config do |config|
           field :email
           field :first_name
           field :first_habit
-          field :time_zone
+          #field :time_zone
           field :phone
+          field :stripe_customer_id
           field :sign_in_count
           field :last_sign_in_at
   #       # filters [:id, :name]  # Array of field names which filters should be shown by default in the table header
