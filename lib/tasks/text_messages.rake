@@ -114,7 +114,7 @@ task :half_hour_jobs => :environment do
 
 		messages = []
 		program.remessages.each { |m| messages.push(m.content) }
-		message = messages.empty? ? "Future you is thanking present you." : messages.sample
+		message = messages.empty? ? "Your Kick-It program has no reminders. Write your own here: http://kick-it-now.com/reminders" : messages.sample
 
 		program.reminders.each do |reminder|
 			if Time.zone.now.hour == reminder.time.hour && reminder.time.min == 30
