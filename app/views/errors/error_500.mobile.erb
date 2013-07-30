@@ -9,9 +9,9 @@
 		<h2>We're sorry</h2>
 		<p>Something went wrong.</p>
 
-		<p>Please go back to the <%= link_to "Kick-It home page", root_path, class: "link" %> and try again.</p>
+		<p>Reload the <%= link_to "Kick-It home page", root_path, class: "link" %> and try to do what you just did again.</p>
 
-		<p>If the problem persists, please <a href="mailto:support@kick-it-now.com" class="link">report</a> your problem and the query that caused it.</p>
+		<p>If it works...awesome, it was just a fluke.  If it shows this screen again, please <a href="mailto:support@kick-it-now.com" class="link">report</a> your problem and what you were trying to do.  We'll get right on fixing it for you.</p>
 		<%= debug(params) if Rails.env.development? %>
 	</div>
 </div>

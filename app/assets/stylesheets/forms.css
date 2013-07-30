@@ -133,6 +133,26 @@ input[type='submit'], input[type='button'] {
   display: inline-block;
 }
 
+.btn-supporter {
+  background-color: #5673b8;
+  border: 2pt solid #ffffff;
+  -moz-border-radius: 25pt;
+  -webkit-border-radius: 25pt;
+  border-radius: 25pt;
+  width: 112pt;
+  height: 20pt;
+  text-align: center;
+  color: #fff;
+  font-family: 'EB Garamond', serif;
+  /* set backup to Times */
+  font-size: 12pt;
+  font-weight: normal !important;
+  padding: 0;
+  padding-bottom: -50px;
+  cursor: pointer;
+  display: inline-block;
+}
+
 .invalidated-field {
 //  background-color: #f99 !important;
   background-color: #c33 !important;
