@@ -36,6 +36,7 @@ Kickit::Application.routes.draw do
       put :complete
     end
   end
+  resources :comments
   
   root to: 'static_pages#home'
   match '/carousel',  to: 'static_pages#carousel'

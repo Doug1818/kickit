@@ -23,6 +23,7 @@ class StaticPagesController < ApplicationController
 			@days = current_user.program.days
   		@today = params[:month] ? Date.parse(params[:month]) : Date.current
   		@day = current_user.program.days.find_by_date(Date.current)
+  		
 		end
 	end
 
