@@ -137,11 +137,29 @@ RailsAdmin.config do |config|
   #   # Section specific configuration:
 
     list do
-      field :program
-      field :day
-      field :result
-      field :date
-      field :goal
+      field :program do
+        column_width 150
+      end
+      field :day do
+        column_width 50
+      end
+      field :result do
+        column_width 75
+      end
+      field :date do
+        column_width 100
+      end
+      field :goal do
+        column_width 100
+      end
+      field :want_count do
+        label "Wanted"
+        column_width 70
+      end
+      field :did_count do
+        label "Did"
+        column_width 70
+      end
       field :updated_at
       field :created_at
       field :id
