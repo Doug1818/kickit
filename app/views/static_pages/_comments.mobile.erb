@@ -5,9 +5,11 @@
 		<div class="ccontent"><%= c.content %></div>
 	<% end %>
 <% end %>
+<div id="jscomments_<%= day.id %>"></div>
+<style type="text/css">.hidden {display: none}</style>
 <div><a href="javascript:void(0);" class="togsupinfo link">Add a Comment</a></div>
 <div class="supinfo" style="display:none;">
-	<%= form_for day.comments.build, html: { id: "new_comment_#{day.id}" } do |f| %>
+	<%= form_for day.comments.build, remote: true, html: { id: "new_comment_#{day.id}" } do |f| %>
 		<%= render 'shared/error_messages', object: f.object %>
 		<%= f.text_area :content, id: "comment_content_#{day.id}" %>
 		<div id="charcount_<%= day.id %>" style="text-align:right;font-size:8pt;"></div>
@@ -18,6 +20,7 @@
 		<%= f.submit "Add Comment", "data-theme" => "d" %>
 	<% end %>
 </div>
+<% user = User.find(Program.find(day.program_id).user_id) %>
 <script type="text/javascript">
 	// Charactier counter
 	$(document).on('pagebeforeshow', function(){
@@ -49,7 +52,12 @@
         $('input[type=submit]').attr('disabled', false);
         return false;
       } else {
-        $('#new_comment_<%= day.id %>')[0].submit();
+      	$('#new_comment_<%= day.id %>').trigger('submit.rails');
+      	$('.ui-submit').removeClass('ui-btn-active')
+      	$("#jscomments_<%= day.id %>").append("<div class='ctime'><%= Time.now.in_time_zone(user.time_zone).strftime('%a, %b %e, %l:%M%P') %></div><div class='ccontent'>" + $('#comment_content_<%= day.id %>').val() + "</div>")
+      	$('#comment_content_<%= day.id %>').val('');
+      	$('input[type=submit]').attr('disabled', false);
+        //$('#new_comment_<%= day.id %>')[0].submit();
       }
 			return false;
 	  });
