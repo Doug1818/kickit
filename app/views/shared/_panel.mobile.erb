@@ -6,6 +6,7 @@
 		<% if current_user != nil %>
 			<%= link_to 'Billing Info', billing_user_path(current_user), "data-role" => "button" %>
 		<% end %>
+		<%= link_to 'Pre-start Checklist', checklist_path, "data-role" => "button" %>
 	</div>
 	<%= link_to 'Sign Out', destroy_user_session_path, method: "delete", "data-role" => "button" %>
 </div>

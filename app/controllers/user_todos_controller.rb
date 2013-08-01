@@ -9,6 +9,6 @@ class UserTodosController < ApplicationController
     else
       @user_todo.update_attributes!(completed: false)
     end
-    redirect_to root_path
+    redirect_to checklist_path
   end
 end

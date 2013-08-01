@@ -1,20 +1,20 @@
 <h2>Pre-start Checklist</h2>
-<h4 style="margin:0">Your 3-week program starts on <%= current_user.next_program.start_date.strftime("%A, %B %d") %></h4>
+<h4 style="margin:0">Your 3-week program starts on <%= current_user.program.start_date.strftime("%A, %B %d") %></h4>
 <br>
 
 <h3 style="margin-bottom:5px">Required</h3>
 <ul data-role="listview" data-inset="true">
-  <% if current_user.next_program.supporters.any? %>
+  <% if current_user.program.supporters.any? %>
     <li data-icon="false">
       <a href=<%= supporters_path %> style="font-weight: bold;">
       <img src="/assets/checklist_checked.png" class="ui-li-icon ui-corner-none">
-      <%= "Add Supporters (#{current_user.next_program.supporters.count} added)" %></a>
+      <%= "Add Supporters (#{current_user.program.supporters.count} added)" %></a>
     </li>
   <% else %>
     <li data-icon="false">
       <a href=<%= supporters_path %> style="font-weight: bold;">
       <img src="/assets/checklist_unchecked.png" class="ui-li-icon ui-corner-none">
-      <%= "Add Supporters (#{current_user.next_program.supporters.count} added)" %></a>
+      <%= "Add Supporters (#{current_user.program.supporters.count} added)" %></a>
     </li>
   <% end %>
   <% if current_user.stripe_customer_id? %>
@@ -30,10 +30,10 @@
   <% end %>
 </ul>
 
-<% if current_user.next_program.user_todos.any? %>
+<% if current_user.program.user_todos.any? %>
 <h3 style="margin-top:20px;margin-bottom:5px">Optional</h3>
 <ul data-role="listview" data-inset="true">
-  <% current_user.next_program.user_todos.order("created_at desc").each do |user_todo| %>
+  <% current_user.program.user_todos.order("created_at desc").each do |user_todo| %>
     <% if user_todo.completed == true %>
       <li data-icon="false">
         <a href=<%= complete_user_todo_path(user_todo) %> data-method="put">
