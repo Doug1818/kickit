@@ -50,22 +50,7 @@
 							</div>
 							<div class="popup-content">
 								<h4 style="margin-bottom:10px;">You were successful on this day.</h4>
-								<% if day.comments.any? %>
-									<p style="text-align:center;margin: 20px 0 7px 0;">Your Comments:</p>
-									<% day.comments.each do |c| %>
-										<div class="ctime"><%= c.created_at.strftime("%a, %b %e, %l:%M%P") %></div>
-										<div class="ccontent"><%= c.content %></div>
-									<% end %>
-								<% end %>
-								<div><a href="javascript:void(0);" class="togsupinfo link">Add a Comment</a></div>
-								<div class="supinfo" style="display:none;">
-									<%= form_for day.comments.build do |f| %>
-										<%= render 'shared/error_messages', object: f.object %>
-										<%= f.text_area :content %>
-										<%= f.hidden_field :day_id, value: day.id %>
-										<%= f.submit "Add Comment", "data-theme" => "d" %>
-									<% end %>
-								</div>
+								<%= render 'comments', day: day %>
 							</div>
 						</div>
 					<% elsif day.result == 2 %>
@@ -77,22 +62,7 @@
 							</div>
 					    <div class="popup-content">
 								<h4 style="margin-bottom:10px;">You were not successful on this day.</h4>
-								<% if day.comments.any? %>
-									<p style="text-align:center;margin: 20px 0 7px 0;">Your Comments:</p>
-									<% day.comments.each do |c| %>
-										<div class="ctime"><%= c.created_at.strftime("%a, %b %e, %l:%M%P") %></div>
-										<div class="ccontent"><%= c.content %></div>
-									<% end %>
-								<% end %>
-								<div><a href="javascript:void(0);" class="togsupinfo link">Add a Comment</a></div>
-								<div class="supinfo" style="display:none;">
-									<%= form_for day.comments.build do |f| %>
-										<%= render 'shared/error_messages', object: f.object %>
-										<%= f.text_area :content %>
-										<%= f.hidden_field :day_id, value: day.id %>
-										<%= f.submit "Add Comment", "data-theme" => "d" %>
-									<% end %>
-								</div>
+								<%= render 'comments', day: day %>
 							</div>
 						</div>
 					<% elsif day.result == 3 %>
@@ -111,22 +81,7 @@
 										<%= link_to "Use a Free Day", free_day_path(day), method: :put, "data-role" => "button", "data-theme" => "d" %>
 									<% end %>
 								</div>
-								<% if day.comments.any? %>
-									<p style="text-align:center;margin: 20px 0 7px 0;">Your Comments:</p>
-									<% day.comments.each do |c| %>
-										<div class="ctime"><%= c.created_at.strftime("%a, %b %e, %l:%M%P") %></div>
-										<div class="ccontent"><%= c.content %></div>
-									<% end %>
-								<% end %>
-								<div><a href="javascript:void(0);" class="togsupinfo link">Add a Comment</a></div>
-								<div class="supinfo" style="display:none;">
-									<%= form_for day.comments.build do |f| %>
-										<%= render 'shared/error_messages', object: f.object %>
-										<%= f.text_area :content %>
-										<%= f.hidden_field :day_id, value: day.id %>
-										<%= f.submit "Add Comment", "data-theme" => "d" %>
-									<% end %>
-								</div>
+								<%= render 'comments', day: day %>
 							</div>
 						</div>
 					<% elsif day.result == 4 %>
@@ -138,22 +93,7 @@
 							</div>
 					    <div class="popup-content">
 								<h4 style="margin-bottom:10px;">You missed your check-in on this day. We charged you a buck.</h4>
-								<% if day.comments.any? %>
-									<p style="text-align:center;margin: 20px 0 7px 0;">Your Comments:</p>
-									<% day.comments.each do |c| %>
-										<div class="ctime"><%= c.created_at.strftime("%a, %b %e, %l:%M%P") %></div>
-										<div class="ccontent"><%= c.content %></div>
-									<% end %>
-								<% end %>
-								<div><a href="javascript:void(0);" class="togsupinfo link">Add a Comment</a></div>
-								<div class="supinfo" style="display:none;">
-									<%= form_for day.comments.build do |f| %>
-										<%= render 'shared/error_messages', object: f.object %>
-										<%= f.text_area :content %>
-										<%= f.hidden_field :day_id, value: day.id %>
-										<%= f.submit "Add Comment", "data-theme" => "d" %>
-									<% end %>
-								</div>
+								<%= render 'comments', day: day %>
 							</div>
 						</div>
 					<% elsif day.result == 5 %>
@@ -165,22 +105,7 @@
 							</div>
 					    <div class="popup-content">
 								<h4 style="margin-bottom:10px;">You used one of your Free Days this day.</h4>
-								<% if day.comments.any? %>
-									<p style="text-align:center;margin: 20px 0 7px 0;">Your Comments:</p>
-									<% day.comments.each do |c| %>
-										<div class="ctime"><%= c.created_at.strftime("%a, %b %e, %l:%M%P") %></div>
-										<div class="ccontent"><%= c.content %></div>
-									<% end %>
-								<% end %>
-								<div><a href="javascript:void(0);" class="togsupinfo link">Add a Comment</a></div>
-								<div class="supinfo" style="display:none;">
-									<%= form_for day.comments.build do |f| %>
-										<%= render 'shared/error_messages', object: f.object %>
-										<%= f.text_area :content %>
-										<%= f.hidden_field :day_id, value: day.id %>
-										<%= f.submit "Add Comment", "data-theme" => "d" %>
-									<% end %>
-								</div>
+								<%= render 'comments', day: day %>
 							</div>
 						</div>
 					<% elsif day.result == nil %>
@@ -193,65 +118,8 @@
 							<% if day.date == Date.current %>
 								<div class="popup-content">
 									<h4 style="margin-bottom:10px;">Too early to check in.</h4>
-									<% if day.comments.any? %>
-										<p style="text-align:center;margin: 20px 0 7px 0;">Your Comments:</p>
-										<% day.comments.each do |c| %>
-											<div class="ctime"><%= c.created_at.strftime("%a, %b %e, %l:%M%P") %></div>
-											<div class="ccontent"><%= c.content %></div>
-										<% end %>
-									<% end %>
-									<div><a href="javascript:void(0);" class="togsupinfo link">Add a Comment</a></div>
-									<div class="supinfo" style="display:none;">
-										<%= form_for day.comments.build, html: { id: "new_comment_#{day.id}" } do |f| %>
-											<%= render 'shared/error_messages', object: f.object %>
-											<%= f.text_area :content, id: "comment_content_#{day.id}" %>
-											<div id="charcount_<%= day.id %>" style="text-align:right;font-size:8pt;"></div>
-											<div id="comment_error_<%= day.id %>" class="client_error">
-					              <noscript>JavaScript is not enabled and is required for this form. First enable it in your web browser settings.</noscript>
-					            </div>
-											<%= f.hidden_field :day_id, value: day.id %>
-											<%= f.submit "Add Comment", "data-theme" => "d" %>
-										<% end %>
-									</div>
+									<%= render 'comments', day: day %>
 								</div>
-								<script type="text/javascript">
-									// Charactier counter
-									$(document).on('pagebeforeshow', function(){
-										$('#comment_content_<%= day.id %>').keyup(function () {
-										  var max = 255;
-										  var len = $(this).val().length;
-										  var char = max - len;
-										  if (len == max) {
-										    $('#charcount_<%= day.id %>').text('You are at the character limit');
-									    } else if (len >= max) {
-									    	$('#charcount_<%= day.id %>').text(Math.abs(char) + ' characters over the limit');
-										  } else {
-										    $('#charcount_<%= day.id %>').text(char + ' characters left');
-										  }
-										});
-									});
-
-									// Content field validation
-									$(document).on('pagebeforeshow', function(){
-									  $('#new_comment_<%= day.id %>').submit(function() {
-									    $('input[type=submit]').attr('disabled', true);
-									    if ($('#comment_content_<%= day.id %>').val().length == 0) {
-							          $('#comment_error_<%= day.id %>').text("Comment can't be blank");
-							          $('.ui-submit').removeClass('ui-btn-active')
-							          $('input[type=submit]').attr('disabled', false);
-							          return false;
-						          } else if ($('#comment_content_<%= day.id %>').val().length >= 255) {
-							          $('#comment_error_<%= day.id %>').text("Comment can't be longer than 255 characters. You need to cut " + ($('#comment_content_<%= day.id %>').val().length - 255) + " characters.");
-							          $('.ui-submit').removeClass('ui-btn-active')
-							          $('input[type=submit]').attr('disabled', false);
-							          return false;
-							        } else {
-							          return $('#new_comment_<%= day.id %>')[0].submit();
-							        }
-											return false;
-									  });
-									});
-								</script>
 							<% else %>
 								<div class="popup-content" style="margin-bottom:-10px;padding-bottom:0;"><h4>Too early to check in.</h4></div>
 							<% end %>
