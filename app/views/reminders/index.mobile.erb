@@ -6,7 +6,7 @@
 	<%= render 'shared/header' %>
 	<div data-role="content">
 		<%= render 'shared/flash', flash: flash %>
-		<h3 style="margin-top:0;">Reminder times</h3>
+		<h3 style="margin-top:0;">Reminder Times</h3>
 
 		<% @reminders.order("time asc").each_with_index do |reminder, i| %>
 			<div style="margin-bottom:25px;">
@@ -19,7 +19,7 @@
 		<%= link_to "Add a New Time", new_reminder_path, "data-role" => "button", "data-theme" => "d" %>
 		<br>
 
-		<h3>Reminder messages</h3>
+		<h3>Reminder Messages</h3>
 
 		<% @remessages.each_with_index do |remessage, i| %>
 			<div style="margin-bottom:25px;">
