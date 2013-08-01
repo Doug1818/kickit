@@ -1,3 +1,11 @@
+//$(document).on('pagebeforeshow', function(){
+//  $('.new_comment').submit(function() {
+//    $('input[type=submit]').attr('disabled', true);
+//    alert('jQuery!')
+//    return false;
+//  });
+//});
+
 // Toggle
 $(document).on('pagebeforeshow', function(){
     $('.togsupinfo').click(function(){
