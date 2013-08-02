@@ -1,5 +1,5 @@
 <div data-role="header" data-theme="d">
-  <%= link_to 'Home', find_path, "data-icon" => "home", "data-iconpos" => "notext", 
+  <%= link_to 'Home', find_path, class: "force-reload", "data-icon" => "home", "data-iconpos" => "notext", 
     "data-role" => "button", "data-theme" => "c", "data-inline" => "true" %>
   <%= yield :h1 %>
   <% if user_signed_in? && current_user.programs.count >= 1 %>

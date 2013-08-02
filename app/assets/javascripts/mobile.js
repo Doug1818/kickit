@@ -1,10 +1,10 @@
-//$(document).on('pagebeforeshow', function(){
-//  $('.new_comment').submit(function() {
-//    $('input[type=submit]').attr('disabled', true);
-//    alert('jQuery!')
-//    return false;
-//  });
-//});
+// Refresh home page
+$(document).on('pageinit', function(){
+  $('a.force-reload').on('click', function(e) {
+    var url = $(this).attr('href');
+    $.mobile.changePage( url, { reloadPage: true, transition: "none"} );
+  });
+});
 
 // Toggle
 $(document).on('pagebeforeshow', function(){
