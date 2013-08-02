@@ -52,7 +52,7 @@
         $('.ui-submit').removeClass('ui-btn-active')
         $('input[type=submit]').attr('disabled', false);
         return false;
-      } else if ($('#comment_content_<%= day.id %>').val().length >= 255) {
+      } else if ($('#comment_content_<%= day.id %>').val().length > 255) {
         $('#comment_error_<%= day.id %>').text("Comment can't be longer than 255 characters. You need to cut " + ($('#comment_content_<%= day.id %>').val().length - 255) + " characters.");
         $('.ui-submit').removeClass('ui-btn-active')
         $('input[type=submit]').attr('disabled', false);
