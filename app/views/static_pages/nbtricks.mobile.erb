@@ -1,0 +1,24 @@
+<% content_for :title do %><title>Nail Biting Tricks</title><% end %>
+<% content_for :h1 do %><h1>Nail Biting Tricks</h1><% end %>
+
+<div data-role="page">
+	<%= render 'shared/panel' %>
+	<%= render 'shared/header' %>
+	<div data-role="content">
+		<%= render 'shared/flash', flash: flash %>
+		<h4>Try doing one of the following when you feel the urge to bite your nails</h4>
+		<ul class="tricks_list">
+			<li>Fidget with an object</li>
+			<li>Clip your nails</li>
+			<li>Chew gum</li>
+			<li>Grab a snack</li>
+			<li>Drum your fingers</li>
+			<li>Play with clay</li>
+			<li>10 deep breaths</li>
+			<li>Doodle / draw</li>
+			<li>Write</li>
+			<li>Go chat with someone</li>
+		</ul>
+		<%= debug(params) if Rails.env.development? %>
+	</div>
+</div>

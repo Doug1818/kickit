@@ -31,4 +31,16 @@ class StaticPagesController < ApplicationController
 
 	def checklist
 	end
+
+	def nbtricks
+	end
+
+	def estricks
+	end
+
+	def lnstricks
+	end
+
+	def oetricks
+	end
 end

@@ -1,0 +1,22 @@
+<% content_for :title do %><title>Eating Sweets Tricks</title><% end %>
+<% content_for :h1 do %><h1>Sweets Tricks</h1><% end %>
+
+<div data-role="page">
+	<%= render 'shared/panel' %>
+	<%= render 'shared/header' %>
+	<div data-role="content">
+		<%= render 'shared/flash', flash: flash %>
+		<h4>Try one of the following when you find yourself craving something sweet</h4>
+		<ul class="tricks_list">
+			<li>Chew gum</li>
+			<li>Fruit</li>
+			<li>Water</li>
+			<li>Tea</li>
+			<li>Go chat with someone</li>
+			<li>Quick walk</li>
+			<li>Exercise</li>
+			<li>Juice</li>
+		</ul>
+		<%= debug(params) if Rails.env.development? %>
+	</div>
+</div>
