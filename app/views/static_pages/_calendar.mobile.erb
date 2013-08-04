@@ -10,7 +10,7 @@
 <!-- Todays's Goal -->
 <% if current_user.program.days.find_by_date(Date.current).goal? %>
 	<h3 style="margin-bottom:0;">Today's Goal:</h3>
-	<h4 style="margin-top:0;margin-bottom:10px;"><%= current_user.program.days.find_by_date(Date.current).goal %></h4>
+	<h4 style="margin-top:0;margin-bottom:10px;"><%= current_user.program.days.find_by_date(Date.current).goal.html_safe %></h4>
 <% end %>
 
 <!-- Counters -->

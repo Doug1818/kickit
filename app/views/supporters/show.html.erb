@@ -3,31 +3,97 @@
 <% if @program.completed_days >= 7 %>
 
 	<h4 style="margin-bottom:0;"><%= @user.first_name %> was successful <%= @program.prev_week_sdays %> of <%= 7 - @program.last_week.used_free_days %> days last week.</h4>  
-	<p style="margin-bottom:0; margin-top:0;">Give them some encouragement.  Use one of our suggested messages or write your own.</p><br>
+	<p style="margin-bottom:0; margin-top:0;">Give them some encouragement.  You can use one of our suggested messages or write your own.</p><br>
 
 	<%= form_for @supmessage do |f| %>
 		<%= render 'shared/error_messages', object: f.object %>
-		<%= f.text_area :content, value: @program.badge, style: "height:100px;width:50%" %><br>
+		<%= f.text_area :content, value: "@program.badge", style: "height:100px;width:50%;font-size:13pt;font-family: 'EB Garamond', serif;" %><br>
 		<%= f.hidden_field :supporter_id, value: @supporter.id %>
 		<%= f.submit "Send message", class: "btn-supporter" %>
-	<% end %><br>
+	<% end %>
 	
-	<table style="margin-top:0;" class="pretty_table">
-		<% @program.days.reported.order("date desc")[(-7 - 7*(@program.prev_week - 1))..(-1 - 7*(@program.prev_week - 1))].each do |day| %>
-			<tr>
-				<td class="date"><%= day.date.strftime("%A, %B %d") %></td>
-				<td class="goal"><%= day.goal %></td>
-				<td class="result"><%= RESULTS.key(day.result) %></td>
-			</tr>
-		<% end %>
+	<h5><%= "#{@user.first_name}'s Results" %></h5>
+	<p style="font-style:italic;margin-bottom:5px;margin-top:0;">Daily Goal: <%= @program.days.first.goal %></p>
+	<table class="suptable">
+		<tr>
+			<th><%= @program.days.find_by_day(1).date.strftime("%a") %></th>
+			<th><%= @program.days.find_by_day(2).date.strftime("%a") %></th>
+			<th><%= @program.days.find_by_day(3).date.strftime("%a") %></th>
+			<th><%= @program.days.find_by_day(4).date.strftime("%a") %></th>
+			<th><%= @program.days.find_by_day(5).date.strftime("%a") %></th>
+			<th><%= @program.days.find_by_day(6).date.strftime("%a") %></th>
+			<th><%= @program.days.find_by_day(7).date.strftime("%a") %></th>
+		</tr>
+		<tr>
+			<% @program.weeks.closed[0].days.each do |d| %>
+				<td>
+					<% if d.result == 1 %>
+						<%= image_tag("glyphicons_206_ok_2.png", size: "15x15") %>
+					<% elsif d.result == 2 %>
+						<%= image_tag("glyphicons_207_remove_2.png", size: "15x15") %>
+					<% elsif d.result == 3 %>
+						<%= image_tag("glyphicons_030_pencil.png", size: "15x15") %>
+					<% elsif d.result == 4 %>
+						<%= image_tag("glyphicons_196_circle_exclamation_mark.png", size: "15x15") %>
+					<% elsif d.result == 5 %>
+						FREE DAY
+					<% end %>
+				</td>
+			<% end %>
+		</tr>
 	</table>
 
+	<% if @program.weeks.closed.count > 1 %>
+		<div><a href="javascript:void(0);" class="link" id="1">See Past Weeks</a></div>
+		<div id="2" style="display:none;">
+			<table class="suptable">
+				<% @program.weeks.closed[1..-1].each do |w| %>
+					<tr>
+						<% w.days.each do |d| %>
+							<td>
+								<% if d.result == 1 %>
+									<%= image_tag("glyphicons_206_ok_2.png", size: "15x15") %>
+								<% elsif d.result == 2 %>
+									<%= image_tag("glyphicons_207_remove_2.png", size: "15x15") %>
+								<% elsif d.result == 3 %>
+									<%= image_tag("glyphicons_030_pencil.png", size: "15x15") %>
+								<% elsif d.result == 4 %>
+									<%= image_tag("glyphicons_196_circle_exclamation_mark.png", size: "15x15") %>
+								<% elsif d.result == 5 %>
+									FREE DAY
+								<% end %>
+							</td>
+						<% end %>
+					</tr>
+				<% end %>
+			</table>
+		</div>
+	<% end %>
+
+	<script type="text/javascript">
+		// Toggle
+		$(function() {
+		    $('#1').click(function(){
+		        $('#2').toggle();
+		    });
+		});
+	</script>
+
+	<p style="width:50%">
+		<%= image_tag("glyphicons_206_ok_2.png", size: "12x12") %> &nbsp;Successful, &nbsp;
+		<%= image_tag("glyphicons_207_remove_2.png", size: "12x12") %> &nbsp;Unsuccessful, &nbsp;
+		<%= image_tag("glyphicons_196_circle_exclamation_mark.png", size: "12x12") %> &nbsp;Failed to check in, &nbsp;
+		<%= image_tag("free_day.png", size: "20x20", style: "position:relative;top:5px;") %> &nbsp;Used a Free Day
+	</p>
+
 	<% if @supporter.supmessages.count > 0 %>
-		<h3>Badge History</h3>
-		<% @supporter.supmessages.order("created_at desc").each do |supmessage| %>
-			<div class="msg_info"><%= supmessage.created_at.strftime("%a, %b %e, %l:%M%P") %></div>
-			<div class="content"><%= supmessage.content.gsub(/\n/, '<br/>').html_safe %></div>
-		<% end %>
+		<h5>Message History</h5>
+		<div class="supmessages">
+			<% @supporter.supmessages.order("created_at desc").each do |supmessage| %>
+				<div class="msg_info"><%= supmessage.created_at.strftime("%a, %b %e, %l:%M%P") %></div>
+				<div class="content"><%= supmessage.content.gsub(/\n/, '<br/>').html_safe %></div>
+			<% end %>
+		</div>
 	<% end %>
 <% end %>
 </div>

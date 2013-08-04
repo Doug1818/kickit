@@ -3,7 +3,7 @@ class SupmessagesController < ApplicationController
 		@supporter = Supporter.find(params[:supmessage][:supporter_id])
 		@supmessage = @supporter.supmessages.build(content: params[:supmessage][:content])
     if @supmessage.save
-      flash[:success] = "Badge sent"
+      flash[:success] = "Message sent"
       redirect_to supporter_path(@supporter)
       UserMailer.supporter_badge(@supmessage).deliver
     else

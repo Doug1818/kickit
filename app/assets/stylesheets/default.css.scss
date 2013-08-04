@@ -102,6 +102,15 @@ h4 {
   font-weight: normal;
 }
 
+h5 {
+  font-family: 'EB Garamond', serif;
+  /* set backup to Times */
+  font-size: 16pt;
+  color: #ffffff;
+  font-weight: normal;
+  margin-bottom: 0;
+}
+
 p {
   font-family: 'EB Garamond', serif;
   /* set backup to Times */
@@ -109,6 +118,16 @@ p {
   color: #ffffff;
   font-weight: normal;
   line-height: 1.5;
+}
+
+.link {
+  text-decoration:none;
+  font-weight: normal !important;
+  color: #f8a159 !important;
+}
+
+td {
+  font-size: 13pt;
 }
 
 img {
@@ -384,6 +403,40 @@ ul.ui-autocomplete.ui-menu {
 
 /* tables */
 
+.suptable {
+  text-align:center;
+  color: black;
+  border-collapse: collapse;
+  width: 50%;
+}
+
+.suptable td,
+.suptable th {
+  font-family: "Lucida Grande",arial,helvetica,sans-serif;
+  font-size: 10px;
+  padding: 3px;
+  border: 1px solid #999;
+}
+
+.suptable th {
+  background: #DDD;
+  color: #666;
+  text-align: center;
+  width: 14.2857142857143%;
+}
+
+.suptable td {
+  margin: 0;
+  padding: 0.6em;
+  background: #FFF;
+  color: black;
+  font-weight:bold;
+  height: 30px;
+  width: 14.2857142857143%;
+  vertical-align: middle;
+  font-size: 14px;
+}
+
 .pretty_table {
   tr {
     text-align:left;
@@ -404,34 +457,37 @@ ul.ui-autocomplete.ui-menu {
       width: 150px;
     }
     .result {
-      width: 125px;
+      width: 150px;
     }
     .goal {
       width: 220px;
     }
     th {
-      padding: 5px 10px;
+      padding: 5px 10px 5px 0;
     }
     td {
-      padding: 5px 10px;
+      padding: 5px 10px 5px 0;
     }
   }
 }
 
 /* supmessages */
 
+.supmessages {
+  width: 50%;
+}
 .msg_info {
-  margin-left: 10px;
+  text-align:right;
+  font-size: 10pt;
+  margin-right:10px;
 }
 .content {
   margin-top: 7px;
   margin-bottom: 20px;
   border: 1px solid $grayMediumLight;
   border-radius:10px;
-  background: #F8F8F8;
+  background-color: rgba(0, 0, 0, 0.1);
   padding: 10px;
-  width: 50%;
-  font: 14pt "Heletica Neue", Helvetica, Arial, sans-serif;
 }
 
 /* client_side_validations */
