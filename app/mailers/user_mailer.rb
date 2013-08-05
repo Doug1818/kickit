@@ -12,11 +12,23 @@ class UserMailer < ActionMailer::Base
   def start_tomorrow(user)
     @user = user
     @program = @user.program
-    @goal = @program.days.first.goal
+    @goal = @program.days.find_by_day(1).goal
     
     mail from:"Kick-It <support@kick-it-now.com>",
     to: @user.email,
     subject: "[Kick-It] Your Program Starts Tomorrow!"
+  end
+
+  def checkin_msg_correction(user)
+    @user = user
+    @program = @user.program
+    @msg_received = @program.days.find_by_day(8).checkin_msg
+    @msg_corrected = @program.days.find_by_day(1).checkin_msg
+    
+    mail from:"Kick-It <support@kick-it-now.com>",
+    to: @user.email,
+    bcc: "support@kick-it-now.com",
+    subject: "[Kick-It] Check-in Message Correction"
   end
 
   def supporter_badge(supmessage)
