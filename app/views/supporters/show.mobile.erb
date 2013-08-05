@@ -50,8 +50,57 @@
 				</tr>
 			</table>
 
+			<% if @program.weeks.closed.count > 1 %>
+				<div><a href="javascript:void(0);" class="link" id="1">See Past Weeks</a></div>
+				<div id="2" style="display:none;">
+					<table class="suptable">
+						<% @program.weeks.closed[1..-1].each do |w| %>
+							<tr>
+								<% w.days.each do |d| %>
+									<td>
+										<% if d.result == 1 %>
+											<%= image_tag("glyphicons_206_ok_2.png", size: "15x15") %>
+										<% elsif d.result == 2 %>
+											<%= image_tag("glyphicons_207_remove_2.png", size: "15x15") %>
+										<% elsif d.result == 3 %>
+											<%= image_tag("glyphicons_030_pencil.png", size: "15x15") %>
+										<% elsif d.result == 4 %>
+											<%= image_tag("glyphicons_196_circle_exclamation_mark.png", size: "15x15") %>
+										<% elsif d.result == 5 %>
+											FREE DAY
+										<% end %>
+									</td>
+								<% end %>
+							</tr>
+						<% end %>
+					</table>
+				</div>
+			<% end %>
+
+			<script type="text/javascript">
+				// Toggle
+				$(document).on('pageinit', function(){
+				    $('#1').click(function(){
+				        $('#2').toggle();
+				    });
+				});
+			</script>
+
+			<p style="font-size:0.8em;">
+				<span class="no-wrap"><%= image_tag("glyphicons_206_ok_2.png", size: "12x12") %> &nbsp;Successful,&nbsp;</span>
+				<span class="no-wrap"><%= image_tag("glyphicons_207_remove_2.png", size: "12x12") %>&nbsp;Unsuccessful,&nbsp;</span>
+				<span class="no-wrap"><%= image_tag("glyphicons_196_circle_exclamation_mark.png", size: "12x12") %>&nbsp;Failed&nbsp;to&nbsp;check&nbsp;in,&nbsp;</span>
+				<span class="no-wrap"><%= image_tag("free_day.png", size: "20x20", style: "position:relative;top:5px;") %> &nbsp;Used a Free Day</span>
+			</p>
+
+			<style type="text/css">
+				.no-wrap {
+					white-space: nowrap;
+				}
+			</style>
+
 			<% if @supporter.supmessages.count > 0 %>
-				<h3>Support History</h3>
+				<h4 style="text-align:left;margin-bottom:5px;margin-top:30px;font-weight:bold;">Message History</h4>
 				<% @supporter.supmessages.order("created_at desc").each do |supmessage| %>
 					<div class="msg_info"><%= supmessage.created_at.strftime("%a, %b %e, %l:%M%P") %></div>
 					<div class="content"><%= supmessage.content.gsub(/\n/, '<br/>').html_safe %></div>
