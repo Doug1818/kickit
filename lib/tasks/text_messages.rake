@@ -29,12 +29,12 @@ task :full_hour_jobs => :environment do
 			number_to_send_to = user.phone
 			if program.free_days_left > 0
 				std_msg = "[Kick-It] Were you successful yesterday? Reply 'Y' (Yes), 'N' (No), or 'F' (Free Day) to check in."
-				custom_msg = "[Kick-It] #{program.days.find_by_date(Date.current).checkin_msg} Reply 'Y' (Yes), 'N' (No), or 'F' (Free Day) to check in."
+				custom_msg = "[Kick-It] #{program.days.find_by_date(Date.current - 1).checkin_msg} Reply 'Y' (Yes), 'N' (No), or 'F' (Free Day) to check in."
 			else
 				std_msg = "[Kick-It] Were you successful yesterday? Reply 'Y' or 'N' to check in."
-				custom_msg = "[Kick-It] #{program.days.find_by_date(Date.current).checkin_msg} Reply 'Y' or 'N' to check in."
+				custom_msg = "[Kick-It] #{program.days.find_by_date(Date.current - 1).checkin_msg} Reply 'Y' or 'N' to check in."
 			end
-			message = program.days.find_by_date(Date.current).checkin_msg != nil ? custom_msg : std_msg
+			message = program.days.find_by_date(Date.current - 1).checkin_msg != nil ? custom_msg : std_msg
 			@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
 		 
 			@twilio_client.account.sms.messages.create(
