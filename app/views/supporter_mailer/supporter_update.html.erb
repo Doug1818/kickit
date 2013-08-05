@@ -1,6 +1,6 @@
 <p><%= "#{@supporter.first_name}," %></p>
 
-<p><%= @user.email %> <strong>met their goal for cutting down on <%= @program.habit.downcase %> <%= @program.last_week.successful %> of <%= 7 - @program.last_week.used_free_days %> times last week</strong>.</p>
+<p><%= @user.email %> <strong>met their goal for cutting down on <%= @program.habit.downcase %> <%= @program.weeks.closed[0].successful %> of <%= 7 - @program.weeks.closed[0].used_free_days %> times last week</strong>.</p>
 
 <p>To view daily results and send them some encouragement, <%= link_to "click here", supporter_url(@supporter) %>.</p>
 
