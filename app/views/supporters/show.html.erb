@@ -2,7 +2,7 @@
 <div class="container">
 <% if @program.completed_days >= 7 %>
 
-	<h4 style="margin-bottom:0;"><%= @user.first_name %> was successful <%= @program.prev_week_sdays %> of <%= 7 - @program.last_week.used_free_days %> days last week.</h4>  
+	<h4 style="margin-bottom:0;"><%= @user.first_name %> met their goal <%= @program.last_week.successful %> of <%= 7 - @program.last_week.used_free_days %> times last week.</h4>  
 	<p style="margin-bottom:0; margin-top:0;">Give them some encouragement.  You can use one of our suggested messages or write your own.</p><br>
 
 	<%= form_for @supmessage do |f| %>
