@@ -43,10 +43,10 @@ Kickit::Application.routes.draw do
   match '/calendar',  to: 'static_pages#calendar'
   match '/signedup',  to: 'static_pages#signedup'
   match '/checklist',  to: 'static_pages#checklist'
-  match '/nbideas',  to: 'static_pages#nbtricks'
-  match '/esideas',  to: 'static_pages#estricks'
-  match '/lnsideas',  to: 'static_pages#lnstricks'
-  match '/oeideas',  to: 'static_pages#oetricks'
+  match '/nbtricks',  to: 'static_pages#nbtricks'
+  match '/estricks',  to: 'static_pages#estricks'
+  match '/lnstricks',  to: 'static_pages#lnstricks'
+  match '/oetricks',  to: 'static_pages#oetricks'
 
   unless Rails.application.config.consider_all_requests_local
     match '*not_found', to: 'errors#error_404'
