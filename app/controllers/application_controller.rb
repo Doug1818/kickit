@@ -4,11 +4,11 @@ class ApplicationController < ActionController::Base
 	before_filter :prepare_for_mobile
 	around_filter :user_time_zone, if: :current_user
 
-	def after_sign_in_path_for(resource)
-    if params[:format] != "mobile"
-  		user_path(current_user)
-		end
-  end
+	#def after_sign_in_path_for(resource)
+  #  if params[:format] != "mobile"
+  #		user_path(current_user)
+	#	end
+  #end
 
   def after_sign_out_path_for(resource)
   	if params[:format] == "mobile"

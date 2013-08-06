@@ -15,6 +15,8 @@ class StaticPagesController < ApplicationController
 	  	elsif current_user.programs.count >= 1 && current_user.next_program.start_date > Date.current # If signed up / setup but not started
 	  		redirect_to checklist_path
 	  	end
+  	elsif user_signed_in? && params[:format] != "mobile"
+  		redirect_to user_path(current_user)
   	end
 	end
 
