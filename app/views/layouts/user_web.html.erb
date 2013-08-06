@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <title>Kick-It</title>
+	  <%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/redmond/jquery-ui.css", "http://fonts.googleapis.com/css?family=EB+Garamond", "application" %>
+	  <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js", "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js", "application" %>
+	  <%= csrf_meta_tags %>
+	  <%= render 'layouts/shim' %>
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	  <%= analytics_init if Rails.env.production? %>
+	  <script type="text/javascript">
+		var heap=heap||[];heap.load=function(a){window._heapid=a;var b=document.createElement("script");b.type="text/javascript",b.async=!0,b.src=("https:"===document.location.protocol?"https:":"http:")+"//d36lvucg9kzous.cloudfront.net";var c=document.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c);var d=function(a){return function(){heap.push([a].concat(Array.prototype.slice.call(arguments,0)))}},e=["identify","track"];for(var f=0;f<e.length;f++)heap[e[f]]=d(e[f])};
+		heap.load("2580676276");
+	</script>
+	</head>
+	<body>
+		<%= render 'layouts/header' if user_signed_in? %>
+		<div class="fill">
+			<% flash.each do |key, value| %>
+				<div class="alert alert-#{key}">
+					<a class="close" data-dismiss="alert">&times;</a>
+					<%= content_tag(:span, value) %>
+				</div>
+			<% end %>
+			
+			<%= yield %>
+
+			<%= debug(params) if Rails.env.development? %>
+		</div>
+	</body>
+</html>

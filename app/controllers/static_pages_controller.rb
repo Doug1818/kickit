@@ -7,7 +7,7 @@ class StaticPagesController < ApplicationController
 	def home
 		@lead = Lead.new
 		@user = User.new
-		if user_signed_in?
+		if user_signed_in? && params[:format] == "mobile"
 			if current_user.current_program != nil # If in an active program
 	      redirect_to calendar_path
 	    elsif current_user.program == nil # If signed up only
@@ -22,7 +22,7 @@ class StaticPagesController < ApplicationController
 		if user_signed_in? && current_user.program != nil
 			@days = current_user.program.days
   		@today = params[:month] ? Date.parse(params[:month]) : Date.current
-  		@day = current_user.program.days.find_by_date(Date.current)
+			@day = current_user.program.days.find_by_date(Date.current)
 		end
 	end
 

@@ -1,7 +1,15 @@
 class UsersController < ApplicationController
-before_filter :authenticate_user!, only: [:setup, :do_setup, :billing, :add_billing_info]
+before_filter :authenticate_user!, only: [:setup, :do_setup, :billing, :add_billing_info, :show]
+layout :user_web_layout, only: [:show]
 
-	def setup
+	def show
+    @user = User.find(params[:id])
+    @program = @user.program
+    @new_week = @program.weeks.closed[0]
+    #@new_week = @program.weeks.find_by_week(1)
+  end
+
+  def setup
 		@user = current_user
     @program = @user.programs.build
     t = Time.zone.now
@@ -57,4 +65,13 @@ before_filter :authenticate_user!, only: [:setup, :do_setup, :billing, :add_bill
       render "billing"
     end
   end
+
+  private
+    def user_web_layout
+      if params[:format] != "mobile" && user_signed_in?
+        "user_web"
+      else
+        "application"
+      end
+    end
 end

@@ -4,15 +4,19 @@ class ApplicationController < ActionController::Base
 	before_filter :prepare_for_mobile
 	around_filter :user_time_zone, if: :current_user
 
-	#def after_sign_in_path_for(resource)
-  #  if current_user.current_program != nil # If in an active program
-  #    calendar_path
-  #  elsif current_user.program == nil # If signed up only
-  #  	signedup_path
-  #	elsif current_user.programs.count >= 1 && current_user.next_program.start_date > Date.current # If signed up / setup but not started
-  #		checklist_path
-  #	end
-  #end
+	def after_sign_in_path_for(resource)
+    if params[:format] != "mobile"
+  		user_path(current_user)
+		end
+  end
+
+  def after_sign_out_path_for(resource)
+  	if params[:format] == "mobile"
+  		root_path
+		else
+			new_user_session_path
+		end
+	end
 
 	# For mobile
 	def mobile_device?

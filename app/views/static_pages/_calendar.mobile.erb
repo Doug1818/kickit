@@ -7,10 +7,11 @@
 	<div class="required_alert">You need to <%= link_to "provide billing information", billing_user_path(current_user) %>.</div>
 <% end %>
 
+<% if current_user.program.end_date != Date.current - 1 %>
 <!-- Todays's Goal -->
-<% if current_user.program.days.find_by_date(Date.current).goal? %>
+<% if @day.goal? %>
 	<h3 style="margin-bottom:0;">Today's Goal:</h3>
-	<h4 style="margin-top:0;margin-bottom:10px;"><%= current_user.program.days.find_by_date(Date.current).goal.html_safe %></h4>
+	<h4 style="margin-top:0;margin-bottom:10px;"><%= @day.goal.html_safe %></h4>
 <% end %>
 
 <!-- Counters -->
@@ -26,6 +27,7 @@
 		<% end %>
 	</div>
 </div>
+<% end %>
 
 <!-- Calendar -->
 <div id="calendar">
@@ -73,7 +75,7 @@
 						    <h1><%= day.date.strftime("%a, %b %d") %></h1>
 							</div>
 							<div class="popup-content">
-								<h4>Were you successful on this day?</h4>
+								<h4><%= day.checkin_msg ? day.checkin_msg : "Were you successful on this day?" %></h4>
 						    <div data-role="controlgroup">
 							    <%= link_to "Yes", success_day_path(day), method: :put, "data-role" => "button", "data-theme" => "d" %>
 									<%= link_to "No", failure_day_path(day), method: :put, "data-role" => "button", "data-theme" => "d" %>
@@ -151,6 +153,7 @@
 	}
 </style>
 
+<% if current_user.program.end_date != Date.current - 1 %>
 <!-- Dollar balance and Free Days balance -->
 <div style="text-align:center;">
 	<% if current_user.program.this_week.missed > 0 %>
@@ -164,3 +167,4 @@
 		</strong> left this week</h4>
 	<% end %>
 </div>
+<% end %>

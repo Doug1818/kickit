@@ -1,0 +1,93 @@
+<!-- if the user has completed a week, show suggested badge, otherwise hide content -->
+<% content_for :title do %><title>Kick-It Results</title><% end %>
+<% content_for :h1 do %><h1>Kick-It Results</h1><% end %>
+
+<div data-role="page">
+	<%= render 'shared/panel' %>
+	<%= render 'shared/header' %>
+	<div data-role="content">
+		<%= render 'shared/flash', flash: flash %>
+		<h3>You met your goal <%= @new_week.successful %> of <%= 7 - @new_week.used_free_days %> times last week</h3>
+		
+		<h4 style="text-align:left;margin-bottom:0;font-weight:bold;">Your Results</h4>
+		<p style="font-style:italic;margin-bottom:5px;margin-top:0;">Daily Goal: <%= @new_week.days.first.goal.html_safe %></p>
+		<table class="suptable">
+			<tr>
+				<th><%= @program.days.find_by_day(1).date.strftime("%a") %></th>
+				<th><%= @program.days.find_by_day(2).date.strftime("%a") %></th>
+				<th><%= @program.days.find_by_day(3).date.strftime("%a") %></th>
+				<th><%= @program.days.find_by_day(4).date.strftime("%a") %></th>
+				<th><%= @program.days.find_by_day(5).date.strftime("%a") %></th>
+				<th><%= @program.days.find_by_day(6).date.strftime("%a") %></th>
+				<th><%= @program.days.find_by_day(7).date.strftime("%a") %></th>
+			</tr>
+			<tr>
+				<% @new_week.days.each do |d| %>
+					<td>
+						<% if d.result == 1 %>
+							<%= image_tag("glyphicons_206_ok_2.png", size: "15x15") %>
+						<% elsif d.result == 2 %>
+							<%= image_tag("glyphicons_207_remove_2.png", size: "15x15") %>
+						<% elsif d.result == 3 %>
+							<%= image_tag("glyphicons_030_pencil.png", size: "15x15") %>
+						<% elsif d.result == 4 %>
+							<%= image_tag("glyphicons_196_circle_exclamation_mark.png", size: "15x15") %>
+						<% elsif d.result == 5 %>
+							FREE DAY
+						<% end %>
+					</td>
+				<% end %>
+			</tr>
+		</table>
+
+		<% if @program.weeks.closed.count > 1 %>
+			<div><a href="javascript:void(0);" class="link" id="1">See Past Weeks</a></div>
+			<div id="2" style="display:none;">
+				<table class="suptable">
+					<% @program.weeks.closed[1..-1].each do |w| %>
+						<tr>
+							<% w.days.each do |d| %>
+								<td>
+									<% if d.result == 1 %>
+										<%= image_tag("glyphicons_206_ok_2.png", size: "15x15") %>
+									<% elsif d.result == 2 %>
+										<%= image_tag("glyphicons_207_remove_2.png", size: "15x15") %>
+									<% elsif d.result == 3 %>
+										<%= image_tag("glyphicons_030_pencil.png", size: "15x15") %>
+									<% elsif d.result == 4 %>
+										<%= image_tag("glyphicons_196_circle_exclamation_mark.png", size: "15x15") %>
+									<% elsif d.result == 5 %>
+										FREE DAY
+									<% end %>
+								</td>
+							<% end %>
+						</tr>
+					<% end %>
+				</table>
+			</div>
+		<% end %>
+
+		<script type="text/javascript">
+			// Toggle
+			$(document).on('pageinit', function(){
+			    $('#1').click(function(){
+			        $('#2').toggle();
+			    });
+			});
+		</script>
+
+		<p style="font-size:0.8em;">
+			<span class="no-wrap"><%= image_tag("glyphicons_206_ok_2.png", size: "12x12") %> &nbsp;Successful,&nbsp;</span>
+			<span class="no-wrap"><%= image_tag("glyphicons_207_remove_2.png", size: "12x12") %>&nbsp;Unsuccessful,&nbsp;</span>
+			<span class="no-wrap"><%= image_tag("glyphicons_196_circle_exclamation_mark.png", size: "12x12") %>&nbsp;Failed&nbsp;to&nbsp;check&nbsp;in,&nbsp;</span>
+			<span class="no-wrap"><%= image_tag("free_day.png", size: "20x20", style: "position:relative;top:5px;") %> &nbsp;Used a Free Day</span>
+		</p>
+
+		<style type="text/css">
+			.no-wrap {
+				white-space: nowrap;
+			}
+		</style>
+		<%= debug(params) if Rails.env.development? %>
+	</div>
+</div>

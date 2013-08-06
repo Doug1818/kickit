@@ -37,7 +37,6 @@ class Week < ActiveRecord::Base
 
   def badge
     program = Program.find(self.program_id)
-    #binding.pry
     if self.successful == 7 - self.used_free_days && program.habit != "Other"
       "Congratulations on a perfect week!  Well, in terms of #{program.habit.downcase} anyway."
     elsif self.successful == 7 - self.used_free_days && program.habit == "Other"
