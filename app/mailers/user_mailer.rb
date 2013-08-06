@@ -46,7 +46,7 @@ class UserMailer < ActionMailer::Base
     @user = user
     @program = @user.program
     @new_week = @program.weeks.closed[0]
-    subject = @new_week.missed > 0 ? "[Kick-It] We charged you $2" : "[Kick-It] We emailed your supporter"
+    subject = @new_week.missed > 0 ? "[Kick-It] We charged you $#{@new_week.missed}" : "[Kick-It] We emailed your supporter"
 
     mail from:"Kick-It <support@kick-it-now.com>",
     to: @user.email,
