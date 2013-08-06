@@ -12,7 +12,7 @@
 			<h3><%= @user.first_name %> met their goal <%= @new_week.successful %> of <%= 7 - @new_week.used_free_days %> times last week</h3>
 			<p style="text-align: center;">Give them some encouragement.  You can use one of our suggested messages or write your own.</p>
 
-			<%= form_for @supmessage do |f| %>
+			<%= form_for @supmessage, html: {"data-ajax" => "false"} do |f| %>
 				<%= render 'shared/error_messages', object: f.object %>
 				<%= f.text_area :content, value: @new_week.badge, style: "height:100px;width:100%;" %>
 				<%= f.hidden_field :supporter_id, value: @supporter.id %>
