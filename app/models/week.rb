@@ -34,4 +34,24 @@ class Week < ActiveRecord::Base
   	self.days.each { |day| x.push(1) if day.result == 2 }
   	x.inject(:+)
   end
+
+  def badge
+    program = Program.find(self.program_id)
+    #binding.pry
+    if self.successful == 7 - self.used_free_days && program.habit != "Other"
+      "Congratulations on a perfect week!  Well, in terms of #{program.habit.downcase} anyway."
+    elsif self.successful == 7 - self.used_free_days && program.habit == "Other"
+      "Congratulations on a perfect week!"
+    elsif self.successful <= 6 - self.used_free_days && self.successful >= 5 - self.used_free_days
+      "Strong week.  Strong to Quite Strong."
+    elsif self.successful <= 4 - self.used_free_days && self.successful >= 3 - self.used_free_days && self.used_free_days <= 1
+      "Pretty good success rate, but I know you can do better.  I give it about a B."
+    elsif self.successful <= 4 - self.used_free_days && self.successful >= 3 - self.used_free_days && self.used_free_days > 1
+      "Looks like you had a tough week.  Hit the reset button and start fresh next week."
+    elsif self.successful <= 2 - self.used_free_days && program.weeks.closed.count == 1
+      "The first week is always hard.  Make a comeback in week 2!"
+    elsif self.successful <= 2 - self.used_free_days && program.weeks.closed.count > 1
+      "Looks like you had a tough week.  Hit the reset button and start fresh next week."
+    end
+  end
 end

@@ -9,18 +9,18 @@
 		<%= render 'shared/flash', flash: flash %>
 		<% if @program.completed_days >= 7 %>
 
-			<h3><%= @user.first_name %> met their goal <%= @program.weeks.closed[0].successful %> of <%= 7 - @program.weeks.closed[0].used_free_days %> times last week</h3>
+			<h3><%= @user.first_name %> met their goal <%= @new_week.successful %> of <%= 7 - @new_week.used_free_days %> times last week</h3>
 			<p style="text-align: center;">Give them some encouragement.  You can use one of our suggested messages or write your own.</p>
 
 			<%= form_for @supmessage do |f| %>
 				<%= render 'shared/error_messages', object: f.object %>
-				<%= f.text_area :content, value: @program.badge, style: "height:100px;width:100%;" %>
+				<%= f.text_area :content, value: @new_week.badge, style: "height:100px;width:100%;" %>
 				<%= f.hidden_field :supporter_id, value: @supporter.id %>
 				<%= f.submit "Send Message", "data-theme" => "d" %>
 			<% end %><br>
 			
 			<h4 style="text-align:left;margin-bottom:0;font-weight:bold;"><%= "#{@user.first_name}'s Results" %></h4>
-			<p style="font-style:italic;margin-bottom:5px;margin-top:0;">Daily Goal: <%= @program.days.first.goal %></p>
+			<p style="font-style:italic;margin-bottom:5px;margin-top:0;">Daily Goal: <%= @new_week.days.first.goal.html_safe %></p>
 			<table class="suptable">
 				<tr>
 					<th><%= @program.days.find_by_day(1).date.strftime("%a") %></th>
@@ -32,7 +32,7 @@
 					<th><%= @program.days.find_by_day(7).date.strftime("%a") %></th>
 				</tr>
 				<tr>
-					<% @program.weeks.closed[0].days.each do |d| %>
+					<% @new_week.days.each do |d| %>
 						<td>
 							<% if d.result == 1 %>
 								<%= image_tag("glyphicons_206_ok_2.png", size: "15x15") %>

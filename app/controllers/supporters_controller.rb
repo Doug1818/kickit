@@ -17,10 +17,19 @@ class SupportersController < ApplicationController
   end
 
   def show
-    @supporter = Supporter.find(params[:id])
+    token = params[:id]
+    supporter_id = decrypt_token(token)
+    @supporter = Supporter.find(supporter_id)
+    #@supporter = Supporter.find(params[:id])
     @program = Program.find(@supporter.program_id)
     @user = User.find(@program.user_id)
     @supmessage = @supporter.supmessages.build
+    @new_week = @program.weeks.closed[0]
+    #@new_week = @program.weeks.find_by_week(1)
+  end
+
+  def decrypt_token(token)
+    Base64.decode64(token).partition('X').first
   end
 
   def index

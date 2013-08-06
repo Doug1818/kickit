@@ -13,12 +13,19 @@ class SupporterMailer < ActionMailer::Base
 
   def supporter_update(supporter)
     @supporter = supporter
+    @token = generate_token(@supporter)
     @program = Program.find(supporter.program_id)
     @user = User.find(@program.user_id)
+    @new_week = @program.weeks.closed[0]
+    #@new_week = @program.weeks.find_by_week(1)
 
     mail from:"Kick-It <support@kick-it-now.com>",
     to: @supporter.email,
     bcc: "support@kick-it-now.com",
     subject: "[Kick-It] Weekly Update on #{@user.email}"
+  end
+
+  def generate_token(supporter)
+    Base64.encode64("#{supporter.id}X#{supporter.first_name}#{supporter.relationship}").gsub(/[^0-9a-z]/i, "")
   end
 end

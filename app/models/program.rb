@@ -77,21 +77,6 @@ class Program < ActiveRecord::Base
     d = Date.current - self.start_date
     d.to_i
   end
-
-  def badge
-    ufd = self.last_week.used_free_days
-    if self.last_week.successful - ufd == 7 - ufd
-      "Congratulations on a perfect week!  Well, in terms of #{self.habit} anyway."
-    elsif self.last_week.successful - ufd <= 6 - ufd && self.last_week.successful - ufd >= 5 - ufd
-      "Strong week.  Strong to Quite Strong."
-    elsif self.last_week.successful - ufd <= 4 - ufd && self.last_week.successful - ufd >= 3 - ufd
-      "Pretty good success rate, but I know you can do better.  I give it about a B."
-    elsif self.last_week.successful - ufd <= 2 - ufd && self.weeks.closed.count == 1
-      "The first week is always hard.  Make a comeback in week 2!"
-    elsif self.last_week.successful - ufd <= 2 - ufd && self.weeks.closed.count > 1
-      "Looks like you had a tough week.  Hit the reset button and start fresh next week."
-    end
-  end
  
   HABITS = ["Biting Nails", "Checking Facebook", "Late Night Snacking", "Overeating at Meals", "Eating Sweets", "Drinking Soda", "Other"]
 end
