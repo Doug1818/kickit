@@ -1,5 +1,6 @@
 class SupportersController < ApplicationController
   before_filter :authenticate_user!, only: [:new, :create, :index, :edit, :update, :destroy]
+  layout :web_layout, only: [:show]
 
   def new
     @supporter = Supporter.new
@@ -57,4 +58,13 @@ class SupportersController < ApplicationController
     flash[:notice] = "Supporter removed"
     redirect_to supporters_path
   end
+
+  private
+    def web_layout
+      if params[:format] != "mobile"
+        "user_web"
+      else
+        "application"
+      end
+    end
 end

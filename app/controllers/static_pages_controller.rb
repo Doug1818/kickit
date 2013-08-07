@@ -1,4 +1,5 @@
 class StaticPagesController < ApplicationController
+	layout :web_layout, only: [:nbtricks, :estricks, :lnstricks, :oetricks]
 
 	def carousel
 		@user = User.new
@@ -45,4 +46,13 @@ class StaticPagesController < ApplicationController
 
 	def oetricks
 	end
+
+	private
+    def web_layout
+      if params[:format] != "mobile"
+        "user_web"
+      else
+        "application"
+      end
+    end
 end
