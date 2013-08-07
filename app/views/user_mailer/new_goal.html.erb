@@ -1,0 +1,6 @@
+<p><%= "Hey #{@user.first_name}," %></p>
+
+<p>Your daily goal for Week <%= @new_week.week %> of your program (which starts tomorrow) is: <strong><%= @new_week.days.first.goal.html_safe %></strong>.</p>
+
+<p>- Doug and Rick<br>
+(The Kick-It Team)</p>
