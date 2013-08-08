@@ -7,15 +7,15 @@
 //});
 
 // Tap counters
-$(document).on('pagebeforeshow', function(){
-  $('#wanted_btn').click(function(){
-    var count = $('#wanted_count').text();
-    $('#wanted_count').text(parseInt(count) + 1);
-    $('#wanted_form').trigger('submit.rails');
+$(document).on('pageinit', '#calendar', function(){
+  $('#want_btn').click(function(){
+    var count = parseInt($('#want_count').text());
+    $('#want_count').text(count + 1);
+    $('#want_form').trigger('submit.rails');
   });
   $('#did_btn').click(function(){
-    var count = $('#did_count').text();
-    $('#did_count').text(parseInt(count) + 1);
+    var count = parseInt($('#did_count').text());
+    $('#did_count').text(count + 1);
     $('#did_form').trigger('submit.rails');
   });
 });

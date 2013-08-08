@@ -1,7 +1,9 @@
-<div data-role="popup">
-	<div data-role="header" data-theme="d">
-    <h1><%= @day.date.strftime("%a, %b %d") %></h1>
-	</div>
+<% content_for :title do %><title><%= @day.date.strftime("%a, %b %d") %></title><% end %>
+<% content_for :h1 do %><h1><%= @day.date.strftime("%a, %b %d") %></h1><% end %>
+
+<div data-role="page" id="day_<%=@day.id%>">
+	<%= render 'shared/panel' %>
+	<%= render 'shared/header' %>
 	<div data-role="content">
 		<%= render 'shared/flash', flash: flash %>
 		<% if @day.result == 1 %>
@@ -24,6 +26,81 @@
 		<% else %>
 			<h4>Too early to check in.</h4>
 		<% end %>
+		<p style="text-align:center;">Your goal was: <%= @day.goal.html_safe %>.</p>
+		<table style="width:100%;margin:0 auto;">
+			<tr>
+				<td class="plusmin"><a href="javascript:void(0);" id="want_btn_<%=@day.id%>">
+					<%= image_tag("glyphicons_190_circle_plus.png", size: "25x25", style: "margin-right:10px;") %></a>
+				<a href="javascript:void(0);" id="want_down_btn_<%=@day.id%>">
+					<%= image_tag("glyphicons_191_circle_minus.png", size: "25x25") %></a></td>
+				<td class="plusmin-labels">Wanted To (<span id="want_count_<%=@day.id%>"><%=@day.want_count%></span>)</td>
+			</tr>
+			<tr>
+				<td class="plusmin"><a href="javascript:void(0);" id="did_btn_<%=@day.id%>">
+					<%= image_tag("glyphicons_190_circle_plus.png", size: "25x25", style: "margin-right:10px;") %></a>
+				<a href="javascript:void(0);" id="did_down_btn_<%=@day.id%>">
+					<%= image_tag("glyphicons_191_circle_minus.png", size: "25x25") %></a></td>
+				<td class="plusmin-labels">Did (<span id="did_count_<%=@day.id%>"><%=@day.did_count%></span>)</td>
+			</tr>
+		</table>
+		<%= render 'comments', day: @day %>
+		<!-- Hidden forms -->
+		<%= form_for @day, url: want_day_path(@day), remote: true, html: { method: :put, id: "want_form_#{@day.id}" } do |f| %>
+			<%= f.submit "Wanted To (#{@day.want_count})", "data-theme" => "d" %>
+		<% end %>
+		<%= form_for @day, url: want_down_day_path(@day), remote: true, html: { method: :put, id: "want_down_form_#{@day.id}" } do |f| %>
+			<%= f.submit "Wanted To (#{@day.want_count})", "data-theme" => "d" %>
+		<% end %>
+		<%= form_for @day, url: did_day_path(@day), remote: true, html: { method: :put, id: "did_form_#{@day.id}" } do |f| %>
+			<%= f.submit "Wanted To (#{@day.did_count})", "data-theme" => "d" %>
+		<% end %>
+		<%= form_for @day, url: did_down_day_path(@day), remote: true, html: { method: :put, id: "did_down_form_#{@day.id}" } do |f| %>
+			<%= f.submit "Did (#{@day.did_count})", "data-theme" => "d" %>
+		<% end %>
+		<!-- xxx -->
+		<style type="text/css">
+			h4 {
+				margin-bottom: 0;
+			}
+			#want_form_<%=@day.id%>, 
+			#want_down_form_<%=@day.id%>, 
+			#did_form_<%=@day.id%>, 
+			#did_down_form_<%=@day.id%> {
+				display: none;
+			}
+			.plusmin {
+				text-align:right;
+				padding-right:10px;
+			}
+			.plusmin-labels {
+				padding-left:10px;
+			}
+		</style>
 		<%= debug(params) if Rails.env.development? %>
 	</div>
+
+	<script type="text/javascript">
+	$(document).on('pagecreate', '#day_<%=@day.id%>', function(){
+	  $('#want_btn_<%=@day.id%>').click(function(){
+	    var count = parseInt($('#want_count_<%=@day.id%>').text());
+	    $('#want_count_<%=@day.id%>').text(count + 1);
+	    $('#want_form_<%=@day.id%>').trigger('submit.rails');
+	  });
+	  $('#want_down_btn_<%=@day.id%>').click(function(){
+	    var count = parseInt($('#want_count_<%=@day.id%>').text());
+	    $('#want_count_<%=@day.id%>').text(count - 1);
+	    $('#want_down_form_<%=@day.id%>').trigger('submit.rails');
+	  });
+	  $('#did_btn_<%=@day.id%>').click(function(){
+	    var count = parseInt($('#did_count_<%=@day.id%>').text());
+	    $('#did_count_<%=@day.id%>').text(count + 1);
+	    $('#did_form_<%=@day.id%>').trigger('submit.rails');
+	  });
+	  $('#did_down_btn_<%=@day.id%>').click(function(){
+	    var count = parseInt($('#did_count_<%=@day.id%>').text());
+	    $('#did_count_<%=@day.id%>').text(count - 1);
+	    $('#did_down_form_<%=@day.id%>').trigger('submit.rails');
+	  });
+	});
+	</script>
 </div>

@@ -1,5 +1,4 @@
 <% if day.comments.any? %>
-	<p style="text-align:center;margin: 20px 0 7px 0;">Your Comments:</p>
 	<% day.comments.each do |c| %>
 		<div class="ctime"><%= c.created_at.strftime("%a, %b %e, %l:%M%P") %></div>
 		<div class="ccontent"><%= c.content %></div>
@@ -12,7 +11,7 @@
 	<%= form_for day.comments.build, remote: true, html: { id: "new_comment_#{day.id}" } do |f| %>
 		<%= render 'shared/error_messages', object: f.object %>
 		<%= f.text_area :content, id: "comment_content_#{day.id}" %>
-		<div id="charcount_<%= day.id %>" style="text-align:right;font-size:8pt;"></div>
+		<div id="charcount_<%= day.id %>" style="text-align:right;"></div>
 		<div id="comment_error_<%= day.id %>" class="client_error">
       <noscript>JavaScript is not enabled and is required for this form. First enable it in your web browser settings.</noscript>
     </div>
@@ -39,7 +38,7 @@
 	    } else if (len >= max) {
 	    	$('#charcount_<%= day.id %>').text(Math.abs(char) + ' characters over the limit');
 		  } else {
-		    $('#charcount_<%= day.id %>').text(char + ' characters left');
+		    $('#charcount_<%= day.id %>').text(char);
 		  }
 		});
 	});

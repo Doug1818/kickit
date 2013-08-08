@@ -8,31 +8,31 @@
 <% end %>
 
 <% if current_user.program.end_date != Date.current - 1 %>
-<!-- Todays's Goal -->
-<% if @day.goal? %>
-	<h3 style="margin-bottom:0;">Today's Goal:</h3>
-	<h4 style="margin-top:0;margin-bottom:10px;"><%= @day.goal.html_safe %></h4>
-<% end %>
+	<!-- Todays's Goal -->
+	<% if @day.goal? %>
+		<h3 style="margin-bottom:0;">Today's Goal:</h3>
+		<h4 style="margin-top:0;margin-bottom:10px;"><%= @day.goal.html_safe %></h4>
+	<% end %>
 
-<!-- Counters -->
-<div class="ui-grid-a counters" style="margin:0 !important;">
-	<div class="ui-block-a">
-		<a href="javascript:void(0);" data-role="button" data-theme="d" id="wanted_btn">
-			Wanted To (<span id="wanted_count"><%=@day.want_count%></span>)
-		</a>
-		<%= form_for @day, url: want_day_path(@day), remote: true, html: { method: :put, id: "wanted_form", style: "display:none;" } do |f| %>
-			<%= f.submit "Wanted To (#{@day.want_count})", "data-theme" => "d" %>
-		<% end %>
+	<!-- Counters -->
+	<div class="ui-grid-a counters" style="margin:0 !important;">
+		<div class="ui-block-a">
+			<a href="javascript:void(0);" data-role="button" data-theme="d" id="want_btn">
+				Wanted To (<span id="want_count"><%=@day.want_count%></span>)
+			</a>
+			<%= form_for @day, url: want_day_path(@day), remote: true, html: { method: :put, id: "want_form", style: "display:none;" } do |f| %>
+				<%= f.submit "Wanted To (#{@day.want_count})", "data-theme" => "d" %>
+			<% end %>
+		</div>
+		<div class="ui-block-b">
+			<a href="javascript:void(0);" data-role="button" data-theme="d" id="did_btn">
+				Did (<span id="did_count"><%=@day.did_count%></span>)
+			</a>
+			<%= form_for @day, url: did_day_path(@day), remote: true, html: { method: :put, id: "did_form", style: "display:none;" } do |f| %>
+				<%= f.submit "Did (#{@day.did_count})", "data-theme" => "d" %>
+			<% end %>
+		</div>
 	</div>
-	<div class="ui-block-b">
-		<a href="javascript:void(0);" data-role="button" data-theme="d" id="did_btn">
-			Did (<span id="did_count"><%=@day.did_count%></span>)
-		</a>
-		<%= form_for @day, url: did_day_path(@day), remote: true, html: { method: :put, id: "did_form", style: "display:none;" } do |f| %>
-			<%= f.submit "Did (#{@day.did_count})", "data-theme" => "d" %>
-		<% end %>
-	</div>
-</div>
 <% end %>
 
 <!-- Calendar -->
@@ -59,7 +59,7 @@
 							</div>
 							<div class="popup-content">
 								<p class="daypop-p">You were successful on this day. Your goal was: <%= day.goal.html_safe %>.</p>
-								<%= render 'comments', day: day %>
+								<%= link_to "Details", day_path(day), class: "link" %>
 							</div>
 						</div>
 					<% elsif day.result == 2 %>
@@ -71,7 +71,7 @@
 							</div>
 					    <div class="popup-content">
 								<p class="daypop-p">You were not successful on this day. Your goal was: <%= day.goal.html_safe %>.</p>
-								<%= render 'comments', day: day %>
+								<%= link_to "Details", day_path(day), class: "link" %>
 							</div>
 						</div>
 					<% elsif day.result == 3 %>
@@ -90,7 +90,7 @@
 										<%= link_to "Use a Free Day", free_day_path(day), method: :put, "data-role" => "button", "data-theme" => "d" %>
 									<% end %>
 								</div>
-								<%= render 'comments', day: day %>
+								<%= link_to "Details", day_path(day), class: "link" %>
 							</div>
 						</div>
 					<% elsif day.result == 4 %>
@@ -102,7 +102,7 @@
 							</div>
 					    <div class="popup-content">
 								<p class="daypop-p">You missed your check-in on this day - we charged you a buck. Your goal was: <%= day.goal.html_safe %>.</p>
-								<%= render 'comments', day: day %>
+								<%= link_to "Details", day_path(day), class: "link" %>
 							</div>
 						</div>
 					<% elsif day.result == 5 %>
@@ -114,7 +114,7 @@
 							</div>
 					    <div class="popup-content">
 								<p class="daypop-p">You used one of your Free Days this day. Your goal was: <%= day.goal.html_safe %>.</p>
-								<%= render 'comments', day: day %>
+								<%= link_to "Details", day_path(day), class: "link" %>
 							</div>
 						</div>
 					<% elsif day.result == nil %>
@@ -127,7 +127,7 @@
 							<% if day.date == Date.current %>
 								<div class="popup-content">
 									<h4 style="margin-bottom:10px;">Too early to check in.</h4>
-									<%= render 'comments', day: day %>
+									<%= link_to "Details", day_path(day), class: "link" %>
 								</div>
 							<% else %>
 								<div class="popup-content" style="margin-bottom:-10px;padding-bottom:0;"><h4>Too early to check in.</h4></div>
@@ -140,6 +140,7 @@
 	<% end %>
 </div>
 
+<!-- Legend Popup -->
 <div data-role="popup" id="legend">
 	<a href="#" data-rel="back" data-role="button" data-theme="c" data-icon="delete" data-iconpos="notext" class="ui-btn-left">Close</a>
   <div class="popup-content">
@@ -152,28 +153,8 @@
 	</div>
 </div>
 
-<style type="text/css">
-	.popup-content {
-		padding: 10px;
-		min-width: 200px;
-	}
-
-	.popup-content .ctime {
-		font-size: 8pt;
-		text-align: right;
-	}
-
-	.popup-content .ccontent {
-		background-color: rgba(0, 0, 0, 0.1); // #717171;
-		border-radius: 5px;
-		padding: 10px;
-		margin: 3px 0 10px 0;
-		//color: #717171;
-	}
-</style>
-
-<% if current_user.program.end_date != Date.current - 1 %>
 <!-- Dollar balance and Free Days balance -->
+<% if current_user.program.end_date != Date.current - 1 %>
 <div style="text-align:center;">
 	<h4 style="margin-top:5px;margin-bottom:5px;"><strong>
 		$<%= current_user.program.missed*current_user.program.daily_commitment %> 
