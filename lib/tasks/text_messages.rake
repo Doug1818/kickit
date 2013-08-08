@@ -1,26 +1,26 @@
 desc "Tasks to be performed on-the-hour"
 task :full_hour_jobs => :environment do
 	# REMINDERS_FULL: Send reminders with on-the-hour times
-	Program.active_program.all.each do |program|
-		user = User.find(program.user_id)
-		number_to_send_to = user.phone
-		@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
-
-		messages = []
-		program.remessages.each { |m| messages.push(m.content) }
-		message = messages.empty? ? "Your Kick-It program has no reminders. Write your own here: http://kick-it-now.com/reminders" : messages.sample
-
-		program.reminders.each do |reminder|
-			if Time.zone.now.hour == reminder.time.hour && reminder.time.min == 0
-				@twilio_client.account.sms.messages.create(
-					:from => "+1#{ENV['TWILIO_PHONE_NUMBER']}",
-					:to => number_to_send_to,
-					:body => message
-				)
-				received_text = program.received_texts.create(message: message)
-			end
-		end
-	end
+#	Program.active_program.all.each do |program|
+#		user = User.find(program.user_id)
+#		number_to_send_to = user.phone
+#		@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
+#
+#		messages = []
+#		program.remessages.each { |m| messages.push(m.content) }
+#		message = messages.empty? ? "Your Kick-It program has no reminders. Write your own here: http://kick-it-now.com/reminders" : messages.sample
+#
+#		program.reminders.each do |reminder|
+#			if Time.zone.now.hour == reminder.time.hour && reminder.time.min == 0
+#				@twilio_client.account.sms.messages.create(
+#					:from => "+1#{ENV['TWILIO_PHONE_NUMBER']}",
+#					:to => number_to_send_to,
+#					:body => message
+#				)
+#				received_text = program.received_texts.create(message: message)
+#			end
+#		end
+#	end
 
 	# TRACKING: Send daily tracking checkin text at 9am local time
 	Program.active_checkins.all.each do |program|
@@ -120,24 +120,24 @@ end
 desc "Tasks to be performed on the half-hour"
 task :half_hour_jobs => :environment do
 	# REMINDERS_HALF: Send reminders with half hour times
-	Program.active_program.all.each do |program|
-		user = User.find(program.user_id)
-		number_to_send_to = user.phone
-		@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
-
-		messages = []
-		program.remessages.each { |m| messages.push(m.content) }
-		message = messages.empty? ? "Your Kick-It program has no reminders. Write your own here: http://kick-it-now.com/reminders" : messages.sample
-
-		program.reminders.each do |reminder|
-			if Time.zone.now.hour == reminder.time.hour && reminder.time.min == 30
-				@twilio_client.account.sms.messages.create(
-					:from => "+1#{ENV['TWILIO_PHONE_NUMBER']}",
-					:to => number_to_send_to,
-					:body => message
-				)
-				received_text = program.received_texts.create(message: message)
-			end
-		end
-	end
+#	Program.active_program.all.each do |program|
+#		user = User.find(program.user_id)
+#		number_to_send_to = user.phone
+#		@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
+#
+#		messages = []
+#		program.remessages.each { |m| messages.push(m.content) }
+#		message = messages.empty? ? "Your Kick-It program has no reminders. Write your own here: http://kick-it-now.com/reminders" : messages.sample
+#
+#		program.reminders.each do |reminder|
+#			if Time.zone.now.hour == reminder.time.hour && reminder.time.min == 30
+#				@twilio_client.account.sms.messages.create(
+#					:from => "+1#{ENV['TWILIO_PHONE_NUMBER']}",
+#					:to => number_to_send_to,
+#					:body => message
+#				)
+#				received_text = program.received_texts.create(message: message)
+#			end
+#		end
+#	end
 end
