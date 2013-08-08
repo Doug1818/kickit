@@ -17,12 +17,18 @@
 <!-- Counters -->
 <div class="ui-grid-a counters" style="margin:0 !important;">
 	<div class="ui-block-a">
-		<%= form_for @day, url: want_day_path(@day), html: { method: :put } do |f| %>
+		<a href="javascript:void(0);" data-role="button" data-theme="d" id="wanted_btn">
+			Wanted To (<span id="wanted_count"><%=@day.want_count%></span>)
+		</a>
+		<%= form_for @day, url: want_day_path(@day), remote: true, html: { method: :put, id: "wanted_form", style: "display:none;" } do |f| %>
 			<%= f.submit "Wanted To (#{@day.want_count})", "data-theme" => "d" %>
 		<% end %>
 	</div>
 	<div class="ui-block-b">
-		<%= form_for @day, url: did_day_path(@day), html: { method: :put } do |f| %>
+		<a href="javascript:void(0);" data-role="button" data-theme="d" id="did_btn">
+			Did (<span id="did_count"><%=@day.did_count%></span>)
+		</a>
+		<%= form_for @day, url: did_day_path(@day), remote: true, html: { method: :put, id: "did_form", style: "display:none;" } do |f| %>
 			<%= f.submit "Did (#{@day.did_count})", "data-theme" => "d" %>
 		<% end %>
 	</div>
@@ -35,7 +41,7 @@
 		<%= link_to "<", :month => (@today.beginning_of_month-1).strftime("%Y-%m-01") %>
 		<%= h @today.strftime("%B %Y") %>
 		<%= link_to ">", :month => (@today.end_of_month+1).strftime("%Y-%m-01") %>
-		<%= link_to "Legend", "#legend", "data-rel" => "popup", class: "link", style: "float:right;position:absolute;" %>
+		<%= link_to "Legend", "#legend", "data-rel" => "popup", class: "link", style: "position:absolute;right:7px;" %>
 	</h3>
 	<%= calendar_for @days, :year => @today.year, :month => @today.month, :today => Date.current do |calendar| %>
 		<%= calendar.head('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat')%>
