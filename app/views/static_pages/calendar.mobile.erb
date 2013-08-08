@@ -11,7 +11,7 @@
 	</div>
 	<script type="text/javascript">
 		// Tap counters
-		$(document).on('pagecreate', function(){
+		$(document).on('pagecreate', '#calendar', function(){
 		  $('#want_btn').click(function(){
 		    var count = parseInt($('#want_count').text());
 		    $('#want_count').text(count + 1);
