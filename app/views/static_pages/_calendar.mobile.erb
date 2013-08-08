@@ -52,7 +52,7 @@
 						    <h1><%= day.date.strftime("%a, %b %d") %></h1>
 							</div>
 							<div class="popup-content">
-								<h4 style="margin-bottom:10px;">You were successful on this day.</h4>
+								<p class="daypop-p">You were successful on this day. Your goal was: <%= day.goal.html_safe %>.</p>
 								<%= render 'comments', day: day %>
 							</div>
 						</div>
@@ -64,7 +64,7 @@
 						    <h1><%= day.date.strftime("%a, %b %d") %></h1>
 							</div>
 					    <div class="popup-content">
-								<h4 style="margin-bottom:10px;">You were not successful on this day.</h4>
+								<p class="daypop-p">You were not successful on this day. Your goal was: <%= day.goal.html_safe %>.</p>
 								<%= render 'comments', day: day %>
 							</div>
 						</div>
@@ -95,7 +95,7 @@
 						    <h1><%= day.date.strftime("%a, %b %d") %></h1>
 							</div>
 					    <div class="popup-content">
-								<h4 style="margin-bottom:10px;">You missed your check-in on this day. We charged you a buck.</h4>
+								<p class="daypop-p">You missed your check-in on this day - we charged you a buck. Your goal was: <%= day.goal.html_safe %>.</p>
 								<%= render 'comments', day: day %>
 							</div>
 						</div>
@@ -107,7 +107,7 @@
 						    <h1><%= day.date.strftime("%a, %b %d") %></h1>
 							</div>
 					    <div class="popup-content">
-								<h4 style="margin-bottom:10px;">You used one of your Free Days this day.</h4>
+								<p class="daypop-p">You used one of your Free Days this day. Your goal was: <%= day.goal.html_safe %>.</p>
 								<%= render 'comments', day: day %>
 							</div>
 						</div>
