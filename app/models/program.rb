@@ -57,6 +57,12 @@ class Program < ActiveRecord::Base
     self.this_week.free_days - self.this_week.used_free_days
   end
 
+  def missed
+    x = [0]
+    self.days.each { |day| x.push(1) if day.result == 4 }
+    x.inject(:+)
+  end
+
   def future_date
     if self.start_date != nil && self.start_date < Time.zone.now.to_date + 1
       self.errors[:start_date] << "can't be earlier than tomorrow"

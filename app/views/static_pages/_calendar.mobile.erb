@@ -176,7 +176,7 @@
 <!-- Dollar balance and Free Days balance -->
 <div style="text-align:center;">
 	<h4 style="margin-top:5px;margin-bottom:5px;"><strong>
-		$<%= current_user.program.this_week.missed*current_user.program.daily_commitment %> 
+		$<%= current_user.program.missed*current_user.program.daily_commitment %> 
 		lost</strong> from missed checkins</h4>
 	<% if current_user.program.this_week.free_days > 0 %>
 		<h4 style="margin-top:5px;"><strong>
