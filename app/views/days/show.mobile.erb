@@ -30,16 +30,16 @@
 		<table style="width:100%;margin:0 auto;">
 			<tr>
 				<td class="plusmin"><a href="javascript:void(0);" id="want_btn_<%=@day.id%>">
-					<%= image_tag("glyphicons_190_circle_plus.png", size: "25x25", style: "margin-right:10px;") %></a>
+					<%= image_tag("glyphicons_190_circle_plus.png", size: "30x30", style: "margin-right:20px;") %></a>
 				<a href="javascript:void(0);" id="want_down_btn_<%=@day.id%>">
-					<%= image_tag("glyphicons_191_circle_minus.png", size: "25x25") %></a></td>
+					<%= image_tag("glyphicons_191_circle_minus.png", size: "30x30") %></a></td>
 				<td class="plusmin-labels">Wanted To (<span id="want_count_<%=@day.id%>"><%=@day.want_count%></span>)</td>
 			</tr>
-			<tr>
+			<tr style="height:60px;">
 				<td class="plusmin"><a href="javascript:void(0);" id="did_btn_<%=@day.id%>">
-					<%= image_tag("glyphicons_190_circle_plus.png", size: "25x25", style: "margin-right:10px;") %></a>
+					<%= image_tag("glyphicons_190_circle_plus.png", size: "30x30", style: "margin-right:20px;") %></a>
 				<a href="javascript:void(0);" id="did_down_btn_<%=@day.id%>">
-					<%= image_tag("glyphicons_191_circle_minus.png", size: "25x25") %></a></td>
+					<%= image_tag("glyphicons_191_circle_minus.png", size: "30x30") %></a></td>
 				<td class="plusmin-labels">Did (<span id="did_count_<%=@day.id%>"><%=@day.did_count%></span>)</td>
 			</tr>
 		</table>
