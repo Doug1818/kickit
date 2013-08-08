@@ -6,20 +6,6 @@
 //  });
 //});
 
-// Tap counters
-$(document).on('pageinit', '#calendar', function(){
-  $('#want_btn').click(function(){
-    var count = parseInt($('#want_count').text());
-    $('#want_count').text(count + 1);
-    $('#want_form').trigger('submit.rails');
-  });
-  $('#did_btn').click(function(){
-    var count = parseInt($('#did_count').text());
-    $('#did_count').text(count + 1);
-    $('#did_form').trigger('submit.rails');
-  });
-});
-
 // Toggle
 $(document).on('pagebeforeshow', function(){
     $('.togsupinfo').click(function(){

@@ -9,4 +9,19 @@
 		<%= render 'calendar' %>
 		<%= debug(params) if Rails.env.development? %>
 	</div>
+	<script type="text/javascript">
+		// Tap counters
+		$(document).on('pagecreate', function(){
+		  $('#want_btn').click(function(){
+		    var count = parseInt($('#want_count').text());
+		    $('#want_count').text(count + 1);
+		    $('#want_form').trigger('submit.rails');
+		  });
+		  $('#did_btn').click(function(){
+		    var count = parseInt($('#did_count').text());
+		    $('#did_count').text(count + 1);
+		    $('#did_form').trigger('submit.rails');
+		  });
+		});
+	</script>
 </div>

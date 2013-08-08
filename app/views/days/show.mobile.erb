@@ -13,10 +13,16 @@
 		<% elsif @day.result == 3 %>
 			<h4>Were you successful on this day?</h4>
 			<div data-role="controlgroup">
-			    <%= link_to "Yes", success_day_path(@day), method: :put, "data-role" => "button", "data-theme" => "d" %>
-				<%= link_to "No", failure_day_path(@day), method: :put, "data-role" => "button", "data-theme" => "d" %>
+	    	<%= form_for @day, url: success_day_path(@day), html: {"data-ajax" => "false"} do |f| %>
+					<%= f.submit "Yes", "data-theme" => "d" %>
+				<% end %>
+				<%= form_for @day, url: failure_day_path(@day), html: {"data-ajax" => "false"} do |f| %>
+					<%= f.submit "No", "data-theme" => "d" %>
+				<% end %>
 				<% if Program.find(@day.program_id).free_days_left > 0 %>
-					<%= link_to "Use A Free Day", free_day_path(@day), method: :put, "data-role" => "button", "data-theme" => "d" %>
+					<%= form_for @day, url: free_day_path(@day), html: {"data-ajax" => "false"} do |f| %>
+						<%= f.submit "Use a Free Day", "data-theme" => "d" %>
+					<% end %>
 				<% end %>
 			</div>
 		<% elsif @day.result == 4 %>
