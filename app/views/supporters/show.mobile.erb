@@ -20,7 +20,9 @@
 			<% end %><br>
 			
 			<h4 style="text-align:left;margin-bottom:0;font-weight:bold;"><%= "#{@user.first_name}'s Results" %></h4>
-			<p style="font-style:italic;margin-bottom:5px;margin-top:0;">Daily Goal: <%= @new_week.days.first.goal.html_safe %></p>
+			<% if @new_week.days.first.goal? %>
+				<p style="font-style:italic;margin-bottom:5px;margin-top:0;">Daily Goal: <%= @new_week.days.first.goal.html_safe %></p>
+			<% end %>
 			<table class="suptable">
 				<tr>
 					<th><%= @program.days.find_by_day(1).date.strftime("%a") %></th>
