@@ -11,6 +11,17 @@ class Week < ActiveRecord::Base
   	days = alldays.order("day asc")[(sd.day - 1)..(ed.day - 1)]
   end
 
+  def update_week(params)
+    goal = params[:days][:goal]
+    checkin_msg = params[:days][:checkin_msg]
+    self.days.each do |d|
+      d.goal = goal
+      d.checkin_msg = checkin_msg
+      d.save
+    end
+    self.update_attributes(free_days: params[:free_days])
+  end
+
   def missed
   	x = [0]
   	self.days.each { |day| x.push(1) if day.result == 4 }

@@ -1,0 +1,102 @@
+<div class="container">
+	<select id="picker">
+		<option value="select a user" disabled selected>Select a User</option>
+		<% @programs.each do |program| %>
+			<option value="program_<%=program.id%>">
+				<%= User.find(program.user_id).email %>
+			</option>
+		<% end %>
+	</select>
+	<br><br>
+
+	<% @programs.each do |program| %>
+		<div id="program_<%=program.id%>" class="programs">
+			<% user = User.find(program.user_id) %>
+
+			<!-- Checkin history -->
+			<% if 1 == 1 %>
+				<table class="suptable">
+					<tr>
+						<th><%= program.days.find_by_day(1).date.strftime("%a") %></th>
+						<th><%= program.days.find_by_day(2).date.strftime("%a") %></th>
+						<th><%= program.days.find_by_day(3).date.strftime("%a") %></th>
+						<th><%= program.days.find_by_day(4).date.strftime("%a") %></th>
+						<th><%= program.days.find_by_day(5).date.strftime("%a") %></th>
+						<th><%= program.days.find_by_day(6).date.strftime("%a") %></th>
+						<th><%= program.days.find_by_day(7).date.strftime("%a") %></th>
+					</tr>
+					<% program.weeks.order("start_date asc").each do |w| %>
+						<tr>
+							<% w.days.each do |d| %>
+								<td>
+									<% if d.result == 1 %>
+										<%= image_tag("glyphicons_206_ok_2.png", size: "15x15") %>
+									<% elsif d.result == 2 %>
+										<%= image_tag("glyphicons_207_remove_2.png", size: "15x15") %>
+									<% elsif d.result == 3 %>
+										<%= image_tag("glyphicons_030_pencil.png", size: "15x15") %>
+									<% elsif d.result == 4 %>
+										<%= image_tag("glyphicons_196_circle_exclamation_mark.png", size: "15x15") %>
+									<% elsif d.result == 5 %>
+										FREE DAY
+									<% elsif d.result == nil %>
+										<%= image_tag("iconmonstr-help-icon.png", size: "20x20") %>
+									<% end %>
+								</td>
+							<% end %>
+						</tr>
+					<% end %>
+				</table>
+			<% end %>
+
+			<!-- Next week form -->
+			<% next_week = program.next_week %>
+			<% if next_week != nil %>
+				<h4><%= "Week #{next_week.week}: Starts #{next_week.start_date.strftime("%a, %b %d")}" %></h4>
+				<%= form_for next_week do |f| %>
+				  <%= f.fields_for :days do |b| %>
+				  	<% if next_week.days.first.goal? %>
+				  		<div><%= b.text_area :goal, class: "adm_field", value: next_week.days.first.goal %></div><br>
+			  		<% else %>
+			  			<div><%= b.text_area :goal, class: "adm_field", placeholder: "Goal" %></div><br>
+			  		<% end %>
+			  		<% if next_week.days.first.goal? %>
+				  		<div><%= b.text_area :checkin_msg, class: "adm_field", value: next_week.days.first.checkin_msg %></div><br>
+			  		<% else %>
+			  			<div><%= b.text_area :checkin_msg, class: "adm_field", placeholder: "Check-in message" %></div><br>
+		  			<% end %>
+			  	<% end %>
+			  	<div style="font-size:14pt;">Free Days</div>
+			  	<%= f.select :free_days, [0,1,2,3,4,5] %>
+			  	<div style="margin-top:25px;"><%= f.submit "Update Week", class: "btn-supporter" %></div>
+				<% end %>
+			<% end %>
+
+
+		</div>
+	<% end %>
+</div>
+
+<style type="text/css">
+	.adm_field {
+		width: 50%;
+		height: 100px;
+		font-size: 14pt;
+	}
+	select, option {
+	  width:50%;
+	  color:#fff !important;
+	  font-size: 14pt;
+	}
+</style>
+
+<script type="text/javascript">
+	$(function() {
+		$(".programs").hide();
+	  $('#picker').change(function() {
+  		var program_id = $('select option:selected').val();
+  		$(".programs").hide();
+  		$("#" + program_id).show();
+		});
+	});
+</script>

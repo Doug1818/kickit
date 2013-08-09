@@ -24,6 +24,7 @@ Kickit::Application.routes.draw do
       put :success, :failure, :free, :want, :did, :want_down, :did_down
     end
   end
+  resources :weeks
   resources :sent_texts
   resources :received_texts
   resources :reminders
@@ -47,6 +48,7 @@ Kickit::Application.routes.draw do
   match '/estricks',  to: 'static_pages#estricks'
   match '/lnstricks',  to: 'static_pages#lnstricks'
   match '/oetricks',  to: 'static_pages#oetricks'
+  match '/update_programs',  to: 'custom_admin_pages#update_programs'
 
   unless Rails.application.config.consider_all_requests_local
     match '*not_found', to: 'errors#error_404'

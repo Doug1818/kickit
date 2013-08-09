@@ -14,7 +14,11 @@ class ApplicationController < ActionController::Base
   	if params[:format] == "mobile"
   		root_path
 		else
-			new_user_session_path
+			if resource == :user
+				new_user_session_path
+			elsif resource == :admin
+				new_admin_session_path
+			end
 		end
 	end
 
