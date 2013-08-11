@@ -18,6 +18,11 @@ class Program < ActiveRecord::Base
   scope :start_tomorrow, where("start_date = ?", Date.current + 1)
   scope :start29, where("start_date = ?", Date.new(2013, 7, 29))
   scope :start_today, where("start_date = ?", Date.current)
+  scope :nb, where("habit = ?", "Biting Nails")
+  scope :lns, where("habit = ?", "Late Night Snacking")
+  scope :oe, where("habit = ?", "Overeating at Meals")
+  scope :es, where("habit = ?", "Eating Sweets")
+  scope :soda, where("habit = ?", "Drinking Soda")
   validates :habit, presence: true
   validates :start_date, presence: true, :on => :create
   validate  :future_date, :on => :create
@@ -82,6 +87,22 @@ class Program < ActiveRecord::Base
   def completed_days
     d = Date.current - self.start_date
     d.to_i
+  end
+
+  def habit_for_sentence
+    if self.habit == "Biting Nails"
+      "bite your nails"
+    elsif self.habit == "Checking Facebook"
+      "check Facebook"
+    elsif self.habit == "Late Night Snacking"
+      "have a late night snack"
+    elsif self.habit == "Overeating at Meals"
+      "overeat"
+    elsif self.habit == "Eating Sweets"
+      "eat sweets"
+    elsif self.habit == "Drinking Soda"
+      "drink soda"
+    end
   end
  
   HABITS = ["Biting Nails", "Checking Facebook", "Late Night Snacking", "Overeating at Meals", "Eating Sweets", "Drinking Soda", "Other"]

@@ -1,6 +1,6 @@
 <p><%= "Hey #{@user.first_name}," %></p>
 
-<p>Your daily goal for Week <%= @new_week.week %> of your program (which starts tomorrow) is: <strong><%= @new_week.days.first.goal.html_safe %></strong>.</p>
+<p>This past week your daily goal was to <%= "#{@old_goal[0].downcase}#{@goal.html_safe[1..-1]}" %>.  This coming week (which starts tomorrow) your daily goal will be to <strong><%= "#{@new_goal[0].downcase}#{@new.html_safe[1..-1]}" %></strong>.</p>
 
 <p>- Doug and Rick<br>
 (The Kick-It Team)</p>

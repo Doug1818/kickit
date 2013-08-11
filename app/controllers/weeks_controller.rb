@@ -10,6 +10,5 @@ class WeeksController < ApplicationController
       flash[:error] = "Update not successful"
       redirect_to update_programs_path
     end
-    #binding.pry
   end
 end

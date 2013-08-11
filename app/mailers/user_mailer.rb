@@ -57,7 +57,24 @@ class UserMailer < ActionMailer::Base
   def new_goal(user)
     @user = user
     @program = @user.program
+    @old_week = @program.weeks.find_by_week(@program.this_week.week)
     @new_week = @program.weeks.find_by_week(@program.this_week.week + 1)
+    @old_goal = @old_week.days.first.goal
+    @new_goal = @new_week.days.first.goal
+
+    mail from:"Kick-It <support@kick-it-now.com>",
+    to: @user.email,
+    bcc: "support@kick-it-now.com",
+    subject: "[Kick-It] New Daily Goal for Week #{@new_week.week}"
+  end
+
+  def new_goal_wk3(user)
+    @user = user
+    @program = @user.program
+    @old_week = @program.weeks.find_by_week(@program.this_week.week)
+    @new_week = @program.weeks.find_by_week(@program.this_week.week + 1)
+    @old_goal = @old_week.days.first.goal
+    @new_goal = @new_week.days.first.goal
 
     mail from:"Kick-It <support@kick-it-now.com>",
     to: @user.email,
