@@ -1,6 +1,6 @@
 <p><%= "Hey #{@user.first_name}," %></p>
 
-<p>This past week your daily goal was to <%= "#{@old_goal[0].downcase}#{@goal.html_safe[1..-1]}" %>.  This coming week (which starts tomorrow) your daily goal will be to <strong><%= "#{@new_goal[0].downcase}#{@new.html_safe[1..-1]}" %></strong>.</p>
+<p>This past week your daily goal was to <%= "#{@old_goal[0].downcase}#{@old_goal[1..-1].html_safe}" %>.  This coming week (which starts tomorrow) your daily goal will be to <strong><%= "#{@new_goal[0].downcase}#{@new_goal[1..-1].html_safe}" %></strong>.</p>
 
 <p>- Doug and Rick<br>
 (The Kick-It Team)</p>

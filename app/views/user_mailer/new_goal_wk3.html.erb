@@ -1,6 +1,6 @@
 <p><%= "Hey #{@user.first_name}," %></p>
 
-<p>This past week your daily goal was to <%= "#{@old_goal[0].downcase}#{@goal.html_safe[1..-1]}" %>.  This coming week (which starts tomorrow) your daily goal will be to <strong><%= "#{@new_goal[0].downcase}#{@new.html_safe[1..-1]}" %></strong>.</p>
+<p>This past week your daily goal was to <%= "#{@old_goal[0].downcase}#{@old_goal[1..-1].html_safe}" %>.  This coming week (which starts tomorrow) your daily goal will be to <strong><%= "#{@new_goal[0].downcase}#{@new_goal[1..-1].html_safe}" %></strong>.</p>
 
 <p>Whereas last week we tried to <u>experiment with ways to beat an urge</u> to <%= @program.habit_for_sentence %>, this week we're going to <u>practice beating one urge per day</u> using a substitution trick that you think will work.  Just one, every day.</p>
 
