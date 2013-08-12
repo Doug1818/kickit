@@ -48,8 +48,8 @@
 			</table>
 
 			<!-- Next week form -->
-			<% next_week = program.next_week %>
-			<% if next_week != nil %>
+			<% if program.next_week != nil %>
+				<% next_week = program.next_week %>
 				<h4><%= "Week #{next_week.week}: Starts #{next_week.start_date.strftime("%a, %b %d")}" %></h4>
 				<%= form_for next_week do |f| %>
 				  <%= f.fields_for :days do |b| %>

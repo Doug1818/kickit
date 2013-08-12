@@ -55,7 +55,11 @@ class Program < ActiveRecord::Base
   end
 
   def next_week
-    self.weeks.find { |w| w.week == self.this_week.week + 1 }
+    if self.this_week == nil
+      nil
+    else
+      self.weeks.find { |w| w.week == self.this_week.week + 1 }
+    end
   end
 
   def free_days_left
