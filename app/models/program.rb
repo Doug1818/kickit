@@ -59,7 +59,19 @@ class Program < ActiveRecord::Base
   end
 
   def free_days_left
-    self.this_week.free_days - self.this_week.used_free_days
+    if self.this_week == nil
+      nil
+    else
+      self.this_week.free_days - self.this_week.used_free_days
+    end
+  end
+
+  def this_week_checkin
+    self.weeks.find { |w| w.start_date <= Date.current - 1 && w.end_date >= Date.current - 1 }
+  end
+
+  def free_days_left_checkin
+    self.this_week_checkin.free_days - self.this_week_checkin.used_free_days
   end
 
   def missed
