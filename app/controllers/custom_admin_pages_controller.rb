@@ -3,7 +3,7 @@ class CustomAdminPagesController < ApplicationController
   layout :web_layout
 
   def update_programs
-    @programs = Program.active_program.all
+    @programs = Program.active_checkins.all
   end
 
   private

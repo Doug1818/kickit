@@ -14,40 +14,38 @@
 			<% user = User.find(program.user_id) %>
 
 			<!-- Checkin history -->
-			<% if 1 == 1 %>
-				<table class="suptable">
+			<table class="suptable">
+				<tr>
+					<th><%= program.days.find_by_day(1).date.strftime("%a") %></th>
+					<th><%= program.days.find_by_day(2).date.strftime("%a") %></th>
+					<th><%= program.days.find_by_day(3).date.strftime("%a") %></th>
+					<th><%= program.days.find_by_day(4).date.strftime("%a") %></th>
+					<th><%= program.days.find_by_day(5).date.strftime("%a") %></th>
+					<th><%= program.days.find_by_day(6).date.strftime("%a") %></th>
+					<th><%= program.days.find_by_day(7).date.strftime("%a") %></th>
+				</tr>
+				<% program.weeks.order("start_date asc").each do |w| %>
 					<tr>
-						<th><%= program.days.find_by_day(1).date.strftime("%a") %></th>
-						<th><%= program.days.find_by_day(2).date.strftime("%a") %></th>
-						<th><%= program.days.find_by_day(3).date.strftime("%a") %></th>
-						<th><%= program.days.find_by_day(4).date.strftime("%a") %></th>
-						<th><%= program.days.find_by_day(5).date.strftime("%a") %></th>
-						<th><%= program.days.find_by_day(6).date.strftime("%a") %></th>
-						<th><%= program.days.find_by_day(7).date.strftime("%a") %></th>
+						<% w.days.each do |d| %>
+							<td>
+								<% if d.result == 1 %>
+									<%= image_tag("glyphicons_206_ok_2.png", size: "15x15") %>
+								<% elsif d.result == 2 %>
+									<%= image_tag("glyphicons_207_remove_2.png", size: "15x15") %>
+								<% elsif d.result == 3 %>
+									<%= image_tag("glyphicons_030_pencil.png", size: "15x15") %>
+								<% elsif d.result == 4 %>
+									<%= image_tag("glyphicons_196_circle_exclamation_mark.png", size: "15x15") %>
+								<% elsif d.result == 5 %>
+									FREE DAY
+								<% elsif d.result == nil %>
+									<%= image_tag("iconmonstr-help-icon.png", size: "20x20") %>
+								<% end %>
+							</td>
+						<% end %>
 					</tr>
-					<% program.weeks.order("start_date asc").each do |w| %>
-						<tr>
-							<% w.days.each do |d| %>
-								<td>
-									<% if d.result == 1 %>
-										<%= image_tag("glyphicons_206_ok_2.png", size: "15x15") %>
-									<% elsif d.result == 2 %>
-										<%= image_tag("glyphicons_207_remove_2.png", size: "15x15") %>
-									<% elsif d.result == 3 %>
-										<%= image_tag("glyphicons_030_pencil.png", size: "15x15") %>
-									<% elsif d.result == 4 %>
-										<%= image_tag("glyphicons_196_circle_exclamation_mark.png", size: "15x15") %>
-									<% elsif d.result == 5 %>
-										FREE DAY
-									<% elsif d.result == nil %>
-										<%= image_tag("iconmonstr-help-icon.png", size: "20x20") %>
-									<% end %>
-								</td>
-							<% end %>
-						</tr>
-					<% end %>
-				</table>
-			<% end %>
+				<% end %>
+			</table>
 
 			<!-- Next week form -->
 			<% next_week = program.next_week %>
