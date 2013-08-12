@@ -47,9 +47,9 @@ class TextMessagesController < ApplicationController
 						end
 					elsif @day.result == 3
 						if sent_msg.upcase == "F"
-							if @program.free_days_left >= 1
+							if @program.free_days_left_checkin >= 1
 								@day.update_attributes(result: 5)
-								received_msg = "Thanks for checking in today! You have #{@program.free_days_left} #{'free day'.pluralize(@program.free_days_left)} left this week."
+								received_msg = "Thanks for checking in today! You have #{@program.free_days_left_checkin} #{'free day'.pluralize(@program.free_days_left_checkin)} left this week."
 								response = Twilio::TwiML::Response.new { |r| r.Sms received_msg }
 								render :xml => response.text
 								received_text = @program.received_texts.create(message: received_msg)
