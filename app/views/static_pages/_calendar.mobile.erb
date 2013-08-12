@@ -7,7 +7,7 @@
 	<div class="required_alert">You need to <%= link_to "provide billing information", billing_user_path(current_user) %>.</div>
 <% end %>
 
-<% if current_user.program.end_date != Date.current - 1 %>
+<% if current_user.program.end_date > Date.current %>
 	<!-- Todays's Goal -->
 	<% if @day.goal? %>
 		<h3 style="margin-bottom:0;">Today's Goal:</h3>
@@ -90,7 +90,7 @@
 									<%= form_for day, url: failure_day_path(day), html: {"data-ajax" => "false"} do |f| %>
 										<%= f.submit "No", "data-theme" => "d" %>
 									<% end %>
-									<% if Program.find(day.program_id).free_days_left > 0 %>
+									<% if Program.find(day.program_id).free_days_left_checkin > 0 %>
 										<%= form_for day, url: free_day_path(day), html: {"data-ajax" => "false"} do |f| %>
 											<%= f.submit "Use a Free Day", "data-theme" => "d" %>
 										<% end %>
@@ -160,15 +160,14 @@
 </div>
 
 <!-- Dollar balance and Free Days balance -->
-<% if current_user.program.end_date != Date.current - 1 %>
 <div style="text-align:center;">
-	<h4 style="margin-top:5px;margin-bottom:5px;"><strong>
+	<h4 style="margin-top:5px;margin-bottom:10px;"><strong>
 		$<%= current_user.program.missed*current_user.program.daily_commitment %> 
 		lost</strong> from missed checkins</h4>
-	<% if current_user.program.this_week.free_days > 0 %>
+	<% if current_user.program.this_week_checkin.free_days > 0 %>
 		<h4 style="margin-top:5px;"><strong>
-			<%= "#{current_user.program.free_days_left} #{'free day'.pluralize(current_user.program.free_days_left)}" %>
-		</strong> left this week</h4>
+			<%= "#{current_user.program.free_days_left_checkin} #{'free day'.pluralize(current_user.program.free_days_left_checkin)}" %>
+			left</strong> for week of<br> <%= current_user.program.this_week_checkin.start_date.strftime("%a, %b %d") %>
+			-&nbsp;<%= current_user.program.this_week_checkin.end_date.strftime("%a, %b %d") %></h4>
 	<% end %>
 </div>
-<% end %>

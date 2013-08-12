@@ -19,7 +19,7 @@
 				<%= form_for @day, url: failure_day_path(@day), html: {"data-ajax" => "false"} do |f| %>
 					<%= f.submit "No", "data-theme" => "d" %>
 				<% end %>
-				<% if Program.find(@day.program_id).free_days_left > 0 %>
+				<% if Program.find(@day.program_id).free_days_left_checkin > 0 %>
 					<%= form_for @day, url: free_day_path(@day), html: {"data-ajax" => "false"} do |f| %>
 						<%= f.submit "Use a Free Day", "data-theme" => "d" %>
 					<% end %>
