@@ -2,10 +2,10 @@
 
 <p>Two quick updates.</p>
 
-<p>First, you've been officially Kicking It for a week.  We sent your results to your <%= 'supporter'.pluralize(@program.supporters.count) %> this morning, and it looked something like <%= link_to 'this', user_url(@user), target: "_blank" %>.</p>
+<p>First, you've been officially Kicking It for <%= @program.weeks.closed.count %> <%= 'week'.pluralize(@program.weeks.closed.count) %>.  We sent your Week <%= @new_week.week %> results to your <%= 'supporter'.pluralize(@program.supporters.count) %> earlier today, and it looked something like <%= link_to 'this', user_url(@user), target: "_blank" %>.</p>
 
 <% if @new_week.missed > 0 %>
-	<p>Secondly, according to our records, you missed <%= @new_week.missed %> <%= 'check-in'.pluralize(@new_week.missed) %> this week, so we charged you <%= "$#{@new_week.missed}" %>.  If you think we shouldn't have, let us know.</p>
+	<p>Secondly, according to our records, you missed <%= @new_week.missed %> <%= 'check-in'.pluralize(@new_week.missed) %> this past week, so we charged you <%= "$#{@new_week.missed}" %>.  If you think we shouldn't have, let us know.</p>
 <% else %>
 	<p>Second, looks like you checked in every day last week.  That's awesome.  Keep it up.</p>
 <% end %>
