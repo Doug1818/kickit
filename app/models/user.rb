@@ -70,6 +70,10 @@ class User < ActiveRecord::Base
       self.current_program
     elsif self.next_program != nil
       self.next_program
+    elsif self.programs.find { |p| p.end_date == Date.current - 1 } != nil
+      self.programs.find { |p| p.end_date == Date.current - 1 }
+    elsif self.programs.find { |p| p.end_date == Date.current - 2 } != nil
+      self.programs.find { |p| p.end_date == Date.current - 2 }
     end
   end
 
