@@ -12,7 +12,12 @@ Kickit::Application.routes.draw do
       get :setup, :billing
       put :do_setup, :add_billing_info
     end
-  resources :programs
+  end
+  resources :programs do
+    member do
+      get :extend_program
+      put :extend
+    end
   end
   resources :text_messages do
     collection do

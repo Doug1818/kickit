@@ -1,0 +1,26 @@
+<div class="container">
+  <%= link_to "Click Here to Extend Your Program", extend_program_path(current_user.program), method: :put, id: "extend" %>
+</div>
+
+<style type="text/css">
+#extend {
+  text-decoration: none;
+  background-color: #5673b8;
+  border: 3pt solid #ffffff;
+  -moz-border-radius: 25pt;
+  -webkit-border-radius: 25pt;
+  border-radius: 25pt;
+  width: 400pt;
+  height: 50pt;
+  line-height: 50pt;
+  text-align: center;
+  color: #fff;
+  font-size: 21pt;
+  font-weight: normal !important;
+  padding: 0;
+  padding-bottom: -50px;
+  cursor: pointer;
+  display: block;
+  margin: 100px auto 0 auto;
+}
+</style>

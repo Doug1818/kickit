@@ -81,4 +81,13 @@ class UserMailer < ActionMailer::Base
     bcc: "support@kick-it-now.com",
     subject: "[Kick-It] New Daily Goal for Week #{@new_week.week}"
   end
+
+  def extend_program(user)
+    @user = user
+
+    mail from:"Kick-It <support@kick-it-now.com>",
+    to: @user.email,
+    bcc: "support@kick-it-now.com",
+    subject: "[Kick-It] Quick Action Required: Your Kick-It Program is Almost Over"
+  end
 end

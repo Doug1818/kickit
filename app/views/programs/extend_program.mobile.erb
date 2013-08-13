@@ -1,0 +1,21 @@
+<% content_for :title do %><title>Extend Program</title><% end %>
+<% content_for :h1 do %><h1>Extend Program</h1><% end %>
+
+<div data-role="page">
+	<%= render 'shared/panel' %>
+	<%= render 'shared/header' %>
+	<div data-role="content">
+		<%= render 'shared/flash', flash: flash %>
+		<%= link_to "Click Here to Extend Your Program", extend_program_path(current_user.program), 
+			method: :put, "data-role" => "button", "data-theme" => "d", id: "extend" %>
+		<%= debug(params) if Rails.env.development? %>
+	</div>
+</div>
+
+<style type="text/css">
+#extend {
+    white-space: normal !important;
+    font-weight: normal;
+    margin-top: 25px;
+}
+</style>
