@@ -10,11 +10,11 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require jquery
-//= require twitter/bootstrap
-//= require jquery-ui
+// require jquery
+// require twitter/bootstrap
+// require jquery-ui
 //= require jquery_ujs
-//= require bootstrap
+// require bootstrap
 //= require add_remove_fields
 //= require rails.validations
 //= require default

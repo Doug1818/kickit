@@ -15,4 +15,5 @@
  *= require forms
  * require forms-sm
  *= require jquery-ui
+ *= require tooltip
  */

@@ -29,17 +29,41 @@
 						<% w.days.each do |d| %>
 							<td>
 								<% if d.result == 1 %>
-									<%= image_tag("glyphicons_206_ok_2.png", size: "15x15") %>
+									<% if d.goal? %>
+										<%= link_to image_tag("glyphicons_206_ok_2.png", size: "15x15"), "#", title: d.goal %>
+									<% else %>
+										<%= image_tag("glyphicons_206_ok_2.png", size: "15x15") %>
+									<% end %>
 								<% elsif d.result == 2 %>
-									<%= image_tag("glyphicons_207_remove_2.png", size: "15x15") %>
+									<% if d.goal? %>
+										<%= link_to image_tag("glyphicons_207_remove_2.png", size: "15x15"), "#", title: d.goal %>
+									<% else %>
+										<%= image_tag("glyphicons_207_remove_2.png", size: "15x15") %>
+									<% end %>
 								<% elsif d.result == 3 %>
-									<%= image_tag("glyphicons_030_pencil.png", size: "15x15") %>
+									<% if d.goal? %>
+										<%= link_to image_tag("glyphicons_030_pencil.png", size: "15x15"), "#", title: d.goal %>
+									<% else %>
+										<%= image_tag("glyphicons_030_pencil.png", size: "15x15") %>
+									<% end %>
 								<% elsif d.result == 4 %>
-									<%= image_tag("glyphicons_196_circle_exclamation_mark.png", size: "15x15") %>
+									<% if d.goal? %>
+										<%= link_to image_tag("glyphicons_196_circle_exclamation_mark.png", size: "15x15"), "#", title: d.goal %>
+									<% else %>
+										<%= image_tag("glyphicons_196_circle_exclamation_mark.png", size: "15x15") %>
+									<% end %>
 								<% elsif d.result == 5 %>
-									FREE DAY
+									<% if d.goal? %>
+										<%= link_to "FREE DAY", "#", title: d.goal, style: "text-decoration:none;color:#000;" %>
+									<% else %>
+										FREE DAY
+									<% end %>
 								<% elsif d.result == nil %>
-									<%= image_tag("iconmonstr-help-icon.png", size: "20x20") %>
+									<% if d.goal? %>
+										<%= link_to image_tag("iconmonstr-help-icon.png", size: "20x20"), "#", title: d.goal %>
+									<% else %>
+										<%= image_tag("iconmonstr-help-icon.png", size: "20x20") %>
+									<% end %>
 								<% end %>
 							</td>
 						<% end %>
