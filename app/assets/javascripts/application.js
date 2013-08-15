@@ -11,7 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
-// require twitter/bootstrap
+//= require twitter/bootstrap
 //= require jquery.ui.all
 //= require jquery_ujs
 // require bootstrap
