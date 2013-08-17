@@ -12,7 +12,7 @@ class ProgramsController < ApplicationController
     weeks_num = days_num/7
 		days_num.times { |i| @program.days.create(day: @old_end_day_num + i + 1, date: @old_end_date + i + 1, goal: "[Temporary Goal -- To Be Updated]") }
 		weeks_num.times { |i| @program.weeks.create(week: @old_end_week_num + i + 1, start_date: @old_end_date + 1 + i*7, end_date: @old_end_date + 1 + 6 + i*7 ) }
-		@program.update_attributes(end_date: @old_end_date += days_num)
+		@program.update_attributes(end_date: @old_end_date += days_num, extended: true)
 		flash[:success] = "Program successfully extended"
 		if params[:format] == "mobile"
 			redirect_to calendar_path
