@@ -115,6 +115,14 @@ task :full_hour_jobs => :environment do
 			received_text = program.received_texts.create(message: msg_2)
 		end
 	end
+
+	# EXTEND PROGRAM EMAIL: Send email with link to renew your program by three weeks at 11am the day before the program end_date
+	Program.end_tomorrow.all.each do |program|
+		user = User.find(program.user_id)
+		if Time.now.in_time_zone(user.time_zone).hour == 11
+			UserMailer.extend_program(program).deliver
+		end
+	end
 end
 
 desc "Tasks to be performed on the half-hour"

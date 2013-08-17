@@ -16,6 +16,7 @@ class Program < ActiveRecord::Base
   scope :active_checkins, where("start_date <= ? AND end_date >= ?", Date.current - 1, Date.current - 1)
   scope :close_window, where("start_date <= ? AND end_date >= ?", Date.current - 2, Date.current - 2)
   scope :start_tomorrow, where("start_date = ?", Date.current + 1)
+  scope :end_tomorrow, where("end_date = ?", Date.current + 1)
   scope :start29, where("start_date = ?", Date.new(2013, 7, 29))
   scope :start_today, where("start_date = ?", Date.current)
   scope :nb, where("habit = ?", "Biting Nails")
