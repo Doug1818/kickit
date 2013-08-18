@@ -164,7 +164,7 @@
 	<h4 style="margin-top:5px;margin-bottom:10px;"><strong>
 		$<%= current_user.program.missed*current_user.program.daily_commitment %> 
 		lost</strong> from missed checkins</h4>
-	<% if current_user.program.this_week_checkin.free_days > 0 %>
+	<% if current_user.program.this_week_checkin != nil && current_user.program.this_week_checkin.free_days > 0 %>
 		<h4 style="margin-top:5px;"><strong>
 			<%= "#{current_user.program.free_days_left_checkin} #{'free day'.pluralize(current_user.program.free_days_left_checkin)}" %>
 			left</strong> for week of<br> <%= current_user.program.this_week_checkin.start_date.strftime("%a, %b %d") %>
