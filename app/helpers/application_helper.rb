@@ -12,7 +12,7 @@ module ApplicationHelper
 
   	def find_path
   		if user_signed_in?
-	  		if current_user.current_program != nil # If in an active program
+	  		if current_user.program != nil # If in an active program
 		    	calendar_path
 			elsif current_user.program == nil # If signed up only
 		    	signedup_path
