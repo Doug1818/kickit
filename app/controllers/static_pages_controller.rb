@@ -9,7 +9,7 @@ class StaticPagesController < ApplicationController
 		@lead = Lead.new
 		@user = User.new
 		if user_signed_in? && params[:format] == "mobile"
-			if current_user.current_program != nil # If in an active program
+			if current_user.program != nil # If in an active program
 	      redirect_to calendar_path
 	    elsif current_user.program == nil # If signed up only
 	    	redirect_to signedup_path
