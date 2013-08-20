@@ -28,4 +28,15 @@ class SupporterMailer < ActionMailer::Base
   def generate_token(supporter)
     Base64.encode64("#{supporter.id}X#{supporter.first_name}#{supporter.relationship}").gsub(/[^0-9a-z]/i, "")
   end
+
+  def supporter_survey(supporter)
+    @supporter = supporter
+    @program = Program.find(@supporter.program_id)
+    @user = User.find(@program.user_id)
+
+    mail from:"Kick-It <support@kick-it-now.com>",
+    to: @user.email,
+    bcc: "support@kick-it-now.com",
+    subject: "[Kick-It] Thanks for Being Supporter!"
+  end
 end

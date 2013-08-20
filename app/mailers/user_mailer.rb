@@ -99,6 +99,6 @@ class UserMailer < ActionMailer::Base
     mail from:"Kick-It <support@kick-it-now.com>",
     to: @user.email,
     bcc: "support@kick-it-now.com",
-    subject: "[WITH BODY] Final Email from Kick-It"
+    subject: "Final Email from Kick-It"
   end
 end
