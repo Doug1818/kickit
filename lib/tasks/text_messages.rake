@@ -72,7 +72,7 @@ task :full_hour_jobs => :environment do
 		user = User.find(program.user_id)
 		week_num = ((Date.current - 1 - program.start_date).to_f/7).prettify
 		if Time.now.in_time_zone(user.time_zone).hour == 9
-			if program.start_date? && program.start_date < Date.current && week_num.is_a?(Integer) && week_num != 0
+			if user.program != nil && program.start_date? && program.start_date < Date.current && week_num.is_a?(Integer) && week_num != 0
 				program.supporters.each { |supporter| SupporterMailer.supporter_update(supporter).deliver }
 				if program.supporters.count > 0
 					UserMailer.week_in_review(user).deliver if user.stripe_customer_id?
