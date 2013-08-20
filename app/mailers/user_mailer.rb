@@ -91,4 +91,14 @@ class UserMailer < ActionMailer::Base
     bcc: "support@kick-it-now.com",
     subject: "[Kick-It] Quick Action Required: Your Kick-It Program is Almost Over"
   end
+
+  def exit_survey(program)
+    @program = program
+    @user = User.find(@program.user_id)
+
+    mail from:"Kick-It <support@kick-it-now.com>",
+    to: @user.email,
+    bcc: "support@kick-it-now.com",
+    subject: "Final Email from Kick-It"
+  end
 end
