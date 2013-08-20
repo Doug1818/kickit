@@ -75,6 +75,14 @@ class Program < ActiveRecord::Base
     self.weeks.find { |w| w.start_date <= Date.current - 1 && w.end_date >= Date.current - 1 }
   end
 
+  def next_week_checkin
+    if self.this_week_checkin == nil
+      nil
+    else
+      self.weeks.find { |w| w.week == self.this_week_checkin.week + 1 }
+    end
+  end
+
   def free_days_left_checkin
     self.this_week_checkin.free_days - self.this_week_checkin.used_free_days
   end

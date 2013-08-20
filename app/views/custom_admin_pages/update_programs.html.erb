@@ -72,8 +72,8 @@
 			</table>
 
 			<!-- Next week form -->
-			<% if program.next_week != nil %>
-				<% next_week = program.next_week %>
+			<% if program.next_week_checkin != nil %>
+				<% next_week = program.next_week_checkin %>
 				<h4><%= "Week #{next_week.week}: Starts #{next_week.start_date.strftime("%a, %b %d")}" %></h4>
 				<%= form_for next_week do |f| %>
 				  <%= f.fields_for :days do |b| %>
