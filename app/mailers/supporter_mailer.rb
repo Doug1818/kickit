@@ -35,7 +35,7 @@ class SupporterMailer < ActionMailer::Base
     @user = User.find(@program.user_id)
 
     mail from:"Kick-It <support@kick-it-now.com>",
-    to: @user.email,
+    to: @supporter.email,
     bcc: "support@kick-it-now.com",
     subject: "[Kick-It] Thanks for Being Supporter!"
   end
