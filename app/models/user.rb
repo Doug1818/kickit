@@ -65,15 +65,24 @@ class User < ActiveRecord::Base
     end
   end
 
+  def last_program
+    if self.programs.count >= 1
+      programs = self.programs
+      x = []
+      programs.each { |p| x.push(p.end_date) if Date.current > p.end_date }
+      programs.find { |p| p.end_date == x.max }
+    else
+      nil
+    end
+  end
+
   def program
     if self.current_program != nil
       self.current_program
     elsif self.next_program != nil
       self.next_program
-    elsif self.programs.find { |p| p.end_date == Date.current - 1 } != nil
-      self.programs.find { |p| p.end_date == Date.current - 1 }
-    elsif self.programs.find { |p| p.end_date == Date.current - 2 } != nil
-      self.programs.find { |p| p.end_date == Date.current - 2 }
+    elsif self.last_program != nil
+      self.last_program
     end
   end
 
