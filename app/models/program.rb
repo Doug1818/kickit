@@ -19,6 +19,7 @@ class Program < ActiveRecord::Base
   scope :end_tomorrow, where("end_date = ?", Date.current + 1)
   scope :start29, where("start_date = ?", Date.new(2013, 7, 29))
   scope :start22, where("start_date = ?", Date.new(2013, 7, 22))
+  scope :start1, where("start_date = ?", Date.new(2013, 8, 1))
   scope :start_today, where("start_date = ?", Date.current)
   scope :nb, where("habit = ?", "Biting Nails")
   scope :lns, where("habit = ?", "Late Night Snacking")
