@@ -18,6 +18,7 @@ class TextMessagesController < ApplicationController
 			render :xml => response.text
 			received_text = @program.csmessages.create(message: sent_msg)
 			received_text = @program.received_texts.create(message: received_msg)
+			# Send admin alert
 		else
 			if !@day.nil? && Time.zone.now >= @day.date + 1 + 9.hours && Time.zone.now <= @day.date + 2 + 9.hours # User is in an active program (@day is not nil) and in the 9am-9am 24hr check-in window
 				if sent_msg.upcase == "Y" || sent_msg.upcase == "N" || sent_msg.upcase == "F"
