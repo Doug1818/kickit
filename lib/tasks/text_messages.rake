@@ -68,7 +68,7 @@ task :full_hour_jobs => :environment do
 	end
 
 	# SUPPORTER EMAIL: Send weekly supporter email at 9am the day following the last checkin window (end_date + 2)
-	Program.all.each do |program|
+	Program.active_support.each do |program|
 		user = User.find(program.user_id)
 		week_num = ((Date.current - 1 - program.start_date).to_f/7).prettify
 		if Time.now.in_time_zone(user.time_zone).hour == 9

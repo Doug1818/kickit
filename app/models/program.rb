@@ -14,6 +14,7 @@ class Program < ActiveRecord::Base
   has_many :user_todos, dependent: :destroy
   scope :active_program, where("start_date <= ? AND end_date >= ?", Date.current, Date.current)
   scope :active_checkins, where("start_date <= ? AND end_date >= ?", Date.current - 1, Date.current - 1)
+  scope :active_support, where("start_date <= ? AND end_date >= ?", Date.current - 2, Date.current - 2)
   scope :close_window, where("start_date <= ? AND end_date >= ?", Date.current - 2, Date.current - 2)
   scope :start_tomorrow, where("start_date = ?", Date.current + 1)
   scope :end_tomorrow, where("end_date = ?", Date.current + 1)
